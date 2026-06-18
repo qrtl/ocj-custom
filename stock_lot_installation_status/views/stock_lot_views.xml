@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_production_lot_form" model="ir.ui.view">
+        <field name="name">stock.lot.form.installation.status</field>
+        <field name="model">stock.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='main_group']" position="inside">
+                <group string="Installation Information" name="installation_group">
+                    <field name="installation_status" />
+                    <field name="installation_status_change_date" />
+                    <field name="installation_completed_date" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_production_lot_tree" model="ir.ui.view">
+        <field name="name">stock.lot.list.installation.status</field>
+        <field name="model">stock.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_id']" position="after">
+                <field name="installation_status" optional="show" />
+            </xpath>
+        </field>
+    </record>
+    <record id="search_product_lot_filter" model="ir.ui.view">
+        <field name="name">stock.lot.search.installation.status</field>
+        <field name="model">stock.lot</field>
+        <field name="inherit_id" ref="stock.search_product_lot_filter" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_id']" position="after">
+                <field name="installation_status" />
+            </xpath>
+            <xpath expr="//filter[@name='group_by_product']" position="before">
+                <filter
+                    name="group_by_installation_status"
+                    string="Installation Status"
+                    domain="[]"
+                    context="{'group_by': 'installation_status'}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

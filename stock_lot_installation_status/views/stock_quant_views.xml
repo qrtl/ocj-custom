@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_stock_quant_tree" model="ir.ui.view">
+        <field name="name">stock.quant.list.installation.status</field>
+        <field name="model">stock.quant</field>
+        <field name="inherit_id" ref="stock.view_stock_quant_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='lot_id']" position="after">
+                <field name="installation_status" optional="show" />
+                <field name="installation_completed_date" optional="show" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_stock_quant_tree_editable" model="ir.ui.view">
+        <field name="name">stock.quant.list.editable.installation.status</field>
+        <field name="model">stock.quant</field>
+        <field name="inherit_id" ref="stock.view_stock_quant_tree_editable" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='lot_id']" position="after">
+                <field name="installation_status" optional="show" />
+                <field name="installation_completed_date" optional="show" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="quant_search_view" model="ir.ui.view">
+        <field name="name">stock.quant.search.installation.status</field>
+        <field name="model">stock.quant</field>
+        <field name="inherit_id" ref="stock.quant_search_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='lot_id']" position="after">
+                <field name="installation_status" />
+            </xpath>
+            <xpath expr="//filter[@name='filter_in_date']" position="after">
+                <filter
+                    name="filter_installation_completed_date"
+                    date="installation_completed_date"
+                />
+            </xpath>
+            <xpath expr="//filter[@name='Lot_Serial_number']" position="after">
+                <filter
+                    string="Installation Status"
+                    name="installation_status_group"
+                    domain="[]"
+                    context="{'group_by': 'installation_status'}"
+                />
+                <filter
+                    string="Installation Completion Date"
+                    name="installation_completed_date_group"
+                    domain="[]"
+                    context="{'group_by': 'installation_completed_date'}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
