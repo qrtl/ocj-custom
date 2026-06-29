@@ -1,0 +1,91 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* partner_billing_policy
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: partner_billing_policy
+#: model:ir.model.fields.selection,name:partner_billing_policy.selection__res_partner__revenue_timing__acceptance_date
+msgid "Acceptance Date"
+msgstr "検収日"
+
+#. module: partner_billing_policy
+#: model:ir.model.fields,field_description:partner_billing_policy.field_res_partner__bill_on_loss
+msgid "Bill on Loss"
+msgstr "紛失時請求"
+
+#. module: partner_billing_policy
+#: model_terms:ir.ui.view,arch_db:partner_billing_policy.view_partner_form
+msgid "Billing Policy"
+msgstr "請求方針"
+
+#. module: partner_billing_policy
+#: model:ir.model.fields,field_description:partner_billing_policy.field_res_partner__billing_scope
+msgid "Billing Scope"
+msgstr "請求範囲"
+
+#. module: partner_billing_policy
+#: model:ir.model.fields.selection,name:partner_billing_policy.selection__res_partner__revenue_timing__delivery_date
+msgid "Delivery Date"
+msgstr "納品日"
+
+#. module: partner_billing_policy
+#: model:ir.model.fields.selection,name:partner_billing_policy.selection__res_partner__billing_scope__full
+msgid "Full Billing"
+msgstr "全請求"
+
+#. module: partner_billing_policy
+#: model:ir.model.fields.selection,name:partner_billing_policy.selection__res_partner__revenue_timing__invoice_date
+msgid "Invoice Date"
+msgstr "請求日"
+
+#. module: partner_billing_policy
+#: model:ir.model.fields.selection,name:partner_billing_policy.selection__res_partner__billing_scope__partial
+msgid "Partial Billing"
+msgstr "部分請求"
+
+#. module: partner_billing_policy
+#: model:ir.model.fields.selection,name:partner_billing_policy.selection__res_partner__revenue_timing__period_end
+msgid "Period End"
+msgstr "期末"
+
+#. module: partner_billing_policy
+#: model:ir.model.fields,field_description:partner_billing_policy.field_res_partner__prorated_billing
+msgid "Prorated Billing"
+msgstr "日割り請求"
+
+#. module: partner_billing_policy
+#: model:ir.model.fields,field_description:partner_billing_policy.field_res_partner__revenue_timing
+msgid "Revenue Recognition Timing"
+msgstr "売上計上タイミング"
+
+#. module: partner_billing_policy
+#: model:ir.model.fields,help:partner_billing_policy.field_res_partner__bill_on_loss
+msgid "Whether lost goods may be billed to the customer."
+msgstr "紛失した物品を顧客に請求してよいか。"
+
+#. module: partner_billing_policy
+#: model:ir.model.fields,help:partner_billing_policy.field_res_partner__billing_scope
+msgid "Whether the whole engagement or only part of it is billed."
+msgstr "全体を請求するか、一部のみを請求するか。"
+
+#. module: partner_billing_policy
+#: model:ir.model.fields,help:partner_billing_policy.field_res_partner__prorated_billing
+msgid ""
+"Whether amounts are prorated by usage days on mid-period start/cancellation."
+msgstr "期中の開始・解約時に利用日数で日割り計算するか。"
+
+#. module: partner_billing_policy
+#: model:ir.model.fields,help:partner_billing_policy.field_res_partner__revenue_timing
+msgid "Point in time at which revenue is recognized."
+msgstr "売上を計上する時点。"
