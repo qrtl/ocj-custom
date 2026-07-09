@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_equipment_classification_user,product.equipment.classification user,model_product_equipment_classification,base.group_user,1,0,0,0
+access_product_equipment_classification_admin,product.equipment.classification admin,model_product_equipment_classification,base.group_system,1,1,1,1
+access_product_equipment_classification_sub_user,product.equipment.classification.sub user,model_product_equipment_classification_sub,base.group_user,1,0,0,0
+access_product_equipment_classification_sub_admin,product.equipment.classification.sub admin,model_product_equipment_classification_sub,base.group_system,1,1,1,1
+access_product_manufacturer_user,product.manufacturer user,model_product_manufacturer,base.group_user,1,0,0,0
+access_product_manufacturer_admin,product.manufacturer admin,model_product_manufacturer,base.group_system,1,1,1,1

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="product_equipment_classification_view_list" model="ir.ui.view">
+        <field name="name">product.equipment.classification.list</field>
+        <field name="model">product.equipment.classification</field>
+        <field name="arch" type="xml">
+            <list editable="bottom" open_form_view="True">
+                <field name="sequence" widget="handle" />
+                <field name="name" />
+                <field name="code" />
+            </list>
+        </field>
+    </record>
+
+    <record id="product_equipment_classification_view_form" model="ir.ui.view">
+        <field name="name">product.equipment.classification.form</field>
+        <field name="model">product.equipment.classification</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="text-bg-danger"
+                        invisible="active"
+                    />
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="code" />
+                            <field name="sequence" />
+                            <field name="active" invisible="1" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="product_equipment_classification_view_search" model="ir.ui.view">
+        <field name="name">product.equipment.classification.search</field>
+        <field name="model">product.equipment.classification</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="code" />
+                <separator />
+                <filter
+                    name="archived"
+                    string="Archived"
+                    domain="[('active', '=', False)]"
+                />
+            </search>
+        </field>
+    </record>
+
+    <record id="product_equipment_classification_action" model="ir.actions.act_window">
+        <field name="name">Equipment Classifications</field>
+        <field name="res_model">product.equipment.classification</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem
+        id="product_equipment_classification_menu"
+        action="product_equipment_classification_action"
+        parent="menu_nif_config"
+        sequence="100"
+    />
+</odoo>

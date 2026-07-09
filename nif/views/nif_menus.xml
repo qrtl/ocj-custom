@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <menuitem
+        id="menu_nif_root"
+        name="Navi in Flow"
+        web_icon="nif,static/description/icon.png"
+        sequence="90"
+    />
+    <menuitem
+        id="menu_nif_config"
+        name="Configuration"
+        parent="menu_nif_root"
+        sequence="10"
+        groups="base.group_system"
+    />
+</odoo>

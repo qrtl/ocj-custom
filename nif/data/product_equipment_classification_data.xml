@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record
+        id="product_equipment_classification_hot"
+        model="product.equipment.classification"
+    >
+        <field name="name">HOT / Concentrator</field>
+        <field name="sequence">10</field>
+    </record>
+    <record
+        id="product_equipment_classification_cpap"
+        model="product.equipment.classification"
+    >
+        <field name="name">CPAP</field>
+        <field name="sequence">20</field>
+    </record>
+    <record
+        id="product_equipment_classification_hit"
+        model="product.equipment.classification"
+    >
+        <field name="name">HIT</field>
+        <field name="sequence">30</field>
+    </record>
+    <record
+        id="product_equipment_classification_other_aux"
+        model="product.equipment.classification"
+    >
+        <field name="name">Other (Auxiliary Device)</field>
+        <field name="sequence">40</field>
+    </record>
+</odoo>
