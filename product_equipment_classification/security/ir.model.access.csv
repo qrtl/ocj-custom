@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_equipment_classification_user,product.equipment.classification user,model_product_equipment_classification,base.group_user,1,0,0,0
+access_product_equipment_classification_manager,product.equipment.classification manager,model_product_equipment_classification,stock.group_stock_manager,1,1,1,1
+access_product_equipment_classification_sub_user,product.equipment.classification.sub user,model_product_equipment_classification_sub,base.group_user,1,0,0,0
+access_product_equipment_classification_sub_manager,product.equipment.classification.sub manager,model_product_equipment_classification_sub,stock.group_stock_manager,1,1,1,1
