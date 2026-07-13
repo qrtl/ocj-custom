@@ -3,12 +3,11 @@
 
 from psycopg2 import IntegrityError
 
-from odoo.exceptions import ValidationError
 from odoo.tests.common import TransactionCase
 from odoo.tools import mute_logger
 
 
-class TestProductEquipmentClassification(TransactionCase):
+class TestProductClassification(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -18,29 +17,41 @@ class TestProductEquipmentClassification(TransactionCase):
         cls.classification_sub = cls.env["product.equipment.classification.sub"].create(
             {"name": "Humidifier", "code": "200"}
         )
+        cls.consumable_classification = cls.env[
+            "product.consumable.classification"
+        ].create({"name": "Mask", "code": "400"})
         cls.manufacturer = cls.env["product.manufacturer"].create(
             {"name": "Acme Medical", "code": "300"}
         )
         cls.product = cls.env["product.template"].create({"name": "Test Device"})
 
-    def test_assign_classifications(self):
+    def test_assign_equipment_classifications(self):
         self.product.write(
             {
+                "product_kind": "equipment",
                 "manufacturer_id": self.manufacturer.id,
                 "equipment_classification_id": self.classification.id,
                 "equipment_classification_sub_id": self.classification_sub.id,
             }
         )
+        self.assertEqual(self.product.product_kind, "equipment")
         self.assertEqual(self.product.manufacturer_id, self.manufacturer)
         self.assertEqual(self.product.equipment_classification_id, self.classification)
         self.assertEqual(
             self.product.equipment_classification_sub_id, self.classification_sub
         )
 
-    def test_equipment_consumable_mutually_exclusive(self):
-        self.product.is_equipment = True
-        with self.assertRaises(ValidationError):
-            self.product.is_consumable = True
+    def test_assign_consumable_classification(self):
+        self.product.write(
+            {
+                "product_kind": "consumable",
+                "consumable_classification_id": self.consumable_classification.id,
+            }
+        )
+        self.assertEqual(self.product.product_kind, "consumable")
+        self.assertEqual(
+            self.product.consumable_classification_id, self.consumable_classification
+        )
 
     @mute_logger("odoo.sql_db")
     def test_classification_code_unique(self):
@@ -54,6 +65,13 @@ class TestProductEquipmentClassification(TransactionCase):
         with self.assertRaises(IntegrityError):
             self.env["product.equipment.classification.sub"].create(
                 {"name": "Duplicate", "code": "200"}
+            )
+
+    @mute_logger("odoo.sql_db")
+    def test_consumable_classification_code_unique(self):
+        with self.assertRaises(IntegrityError):
+            self.env["product.consumable.classification"].create(
+                {"name": "Duplicate", "code": "400"}
             )
 
     @mute_logger("odoo.sql_db")

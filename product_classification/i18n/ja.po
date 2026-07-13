@@ -1,0 +1,288 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* product_classification
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: product_classification
+#: model:ir.model.fields,field_description:product_classification.field_product_consumable_classification__active
+#: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__active
+#: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification_sub__active
+#: model:ir.model.fields,field_description:product_classification.field_product_manufacturer__active
+msgid "Active"
+msgstr "有効"
+
+#. module: product_classification
+#: model_terms:ir.ui.view,arch_db:product_classification.product_consumable_classification_view_form
+#: model_terms:ir.ui.view,arch_db:product_classification.product_consumable_classification_view_search
+#: model_terms:ir.ui.view,arch_db:product_classification.product_equipment_classification_sub_view_form
+#: model_terms:ir.ui.view,arch_db:product_classification.product_equipment_classification_sub_view_search
+#: model_terms:ir.ui.view,arch_db:product_classification.product_equipment_classification_view_form
+#: model_terms:ir.ui.view,arch_db:product_classification.product_equipment_classification_view_search
+#: model_terms:ir.ui.view,arch_db:product_classification.product_manufacturer_view_form
+#: model_terms:ir.ui.view,arch_db:product_classification.product_manufacturer_view_search
+msgid "Archived"
+msgstr "アーカイブ済"
+
+#. module: product_classification
+#: model:product.equipment.classification,name:product_classification.product_equipment_classification_cpap
+msgid "CPAP"
+msgstr "CPAP"
+
+#. module: product_classification
+#: model_terms:ir.ui.view,arch_db:product_classification.product_template_view_form
+msgid "Classification"
+msgstr "分類"
+
+#. module: product_classification
+#: model:ir.model.fields,help:product_classification.field_product_product__consumable_classification_id
+#: model:ir.model.fields,help:product_classification.field_product_template__consumable_classification_id
+msgid "Classification of a consumable product."
+msgstr "消耗品の分類。"
+
+#. module: product_classification
+#: model:ir.model.fields,field_description:product_classification.field_product_consumable_classification__code
+#: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__code
+#: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification_sub__code
+#: model:ir.model.fields,field_description:product_classification.field_product_manufacturer__code
+msgid "Code"
+msgstr "コード"
+
+#. module: product_classification
+#: model:ir.model.fields.selection,name:product_classification.selection__product_template__product_kind__consumable
+msgid "Consumable"
+msgstr "消耗品"
+
+#. module: product_classification
+#: model:ir.model.fields,field_description:product_classification.field_product_product__consumable_classification_id
+#: model:ir.model.fields,field_description:product_classification.field_product_template__consumable_classification_id
+#: model_terms:ir.ui.view,arch_db:product_classification.product_template_view_form
+msgid "Consumable Classification"
+msgstr "消耗品分類"
+
+#. module: product_classification
+#: model:ir.actions.act_window,name:product_classification.product_consumable_classification_action
+#: model:ir.ui.menu,name:product_classification.product_consumable_classification_menu
+msgid "Consumable Classifications"
+msgstr "消耗品分類"
+
+#. module: product_classification
+#: model:ir.model.fields,field_description:product_classification.field_product_consumable_classification__create_uid
+#: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__create_uid
+#: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification_sub__create_uid
+#: model:ir.model.fields,field_description:product_classification.field_product_manufacturer__create_uid
+msgid "Created by"
+msgstr "作成者"
+
+#. module: product_classification
+#: model:ir.model.fields,field_description:product_classification.field_product_consumable_classification__create_date
+#: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__create_date
+#: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification_sub__create_date
+#: model:ir.model.fields,field_description:product_classification.field_product_manufacturer__create_date
+msgid "Created on"
+msgstr "作成日"
+
+#. module: product_classification
+#: model:ir.model.fields,field_description:product_classification.field_product_consumable_classification__display_name
+#: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__display_name
+#: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification_sub__display_name
+#: model:ir.model.fields,field_description:product_classification.field_product_manufacturer__display_name
+#: model:ir.model.fields,field_description:product_classification.field_product_template__display_name
+msgid "Display Name"
+msgstr "表示名"
+
+#. module: product_classification
+#: model:ir.model.fields.selection,name:product_classification.selection__product_template__product_kind__equipment
+msgid "Equipment"
+msgstr "機器"
+
+#. module: product_classification
+#: model:ir.model.fields,field_description:product_classification.field_product_product__equipment_classification_id
+#: model:ir.model.fields,field_description:product_classification.field_product_template__equipment_classification_id
+#: model_terms:ir.ui.view,arch_db:product_classification.product_template_view_form
+msgid "Equipment Classification"
+msgstr "機器分類"
+
+#. module: product_classification
+#: model:ir.actions.act_window,name:product_classification.product_equipment_classification_action
+#: model:ir.ui.menu,name:product_classification.product_equipment_classification_menu
+msgid "Equipment Classifications"
+msgstr "機器分類"
+
+#. module: product_classification
+#: model:ir.model.fields,field_description:product_classification.field_product_product__equipment_classification_sub_id
+#: model:ir.model.fields,field_description:product_classification.field_product_template__equipment_classification_sub_id
+msgid "Equipment Sub-Classification"
+msgstr "機器分類サブ"
+
+#. module: product_classification
+#: model:ir.actions.act_window,name:product_classification.product_equipment_classification_sub_action
+#: model:ir.ui.menu,name:product_classification.product_equipment_classification_sub_menu
+msgid "Equipment Sub-Classifications"
+msgstr "機器分類サブ"
+
+#. module: product_classification
+#: model:ir.model.fields,help:product_classification.field_product_consumable_classification__code
+#: model:ir.model.fields,help:product_classification.field_product_equipment_classification__code
+#: model:ir.model.fields,help:product_classification.field_product_equipment_classification_sub__code
+#: model:ir.model.fields,help:product_classification.field_product_manufacturer__code
+msgid "External code used for integration. A numeric code is preferred."
+msgstr "連携に使用する外部コード。数値コードが推奨されます。"
+
+#. module: product_classification
+#: model:product.equipment.classification,name:product_classification.product_equipment_classification_hit
+msgid "HIT"
+msgstr "HIT"
+
+#. module: product_classification
+#: model:product.equipment.classification,name:product_classification.product_equipment_classification_hot
+msgid "HOT / Concentrator"
+msgstr "HOT/濃縮器"
+
+#. module: product_classification
+#: model:ir.model.fields,field_description:product_classification.field_product_consumable_classification__id
+#: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__id
+#: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification_sub__id
+#: model:ir.model.fields,field_description:product_classification.field_product_manufacturer__id
+#: model:ir.model.fields,field_description:product_classification.field_product_template__id
+msgid "ID"
+msgstr "ID"
+
+#. module: product_classification
+#: model:ir.model.fields,field_description:product_classification.field_product_consumable_classification__write_uid
+#: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__write_uid
+#: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification_sub__write_uid
+#: model:ir.model.fields,field_description:product_classification.field_product_manufacturer__write_uid
+msgid "Last Updated by"
+msgstr "最終更新者"
+
+#. module: product_classification
+#: model:ir.model.fields,field_description:product_classification.field_product_consumable_classification__write_date
+#: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__write_date
+#: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification_sub__write_date
+#: model:ir.model.fields,field_description:product_classification.field_product_manufacturer__write_date
+msgid "Last Updated on"
+msgstr "最終更新日"
+
+#. module: product_classification
+#: model:ir.model.fields,field_description:product_classification.field_product_product__manufacturer_id
+#: model:ir.model.fields,field_description:product_classification.field_product_template__manufacturer_id
+msgid "Manufacturer"
+msgstr "メーカー"
+
+#. module: product_classification
+#: model:ir.model.fields,help:product_classification.field_product_product__manufacturer_id
+#: model:ir.model.fields,help:product_classification.field_product_template__manufacturer_id
+msgid "Manufacturer of the product. Used in the Navi in Flow integration."
+msgstr "プロダクトのメーカー。ナビフロー連携で使用されます。"
+
+#. module: product_classification
+#: model:ir.actions.act_window,name:product_classification.product_manufacturer_action
+#: model:ir.ui.menu,name:product_classification.product_manufacturer_menu
+msgid "Manufacturers"
+msgstr "メーカー"
+
+#. module: product_classification
+#: model:ir.model.fields,field_description:product_classification.field_product_consumable_classification__name
+#: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__name
+#: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification_sub__name
+#: model:ir.model.fields,field_description:product_classification.field_product_manufacturer__name
+msgid "Name"
+msgstr "名称"
+
+#. module: product_classification
+#: model:product.equipment.classification,name:product_classification.product_equipment_classification_other_aux
+msgid "Other (Auxiliary Device)"
+msgstr "その他（副装置）"
+
+#. module: product_classification
+#: model:ir.model.fields,help:product_classification.field_product_product__equipment_classification_id
+#: model:ir.model.fields,help:product_classification.field_product_template__equipment_classification_id
+msgid ""
+"Primary classification of an equipment product. Used in the Navi in Flow "
+"integration."
+msgstr "機器プロダクトの主分類。ナビフロー連携で使用されます。"
+
+#. module: product_classification
+#: model:ir.model,name:product_classification.model_product_template
+msgid "Product"
+msgstr "プロダクト"
+
+#. module: product_classification
+#: model:ir.model,name:product_classification.model_product_consumable_classification
+msgid "Product Consumable Classification"
+msgstr "消耗品分類"
+
+#. module: product_classification
+#: model:ir.model,name:product_classification.model_product_equipment_classification
+msgid "Product Equipment Classification"
+msgstr "機器分類"
+
+#. module: product_classification
+#: model:ir.model,name:product_classification.model_product_equipment_classification_sub
+msgid "Product Equipment Sub-Classification"
+msgstr "機器分類サブ"
+
+#. module: product_classification
+#: model:ir.model.fields,field_description:product_classification.field_product_product__product_kind
+#: model:ir.model.fields,field_description:product_classification.field_product_template__product_kind
+msgid "Product Kind"
+msgstr "プロダクト種別"
+
+#. module: product_classification
+#: model:ir.model,name:product_classification.model_product_manufacturer
+msgid "Product Manufacturer"
+msgstr "メーカー"
+
+#. module: product_classification
+#: model:ir.model.fields,field_description:product_classification.field_product_consumable_classification__sequence
+#: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__sequence
+#: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification_sub__sequence
+#: model:ir.model.fields,field_description:product_classification.field_product_manufacturer__sequence
+msgid "Sequence"
+msgstr "シーケンス"
+
+#. module: product_classification
+#: model:ir.model.fields,help:product_classification.field_product_product__equipment_classification_sub_id
+#: model:ir.model.fields,help:product_classification.field_product_template__equipment_classification_sub_id
+msgid ""
+"Sub-classification for auxiliary equipment. Used in the Navi in Flow "
+"integration."
+msgstr "補助機器のサブ分類。ナビフロー連携で使用されます。"
+
+#. module: product_classification
+#: model:ir.model.constraint,message:product_classification.constraint_product_consumable_classification_code_uniq
+msgid "The code of a consumable classification must be unique."
+msgstr "消耗品分類のコードは一意である必要があります。"
+
+#. module: product_classification
+#: model:ir.model.constraint,message:product_classification.constraint_product_manufacturer_code_uniq
+msgid "The code of a manufacturer must be unique."
+msgstr "メーカーのコードは一意である必要があります。"
+
+#. module: product_classification
+#: model:ir.model.constraint,message:product_classification.constraint_product_equipment_classification_code_uniq
+msgid "The code of an equipment classification must be unique."
+msgstr "機器分類のコードは一意である必要があります。"
+
+#. module: product_classification
+#: model:ir.model.constraint,message:product_classification.constraint_product_equipment_classification_sub_code_uniq
+msgid "The code of an equipment sub-classification must be unique."
+msgstr "機器分類サブのコードは一意である必要があります。"
+
+#. module: product_classification
+#: model:ir.model.fields,help:product_classification.field_product_product__product_kind
+#: model:ir.model.fields,help:product_classification.field_product_template__product_kind
+msgid ""
+"Whether the product is an equipment or a consumable. Used in the Navi in "
+"Flow integration."
+msgstr "プロダクトが機器か消耗品か。ナビフロー連携で使用されます。"

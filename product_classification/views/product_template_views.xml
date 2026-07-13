@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="product_template_view_form" model="ir.ui.view">
-        <field name="name">product.template.form.nif</field>
+        <field name="name">product.template.form.classification</field>
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_form_view" />
         <field name="arch" type="xml">
             <xpath expr="//notebook" position="inside">
-                <page name="nif" string="Navi in Flow">
+                <page name="classification" string="Classification">
                     <group>
-                        <group string="Product Type">
-                            <field name="is_equipment" readonly="is_consumable" />
-                            <field name="is_consumable" readonly="is_equipment" />
+                        <group>
+                            <field name="product_kind" />
+                            <field
+                                name="manufacturer_id"
+                                options="{'no_quick_create': True}"
+                            />
                         </group>
                         <group
                             string="Equipment Classification"
-                            invisible="not is_equipment"
+                            invisible="product_kind != 'equipment'"
                         >
                             <field
                                 name="equipment_classification_id"
@@ -25,9 +28,12 @@
                                 options="{'no_quick_create': True}"
                             />
                         </group>
-                        <group>
+                        <group
+                            string="Consumable Classification"
+                            invisible="product_kind != 'consumable'"
+                        >
                             <field
-                                name="manufacturer_id"
+                                name="consumable_classification_id"
                                 options="{'no_quick_create': True}"
                             />
                         </group>
@@ -38,7 +44,7 @@
     </record>
 
     <record id="product_template_view_search" model="ir.ui.view">
-        <field name="name">product.template.search.nif</field>
+        <field name="name">product.template.search.classification</field>
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_search_view" />
         <field name="arch" type="xml">
@@ -46,6 +52,7 @@
                 <field name="manufacturer_id" />
                 <field name="equipment_classification_id" />
                 <field name="equipment_classification_sub_id" />
+                <field name="consumable_classification_id" />
             </field>
         </field>
     </record>
