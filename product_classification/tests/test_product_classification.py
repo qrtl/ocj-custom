@@ -41,6 +41,16 @@ class TestProductClassification(TransactionCase):
             self.product.equipment_classification_sub_id, self.classification_sub
         )
 
+    def test_assign_accessory_classification(self):
+        self.product.write(
+            {
+                "product_kind": "accessory",
+                "equipment_classification_id": self.classification.id,
+            }
+        )
+        self.assertEqual(self.product.product_kind, "accessory")
+        self.assertEqual(self.product.equipment_classification_id, self.classification)
+
     def test_assign_consumable_classification(self):
         self.product.write(
             {

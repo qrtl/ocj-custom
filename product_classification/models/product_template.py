@@ -10,10 +10,11 @@ class ProductTemplate(models.Model):
     product_kind = fields.Selection(
         selection=[
             ("equipment", "Equipment"),
+            ("accessory", "Accessory"),
             ("consumable", "Consumable"),
         ],
-        help="Whether the product is an equipment or a consumable. "
-        "Used in the Navi in Flow integration.",
+        help="Whether the product is an equipment, an accessory or a "
+        "consumable. Used in the Navi in Flow integration.",
     )
     manufacturer_id = fields.Many2one(
         comodel_name="product.manufacturer",
@@ -23,13 +24,13 @@ class ProductTemplate(models.Model):
     equipment_classification_id = fields.Many2one(
         comodel_name="product.equipment.classification",
         string="Equipment Classification",
-        help="Primary classification of an equipment product. "
+        help="Primary classification of an equipment or accessory product. "
         "Used in the Navi in Flow integration.",
     )
     equipment_classification_sub_id = fields.Many2one(
         comodel_name="product.equipment.classification.sub",
         string="Equipment Sub-Classification",
-        help="Sub-classification for auxiliary equipment. "
+        help="Sub-classification for auxiliary equipment or accessories. "
         "Used in the Navi in Flow integration.",
     )
     consumable_classification_id = fields.Many2one(

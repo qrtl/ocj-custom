@@ -14,6 +14,11 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: product_classification
+#: model:ir.model.fields.selection,name:product_classification.selection__product_template__product_kind__accessory
+msgid "Accessory"
+msgstr "付属品"
+
+#. module: product_classification
 #: model:ir.model.fields,field_description:product_classification.field_product_consumable_classification__active
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__active
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification_sub__active
@@ -208,9 +213,9 @@ msgstr "その他（副装置）"
 #: model:ir.model.fields,help:product_classification.field_product_product__equipment_classification_id
 #: model:ir.model.fields,help:product_classification.field_product_template__equipment_classification_id
 msgid ""
-"Primary classification of an equipment product. Used in the Navi in Flow "
-"integration."
-msgstr "機器プロダクトの主分類。ナビフロー連携で使用されます。"
+"Primary classification of an equipment or accessory product. Used in the "
+"Navi in Flow integration."
+msgstr "機器または付属品プロダクトの主分類。ナビフロー連携で使用されます。"
 
 #. module: product_classification
 #: model:ir.model,name:product_classification.model_product_template
@@ -255,9 +260,9 @@ msgstr "シーケンス"
 #: model:ir.model.fields,help:product_classification.field_product_product__equipment_classification_sub_id
 #: model:ir.model.fields,help:product_classification.field_product_template__equipment_classification_sub_id
 msgid ""
-"Sub-classification for auxiliary equipment. Used in the Navi in Flow "
-"integration."
-msgstr "補助機器のサブ分類。ナビフロー連携で使用されます。"
+"Sub-classification for auxiliary equipment or accessories. Used in the Navi "
+"in Flow integration."
+msgstr "補助機器または付属品のサブ分類。ナビフロー連携で使用されます。"
 
 #. module: product_classification
 #: model:ir.model.constraint,message:product_classification.constraint_product_consumable_classification_code_uniq
@@ -283,6 +288,6 @@ msgstr "機器分類サブのコードは一意である必要があります。
 #: model:ir.model.fields,help:product_classification.field_product_product__product_kind
 #: model:ir.model.fields,help:product_classification.field_product_template__product_kind
 msgid ""
-"Whether the product is an equipment or a consumable. Used in the Navi in "
-"Flow integration."
-msgstr "プロダクトが機器か消耗品か。ナビフロー連携で使用されます。"
+"Whether the product is an equipment, an accessory or a consumable. Used in "
+"the Navi in Flow integration."
+msgstr "プロダクトが機器・付属品・消耗品のいずれか。ナビフロー連携で使用されます。"

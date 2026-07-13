@@ -17,7 +17,7 @@
                         </group>
                         <group
                             string="Equipment Classification"
-                            invisible="product_kind != 'equipment'"
+                            invisible="product_kind not in ('equipment', 'accessory')"
                         >
                             <field
                                 name="equipment_classification_id"
