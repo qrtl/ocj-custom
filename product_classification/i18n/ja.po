@@ -20,6 +20,7 @@ msgstr "ASV"
 
 #. module: product_classification
 #: model:ir.model.fields.selection,name:product_classification.selection__product_template__product_kind__accessory
+#: model_terms:ir.ui.view,arch_db:product_classification.product_template_view_search
 msgid "Accessory"
 msgstr "付属品"
 
@@ -69,6 +70,7 @@ msgstr "コード"
 
 #. module: product_classification
 #: model:ir.model.fields.selection,name:product_classification.selection__product_template__product_kind__consumable
+#: model_terms:ir.ui.view,arch_db:product_classification.product_template_view_search
 msgid "Consumable"
 msgstr "消耗品"
 
@@ -76,6 +78,7 @@ msgstr "消耗品"
 #: model:ir.model.fields,field_description:product_classification.field_product_product__consumable_classification_id
 #: model:ir.model.fields,field_description:product_classification.field_product_template__consumable_classification_id
 #: model_terms:ir.ui.view,arch_db:product_classification.product_template_view_form
+#: model_terms:ir.ui.view,arch_db:product_classification.product_template_view_search
 msgid "Consumable Classification"
 msgstr "消耗品分類"
 
@@ -117,6 +120,7 @@ msgstr "表示名"
 
 #. module: product_classification
 #: model:ir.model.fields.selection,name:product_classification.selection__product_template__product_kind__equipment
+#: model_terms:ir.ui.view,arch_db:product_classification.product_template_view_search
 msgid "Equipment"
 msgstr "機器"
 
@@ -124,6 +128,7 @@ msgstr "機器"
 #: model:ir.model.fields,field_description:product_classification.field_product_product__equipment_classification_id
 #: model:ir.model.fields,field_description:product_classification.field_product_template__equipment_classification_id
 #: model_terms:ir.ui.view,arch_db:product_classification.product_template_view_form
+#: model_terms:ir.ui.view,arch_db:product_classification.product_template_view_search
 msgid "Equipment Classification"
 msgstr "機器分類"
 
@@ -136,6 +141,7 @@ msgstr "機器分類"
 #. module: product_classification
 #: model:ir.model.fields,field_description:product_classification.field_product_product__equipment_classification_sub_id
 #: model:ir.model.fields,field_description:product_classification.field_product_template__equipment_classification_sub_id
+#: model_terms:ir.ui.view,arch_db:product_classification.product_template_view_search
 msgid "Equipment Sub-Classification"
 msgstr "機器分類サブ"
 
@@ -211,6 +217,7 @@ msgstr "MV/院内・在宅"
 #. module: product_classification
 #: model:ir.model.fields,field_description:product_classification.field_product_product__manufacturer_id
 #: model:ir.model.fields,field_description:product_classification.field_product_template__manufacturer_id
+#: model_terms:ir.ui.view,arch_db:product_classification.product_template_view_search
 msgid "Manufacturer"
 msgstr "メーカー"
 
@@ -285,6 +292,7 @@ msgstr "機器分類サブ"
 #. module: product_classification
 #: model:ir.model.fields,field_description:product_classification.field_product_product__product_kind
 #: model:ir.model.fields,field_description:product_classification.field_product_template__product_kind
+#: model_terms:ir.ui.view,arch_db:product_classification.product_template_view_search
 msgid "Product Kind"
 msgstr "プロダクト種別"
 

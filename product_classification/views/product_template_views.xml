@@ -44,11 +44,54 @@
         <field name="inherit_id" ref="product.product_template_search_view" />
         <field name="arch" type="xml">
             <field name="product_tag_ids" position="after">
-                <field name="manufacturer_id" />
                 <field name="equipment_classification_id" />
                 <field name="equipment_classification_sub_id" />
                 <field name="consumable_classification_id" />
+                <field name="manufacturer_id" />
+                <separator />
+                <filter
+                    string="Equipment"
+                    name="kind_equipment"
+                    domain="[('product_kind', '=', 'equipment')]"
+                />
+                <filter
+                    string="Accessory"
+                    name="kind_accessory"
+                    domain="[('product_kind', '=', 'accessory')]"
+                />
+                <filter
+                    string="Consumable"
+                    name="kind_consumable"
+                    domain="[('product_kind', '=', 'consumable')]"
+                />
             </field>
+            <xpath expr="//search/group" position="inside">
+                <filter
+                    string="Product Kind"
+                    name="group_by_product_kind"
+                    context="{'group_by': 'product_kind'}"
+                />
+                <filter
+                    string="Equipment Classification"
+                    name="group_by_equipment_classification_id"
+                    context="{'group_by': 'equipment_classification_id'}"
+                />
+                <filter
+                    string="Equipment Sub-Classification"
+                    name="group_by_equipment_classification_sub_id"
+                    context="{'group_by': 'equipment_classification_sub_id'}"
+                />
+                <filter
+                    string="Consumable Classification"
+                    name="group_by_consumable_classification_id"
+                    context="{'group_by': 'consumable_classification_id'}"
+                />
+                <filter
+                    string="Manufacturer"
+                    name="group_by_manufacturer_id"
+                    context="{'group_by': 'manufacturer_id'}"
+                />
+            </xpath>
         </field>
     </record>
 </odoo>
