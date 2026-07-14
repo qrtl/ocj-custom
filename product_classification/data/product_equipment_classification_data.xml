@@ -1,31 +1,123 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="1">
     <record
-        id="product_equipment_classification_hot"
+        id="product_equipment_classification_hot_concentrator"
         model="product.equipment.classification"
     >
         <field name="name">HOT / Concentrator</field>
+        <field name="code">1</field>
         <field name="sequence">10</field>
+    </record>
+    <record
+        id="product_equipment_classification_hot_liquid_oxygen"
+        model="product.equipment.classification"
+    >
+        <field name="name">HOT / Liquid Oxygen</field>
+        <field name="code">2</field>
+        <field name="sequence">20</field>
+    </record>
+    <record
+        id="product_equipment_classification_hot_cylinder"
+        model="product.equipment.classification"
+    >
+        <field name="name">HOT / Cylinder</field>
+        <field name="code">3</field>
+        <field name="sequence">30</field>
+    </record>
+    <record
+        id="product_equipment_classification_mv"
+        model="product.equipment.classification"
+    >
+        <field name="name">MV / In-hospital &amp; Home</field>
+        <field name="code">5</field>
+        <field name="sequence">40</field>
     </record>
     <record
         id="product_equipment_classification_cpap"
         model="product.equipment.classification"
     >
         <field name="name">CPAP</field>
-        <field name="sequence">20</field>
+        <field name="code">7</field>
+        <field name="sequence">50</field>
+    </record>
+    <record
+        id="product_equipment_classification_asv"
+        model="product.equipment.classification"
+    >
+        <field name="name">ASV</field>
+        <field name="code">10</field>
+        <field name="sequence">51</field>
     </record>
     <record
         id="product_equipment_classification_hit"
         model="product.equipment.classification"
     >
         <field name="name">HIT</field>
-        <field name="sequence">30</field>
+        <field name="code">8</field>
+        <field name="sequence">60</field>
+    </record>
+    <record
+        id="product_equipment_classification_pulse_oximeter"
+        model="product.equipment.classification"
+    >
+        <field name="name">Pulse Oximeter</field>
+        <field name="code">21</field>
+        <field name="sequence">70</field>
+    </record>
+    <record
+        id="product_equipment_classification_pca_pump"
+        model="product.equipment.classification"
+    >
+        <field name="name">PCA Pump</field>
+        <field name="code">22</field>
+        <field name="sequence">80</field>
+    </record>
+    <record
+        id="product_equipment_classification_ultrasonic_bone_healing"
+        model="product.equipment.classification"
+    >
+        <field name="name">Ultrasonic Bone Healing Device</field>
+        <field name="code">23</field>
+        <field name="sequence">90</field>
+    </record>
+    <record
+        id="product_equipment_classification_cough_assist"
+        model="product.equipment.classification"
+    >
+        <field name="name">Cough Assist Device</field>
+        <field name="code">24</field>
+        <field name="sequence">100</field>
+    </record>
+    <record
+        id="product_equipment_classification_high_flow_therapy"
+        model="product.equipment.classification"
+    >
+        <field name="name">High-Flow Therapy</field>
+        <field name="code">25</field>
+        <field name="sequence">110</field>
+    </record>
+    <record
+        id="product_equipment_classification_other_medical"
+        model="product.equipment.classification"
+    >
+        <field name="name">Other Medical Equipment</field>
+        <field name="code">9</field>
+        <field name="sequence">120</field>
     </record>
     <record
         id="product_equipment_classification_other_aux"
         model="product.equipment.classification"
     >
         <field name="name">Other (Auxiliary Device)</field>
-        <field name="sequence">40</field>
+        <field name="code">90</field>
+        <field name="sequence">130</field>
+    </record>
+    <record
+        id="product_equipment_classification_portable_oxygen"
+        model="product.equipment.classification"
+    >
+        <field name="name">Portable Oxygen</field>
+        <field name="code">20</field>
+        <field name="sequence">140</field>
     </record>
 </odoo>

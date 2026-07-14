@@ -14,6 +14,11 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: product_classification
+#: model:product.equipment.classification,name:product_classification.product_equipment_classification_asv
+msgid "ASV"
+msgstr "ASV"
+
+#. module: product_classification
 #: model:ir.model.fields.selection,name:product_classification.selection__product_template__product_kind__accessory
 msgid "Accessory"
 msgstr "付属品"
@@ -79,6 +84,11 @@ msgstr "消耗品分類"
 #: model:ir.ui.menu,name:product_classification.product_consumable_classification_menu
 msgid "Consumable Classifications"
 msgstr "消耗品分類"
+
+#. module: product_classification
+#: model:product.equipment.classification,name:product_classification.product_equipment_classification_cough_assist
+msgid "Cough Assist Device"
+msgstr "排痰補助装置"
 
 #. module: product_classification
 #: model:ir.model.fields,field_description:product_classification.field_product_consumable_classification__create_uid
@@ -149,9 +159,24 @@ msgid "HIT"
 msgstr "HIT"
 
 #. module: product_classification
-#: model:product.equipment.classification,name:product_classification.product_equipment_classification_hot
+#: model:product.equipment.classification,name:product_classification.product_equipment_classification_hot_concentrator
 msgid "HOT / Concentrator"
 msgstr "HOT/濃縮器"
+
+#. module: product_classification
+#: model:product.equipment.classification,name:product_classification.product_equipment_classification_hot_cylinder
+msgid "HOT / Cylinder"
+msgstr "HOT/ボンベ"
+
+#. module: product_classification
+#: model:product.equipment.classification,name:product_classification.product_equipment_classification_hot_liquid_oxygen
+msgid "HOT / Liquid Oxygen"
+msgstr "HOT/液体酸素"
+
+#. module: product_classification
+#: model:product.equipment.classification,name:product_classification.product_equipment_classification_high_flow_therapy
+msgid "High-Flow Therapy"
+msgstr "ハイフローセラピー"
 
 #. module: product_classification
 #: model:ir.model.fields,field_description:product_classification.field_product_consumable_classification__id
@@ -177,6 +202,11 @@ msgstr "最終更新者"
 #: model:ir.model.fields,field_description:product_classification.field_product_manufacturer__write_date
 msgid "Last Updated on"
 msgstr "最終更新日"
+
+#. module: product_classification
+#: model:product.equipment.classification,name:product_classification.product_equipment_classification_mv
+msgid "MV / In-hospital & Home"
+msgstr "MV/院内・在宅"
 
 #. module: product_classification
 #: model:ir.model.fields,field_description:product_classification.field_product_product__manufacturer_id
@@ -208,6 +238,21 @@ msgstr "名称"
 #: model:product.equipment.classification,name:product_classification.product_equipment_classification_other_aux
 msgid "Other (Auxiliary Device)"
 msgstr "その他（副装置）"
+
+#. module: product_classification
+#: model:product.equipment.classification,name:product_classification.product_equipment_classification_other_medical
+msgid "Other Medical Equipment"
+msgstr "その他医療機器"
+
+#. module: product_classification
+#: model:product.equipment.classification,name:product_classification.product_equipment_classification_pca_pump
+msgid "PCA Pump"
+msgstr "PCAポンプ"
+
+#. module: product_classification
+#: model:product.equipment.classification,name:product_classification.product_equipment_classification_portable_oxygen
+msgid "Portable Oxygen"
+msgstr "携帯酸素"
 
 #. module: product_classification
 #: model:ir.model.fields,help:product_classification.field_product_product__equipment_classification_id
@@ -249,6 +294,11 @@ msgid "Product Manufacturer"
 msgstr "メーカー"
 
 #. module: product_classification
+#: model:product.equipment.classification,name:product_classification.product_equipment_classification_pulse_oximeter
+msgid "Pulse Oximeter"
+msgstr "パルスオキシメータ"
+
+#. module: product_classification
 #: model:ir.model.fields,field_description:product_classification.field_product_consumable_classification__sequence
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__sequence
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification_sub__sequence
@@ -283,6 +333,11 @@ msgstr "機器分類のコードは一意である必要があります。"
 #: model:ir.model.constraint,message:product_classification.constraint_product_equipment_classification_sub_code_uniq
 msgid "The code of an equipment sub-classification must be unique."
 msgstr "機器分類サブのコードは一意である必要があります。"
+
+#. module: product_classification
+#: model:product.equipment.classification,name:product_classification.product_equipment_classification_ultrasonic_bone_healing
+msgid "Ultrasonic Bone Healing Device"
+msgstr "超音波骨折治療器"
 
 #. module: product_classification
 #: model:ir.model.fields,help:product_classification.field_product_product__product_kind
