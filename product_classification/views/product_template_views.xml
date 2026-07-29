@@ -5,6 +5,10 @@
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_form_view" />
         <field name="arch" type="xml">
+            <field name="categ_id" position="after">
+                <field name="middle_category_id" options="{'no_quick_create': True}" />
+                <field name="minor_category_id" options="{'no_quick_create': True}" />
+            </field>
             <xpath expr="//notebook" position="inside">
                 <page name="classification" string="Classification">
                     <group>
@@ -47,6 +51,8 @@
                 <field name="equipment_classification_id" />
                 <field name="equipment_classification_sub_id" />
                 <field name="consumable_classification_id" />
+                <field name="middle_category_id" />
+                <field name="minor_category_id" />
                 <field name="manufacturer_id" />
                 <separator />
                 <filter
@@ -85,6 +91,16 @@
                     string="Consumable Classification"
                     name="group_by_consumable_classification_id"
                     context="{'group_by': 'consumable_classification_id'}"
+                />
+                <filter
+                    string="Middle Category"
+                    name="group_by_middle_category_id"
+                    context="{'group_by': 'middle_category_id'}"
+                />
+                <filter
+                    string="Minor Category"
+                    name="group_by_minor_category_id"
+                    context="{'group_by': 'minor_category_id'}"
                 />
                 <filter
                     string="Manufacturer"

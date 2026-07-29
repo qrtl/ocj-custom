@@ -8,6 +8,9 @@ and linked to a **Manufacturer** (メーカー), then given a classification:
   Sub-Classification** (機器分類サブ) for auxiliary devices.
 - **Consumable Classification** for consumable products.
 
+Products can also be given a **Middle Category** (中分類) and a **Minor
+Category** (小分類).
+
 Each axis is backed by a dedicated, user-maintainable model holding a name and
 an optional code (a numeric code is preferred for integration with external
 systems). Several fields feed the **Navi in Flow** (ナビフロー) integration,

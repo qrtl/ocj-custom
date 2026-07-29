@@ -38,3 +38,13 @@ class ProductTemplate(models.Model):
         string="Consumable Classification",
         help="Classification of a consumable product.",
     )
+    middle_category_id = fields.Many2one(
+        comodel_name="product.middle.category",
+        string="Middle Category",
+        help="Middle-level product category. Used in the Navi in Flow integration.",
+    )
+    minor_category_id = fields.Many2one(
+        comodel_name="product.minor.category",
+        string="Minor Category",
+        help="Minor-level product category. Used in the Navi in Flow integration.",
+    )

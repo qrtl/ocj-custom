@@ -5,5 +5,9 @@ access_product_equipment_classification_sub_user,product.equipment.classificatio
 access_product_equipment_classification_sub_admin,product.equipment.classification.sub admin,model_product_equipment_classification_sub,base.group_system,1,1,1,1
 access_product_consumable_classification_user,product.consumable.classification user,model_product_consumable_classification,base.group_user,1,0,0,0
 access_product_consumable_classification_admin,product.consumable.classification admin,model_product_consumable_classification,base.group_system,1,1,1,1
+access_product_middle_category_user,product.middle.category user,model_product_middle_category,base.group_user,1,0,0,0
+access_product_middle_category_admin,product.middle.category admin,model_product_middle_category,base.group_system,1,1,1,1
+access_product_minor_category_user,product.minor.category user,model_product_minor_category,base.group_user,1,0,0,0
+access_product_minor_category_admin,product.minor.category admin,model_product_minor_category,base.group_system,1,1,1,1
 access_product_manufacturer_user,product.manufacturer user,model_product_manufacturer,base.group_user,1,0,0,0
 access_product_manufacturer_admin,product.manufacturer admin,model_product_manufacturer,base.group_system,1,1,1,1

@@ -1,3 +1,7 @@
+.. image:: https://odoo-community.org/readme-banner-image
+   :target: https://odoo-community.org/get-involved?utm_source=readme
+   :alt: Odoo Community Association
+
 ======================
 Product Classification
 ======================
@@ -13,12 +17,12 @@ Product Classification
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/licence-LGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/license-LGPL--3-blue.png
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
-.. |badge3| image:: https://img.shields.io/badge/github-qrtl%2Focj--custom-lightgray.png?logo=github
-    :target: https://github.com/qrtl/ocj-custom/tree/19.0/product_classification
-    :alt: qrtl/ocj-custom
+.. |badge3| image:: https://img.shields.io/badge/github-qrtl%2FOCJ Custom-lightgray.png?logo=github
+    :target: https://github.com/qrtl/OCJ Custom/tree/19.0/product_classification
+    :alt: qrtl/OCJ Custom
 
 |badge1| |badge2| |badge3|
 
@@ -29,9 +33,12 @@ Each product can be flagged as **equipment** or **consumable** (*Product
 Kind*) and linked to a **Manufacturer** (メーカー), then given a
 classification:
 
--  **Equipment Classification** (機器分類), with an **Equipment
-   Sub-Classification** (機器分類サブ) for auxiliary devices.
--  **Consumable Classification** for consumable products.
+- **Equipment Classification** (機器分類), with an **Equipment
+  Sub-Classification** (機器分類サブ) for auxiliary devices.
+- **Consumable Classification** for consumable products.
+
+Products can also be given a **Middle Category** (中分類) and a **Minor
+Category** (小分類).
 
 Each axis is backed by a dedicated, user-maintainable model holding a
 name and an optional code (a numeric code is preferred for integration
@@ -56,7 +63,8 @@ To maintain the available classifications:
 
 1. Go to *Inventory > Configuration > Products* and open *Equipment
    Classifications*, *Equipment Sub-Classifications*, *Consumable
-   Classifications* or *Manufacturers*.
+   Classifications*, *Middle Categories*, *Minor Categories* or
+   *Manufacturers*.
 2. Create the entries with a name and, preferably, a numeric code.
 
 Usage
@@ -76,10 +84,10 @@ from the product list view.
 Bug Tracker
 ===========
 
-Bugs are tracked on `GitHub Issues <https://github.com/qrtl/ocj-custom/issues>`_.
+Bugs are tracked on `GitHub Issues <https://github.com/qrtl/OCJ Custom/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/qrtl/ocj-custom/issues/new?body=module:%20product_classification%0Aversion:%2019.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/qrtl/OCJ Custom/issues/new?body=module:%20product_classification%0Aversion:%2019.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -102,6 +110,6 @@ Current maintainer:
 
 |maintainer-yostashiro| 
 
-This module is part of the `qrtl/ocj-custom <https://github.com/qrtl/ocj-custom/tree/19.0/product_classification>`_ project on GitHub.
+This module is part of the `qrtl/OCJ Custom <https://github.com/qrtl/OCJ Custom/tree/19.0/product_classification>`_ project on GitHub.
 
 You are welcome to contribute.
