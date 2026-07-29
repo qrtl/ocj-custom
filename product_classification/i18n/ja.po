@@ -6,6 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0+e\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-29 09:38+0000\n"
+"PO-Revision-Date: 2026-07-29 09:38+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -29,6 +31,8 @@ msgstr "付属品"
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__active
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification_sub__active
 #: model:ir.model.fields,field_description:product_classification.field_product_manufacturer__active
+#: model:ir.model.fields,field_description:product_classification.field_product_middle_category__active
+#: model:ir.model.fields,field_description:product_classification.field_product_minor_category__active
 msgid "Active"
 msgstr "有効"
 
@@ -65,6 +69,8 @@ msgstr "消耗品の分類。"
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__code
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification_sub__code
 #: model:ir.model.fields,field_description:product_classification.field_product_manufacturer__code
+#: model:ir.model.fields,field_description:product_classification.field_product_middle_category__code
+#: model:ir.model.fields,field_description:product_classification.field_product_minor_category__code
 msgid "Code"
 msgstr "コード"
 
@@ -77,7 +83,6 @@ msgstr "消耗品"
 #. module: product_classification
 #: model:ir.model.fields,field_description:product_classification.field_product_product__consumable_classification_id
 #: model:ir.model.fields,field_description:product_classification.field_product_template__consumable_classification_id
-#: model_terms:ir.ui.view,arch_db:product_classification.product_template_view_form
 #: model_terms:ir.ui.view,arch_db:product_classification.product_template_view_search
 msgid "Consumable Classification"
 msgstr "消耗品分類"
@@ -98,6 +103,8 @@ msgstr "排痰補助装置"
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__create_uid
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification_sub__create_uid
 #: model:ir.model.fields,field_description:product_classification.field_product_manufacturer__create_uid
+#: model:ir.model.fields,field_description:product_classification.field_product_middle_category__create_uid
+#: model:ir.model.fields,field_description:product_classification.field_product_minor_category__create_uid
 msgid "Created by"
 msgstr "作成者"
 
@@ -106,6 +113,8 @@ msgstr "作成者"
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__create_date
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification_sub__create_date
 #: model:ir.model.fields,field_description:product_classification.field_product_manufacturer__create_date
+#: model:ir.model.fields,field_description:product_classification.field_product_middle_category__create_date
+#: model:ir.model.fields,field_description:product_classification.field_product_minor_category__create_date
 msgid "Created on"
 msgstr "作成日"
 
@@ -114,6 +123,8 @@ msgstr "作成日"
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__display_name
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification_sub__display_name
 #: model:ir.model.fields,field_description:product_classification.field_product_manufacturer__display_name
+#: model:ir.model.fields,field_description:product_classification.field_product_middle_category__display_name
+#: model:ir.model.fields,field_description:product_classification.field_product_minor_category__display_name
 #: model:ir.model.fields,field_description:product_classification.field_product_template__display_name
 msgid "Display Name"
 msgstr "表示名"
@@ -127,7 +138,6 @@ msgstr "機器"
 #. module: product_classification
 #: model:ir.model.fields,field_description:product_classification.field_product_product__equipment_classification_id
 #: model:ir.model.fields,field_description:product_classification.field_product_template__equipment_classification_id
-#: model_terms:ir.ui.view,arch_db:product_classification.product_template_view_form
 #: model_terms:ir.ui.view,arch_db:product_classification.product_template_view_search
 msgid "Equipment Classification"
 msgstr "機器分類"
@@ -156,6 +166,8 @@ msgstr "機器分類サブ"
 #: model:ir.model.fields,help:product_classification.field_product_equipment_classification__code
 #: model:ir.model.fields,help:product_classification.field_product_equipment_classification_sub__code
 #: model:ir.model.fields,help:product_classification.field_product_manufacturer__code
+#: model:ir.model.fields,help:product_classification.field_product_middle_category__code
+#: model:ir.model.fields,help:product_classification.field_product_minor_category__code
 msgid "External code used for integration. A numeric code is preferred."
 msgstr "連携に使用する外部コード。数値コードが推奨されます。"
 
@@ -189,6 +201,8 @@ msgstr "ハイフローセラピー"
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__id
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification_sub__id
 #: model:ir.model.fields,field_description:product_classification.field_product_manufacturer__id
+#: model:ir.model.fields,field_description:product_classification.field_product_middle_category__id
+#: model:ir.model.fields,field_description:product_classification.field_product_minor_category__id
 #: model:ir.model.fields,field_description:product_classification.field_product_template__id
 msgid "ID"
 msgstr "ID"
@@ -198,6 +212,8 @@ msgstr "ID"
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__write_uid
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification_sub__write_uid
 #: model:ir.model.fields,field_description:product_classification.field_product_manufacturer__write_uid
+#: model:ir.model.fields,field_description:product_classification.field_product_middle_category__write_uid
+#: model:ir.model.fields,field_description:product_classification.field_product_minor_category__write_uid
 msgid "Last Updated by"
 msgstr "最終更新者"
 
@@ -206,6 +222,8 @@ msgstr "最終更新者"
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__write_date
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification_sub__write_date
 #: model:ir.model.fields,field_description:product_classification.field_product_manufacturer__write_date
+#: model:ir.model.fields,field_description:product_classification.field_product_middle_category__write_date
+#: model:ir.model.fields,field_description:product_classification.field_product_minor_category__write_date
 msgid "Last Updated on"
 msgstr "最終更新日"
 
@@ -234,10 +252,50 @@ msgid "Manufacturers"
 msgstr "メーカー"
 
 #. module: product_classification
+#: model:ir.actions.act_window,name:product_classification.product_middle_category_action
+#: model:ir.ui.menu,name:product_classification.product_middle_category_menu
+msgid "Middle Categories"
+msgstr "中分類"
+
+#. module: product_classification
+#: model:ir.model.fields,field_description:product_classification.field_product_product__middle_category_id
+#: model:ir.model.fields,field_description:product_classification.field_product_template__middle_category_id
+#: model_terms:ir.ui.view,arch_db:product_classification.product_template_view_search
+msgid "Middle Category"
+msgstr "中分類"
+
+#. module: product_classification
+#: model:ir.model.fields,help:product_classification.field_product_product__middle_category_id
+#: model:ir.model.fields,help:product_classification.field_product_template__middle_category_id
+msgid "Middle-level product category. Used in the Navi in Flow integration."
+msgstr "プロダクトの中分類。ナビフロー連携で使用されます。"
+
+#. module: product_classification
+#: model:ir.actions.act_window,name:product_classification.product_minor_category_action
+#: model:ir.ui.menu,name:product_classification.product_minor_category_menu
+msgid "Minor Categories"
+msgstr "小分類"
+
+#. module: product_classification
+#: model:ir.model.fields,field_description:product_classification.field_product_product__minor_category_id
+#: model:ir.model.fields,field_description:product_classification.field_product_template__minor_category_id
+#: model_terms:ir.ui.view,arch_db:product_classification.product_template_view_search
+msgid "Minor Category"
+msgstr "小分類"
+
+#. module: product_classification
+#: model:ir.model.fields,help:product_classification.field_product_product__minor_category_id
+#: model:ir.model.fields,help:product_classification.field_product_template__minor_category_id
+msgid "Minor-level product category. Used in the Navi in Flow integration."
+msgstr "プロダクトの小分類。ナビフロー連携で使用されます。"
+
+#. module: product_classification
 #: model:ir.model.fields,field_description:product_classification.field_product_consumable_classification__name
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__name
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification_sub__name
 #: model:ir.model.fields,field_description:product_classification.field_product_manufacturer__name
+#: model:ir.model.fields,field_description:product_classification.field_product_middle_category__name
+#: model:ir.model.fields,field_description:product_classification.field_product_minor_category__name
 msgid "Name"
 msgstr "名称"
 
@@ -302,6 +360,16 @@ msgid "Product Manufacturer"
 msgstr "メーカー"
 
 #. module: product_classification
+#: model:ir.model,name:product_classification.model_product_middle_category
+msgid "Product Middle Category"
+msgstr "中分類"
+
+#. module: product_classification
+#: model:ir.model,name:product_classification.model_product_minor_category
+msgid "Product Minor Category"
+msgstr "小分類"
+
+#. module: product_classification
 #: model:product.equipment.classification,name:product_classification.product_equipment_classification_pulse_oximeter
 msgid "Pulse Oximeter"
 msgstr "パルスオキシメータ"
@@ -311,6 +379,8 @@ msgstr "パルスオキシメータ"
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__sequence
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification_sub__sequence
 #: model:ir.model.fields,field_description:product_classification.field_product_manufacturer__sequence
+#: model:ir.model.fields,field_description:product_classification.field_product_middle_category__sequence
+#: model:ir.model.fields,field_description:product_classification.field_product_minor_category__sequence
 msgid "Sequence"
 msgstr "シーケンス"
 
@@ -331,6 +401,16 @@ msgstr "消耗品分類のコードは一意である必要があります。"
 #: model:ir.model.constraint,message:product_classification.constraint_product_manufacturer_code_uniq
 msgid "The code of a manufacturer must be unique."
 msgstr "メーカーのコードは一意である必要があります。"
+
+#. module: product_classification
+#: model:ir.model.constraint,message:product_classification.constraint_product_middle_category_code_uniq
+msgid "The code of a middle category must be unique."
+msgstr "中分類のコードは一意である必要があります。"
+
+#. module: product_classification
+#: model:ir.model.constraint,message:product_classification.constraint_product_minor_category_code_uniq
+msgid "The code of a minor category must be unique."
+msgstr "小分類のコードは一意である必要があります。"
 
 #. module: product_classification
 #: model:ir.model.constraint,message:product_classification.constraint_product_equipment_classification_code_uniq
