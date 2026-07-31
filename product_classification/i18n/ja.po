@@ -17,6 +17,7 @@ msgstr ""
 
 #. module: product_classification
 #: model:product.equipment.classification,name:product_classification.product_equipment_classification_asv
+#: model:product.middle.category,name:product_classification.product_middle_category_asv
 msgid "ASV"
 msgstr "ASV"
 
@@ -50,8 +51,14 @@ msgstr "アーカイブ済"
 
 #. module: product_classification
 #: model:product.equipment.classification,name:product_classification.product_equipment_classification_cpap
+#: model:product.middle.category,name:product_classification.product_middle_category_cpap
 msgid "CPAP"
 msgstr "CPAP"
+
+#. module: product_classification
+#: model:product.minor.category,name:product_classification.product_minor_category_cannula_cylinder_accessories
+msgid "Cannula / Cylinder Accessories"
+msgstr "カニューラ・ボンベ付属品"
 
 #. module: product_classification
 #: model_terms:ir.ui.view,arch_db:product_classification.product_template_view_form
@@ -130,6 +137,11 @@ msgid "Display Name"
 msgstr "表示名"
 
 #. module: product_classification
+#: model:product.minor.category,name:product_classification.product_minor_category_disposal_cost
+msgid "Disposal Cost"
+msgstr "廃棄費用"
+
+#. module: product_classification
 #: model:ir.model.fields.selection,name:product_classification.selection__product_template__product_kind__equipment
 #: model_terms:ir.ui.view,arch_db:product_classification.product_template_view_search
 msgid "Equipment"
@@ -162,6 +174,11 @@ msgid "Equipment Sub-Classifications"
 msgstr "機器分類サブ"
 
 #. module: product_classification
+#: model:product.minor.category,name:product_classification.product_minor_category_examination
+msgid "Examination"
+msgstr "検査系"
+
+#. module: product_classification
 #: model:ir.model.fields,help:product_classification.field_product_consumable_classification__code
 #: model:ir.model.fields,help:product_classification.field_product_equipment_classification__code
 #: model:ir.model.fields,help:product_classification.field_product_equipment_classification_sub__code
@@ -172,9 +189,19 @@ msgid "External code used for integration. A numeric code is preferred."
 msgstr "連携に使用する外部コード。数値コードが推奨されます。"
 
 #. module: product_classification
+#: model:product.middle.category,name:product_classification.product_middle_category_hft
+msgid "HFT"
+msgstr "HFT"
+
+#. module: product_classification
 #: model:product.equipment.classification,name:product_classification.product_equipment_classification_hit
 msgid "HIT"
 msgstr "HIT"
+
+#. module: product_classification
+#: model:product.middle.category,name:product_classification.product_middle_category_hot
+msgid "HOT"
+msgstr "HOT"
 
 #. module: product_classification
 #: model:product.equipment.classification,name:product_classification.product_equipment_classification_hot_concentrator
@@ -197,6 +224,11 @@ msgid "High-Flow Therapy"
 msgstr "ハイフローセラピー"
 
 #. module: product_classification
+#: model:product.minor.category,name:product_classification.product_minor_category_humidair_filter
+msgid "HumidAir / Filter"
+msgstr "HumidAir・フィルタ"
+
+#. module: product_classification
 #: model:ir.model.fields,field_description:product_classification.field_product_consumable_classification__id
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__id
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification_sub__id
@@ -206,6 +238,11 @@ msgstr "ハイフローセラピー"
 #: model:ir.model.fields,field_description:product_classification.field_product_template__id
 msgid "ID"
 msgstr "ID"
+
+#. module: product_classification
+#: model:product.middle.category,name:product_classification.product_middle_category_imv
+msgid "IMV"
+msgstr "IMV"
 
 #. module: product_classification
 #: model:ir.model.fields,field_description:product_classification.field_product_consumable_classification__write_uid
@@ -226,6 +263,11 @@ msgstr "最終更新者"
 #: model:ir.model.fields,field_description:product_classification.field_product_minor_category__write_date
 msgid "Last Updated on"
 msgstr "最終更新日"
+
+#. module: product_classification
+#: model:product.minor.category,name:product_classification.product_minor_category_liquid_oxygen_cylinder
+msgid "Liquid Oxygen / Cylinder"
+msgstr "液化酸素・ボンベ"
 
 #. module: product_classification
 #: model:product.equipment.classification,name:product_classification.product_equipment_classification_mv
@@ -252,6 +294,16 @@ msgid "Manufacturers"
 msgstr "メーカー"
 
 #. module: product_classification
+#: model:product.minor.category,name:product_classification.product_minor_category_mask_cushion_headgear
+msgid "Mask / Cushion / Headgear"
+msgstr "マスク・クッション・ヘッドギア"
+
+#. module: product_classification
+#: model:product.middle.category,name:product_classification.product_middle_category_medical_gas
+msgid "Medical Gas"
+msgstr "メドガス"
+
+#. module: product_classification
 #: model:ir.actions.act_window,name:product_classification.product_middle_category_action
 #: model:ir.ui.menu,name:product_classification.product_middle_category_menu
 msgid "Middle Categories"
@@ -267,8 +319,8 @@ msgstr "中分類"
 #. module: product_classification
 #: model:ir.model.fields,help:product_classification.field_product_product__middle_category_id
 #: model:ir.model.fields,help:product_classification.field_product_template__middle_category_id
-msgid "Middle-level product category. Used in the Navi in Flow integration."
-msgstr "プロダクトの中分類。ナビフロー連携で使用されます。"
+msgid "Middle-level product category."
+msgstr "プロダクトの中分類。"
 
 #. module: product_classification
 #: model:ir.actions.act_window,name:product_classification.product_minor_category_action
@@ -286,8 +338,13 @@ msgstr "小分類"
 #. module: product_classification
 #: model:ir.model.fields,help:product_classification.field_product_product__minor_category_id
 #: model:ir.model.fields,help:product_classification.field_product_template__minor_category_id
-msgid "Minor-level product category. Used in the Navi in Flow integration."
-msgstr "プロダクトの小分類。ナビフロー連携で使用されます。"
+msgid "Minor-level product category."
+msgstr "プロダクトの小分類。"
+
+#. module: product_classification
+#: model:product.middle.category,name:product_classification.product_middle_category_nip
+msgid "NIP"
+msgstr "NIP"
 
 #. module: product_classification
 #: model:ir.model.fields,field_description:product_classification.field_product_consumable_classification__name
@@ -300,6 +357,11 @@ msgid "Name"
 msgstr "名称"
 
 #. module: product_classification
+#: model:product.middle.category,name:product_classification.product_middle_category_non_teijin
+msgid "Non-Teijin"
+msgstr "帝人以外"
+
+#. module: product_classification
 #: model:product.equipment.classification,name:product_classification.product_equipment_classification_other_aux
 msgid "Other (Auxiliary Device)"
 msgstr "その他（副装置）"
@@ -310,9 +372,19 @@ msgid "Other Medical Equipment"
 msgstr "その他医療機器"
 
 #. module: product_classification
+#: model:product.middle.category,name:product_classification.product_middle_category_own_use
+msgid "Own Use"
+msgstr "自社用"
+
+#. module: product_classification
 #: model:product.equipment.classification,name:product_classification.product_equipment_classification_pca_pump
 msgid "PCA Pump"
 msgstr "PCAポンプ"
+
+#. module: product_classification
+#: model:product.minor.category,name:product_classification.product_minor_category_patient_care
+msgid "Patient Care Outsourcing"
+msgstr "患者ケア業務委託"
 
 #. module: product_classification
 #: model:product.equipment.classification,name:product_classification.product_equipment_classification_portable_oxygen
@@ -393,6 +465,11 @@ msgid ""
 msgstr "補助機器または付属品のサブ分類。ナビフロー連携で使用されます。"
 
 #. module: product_classification
+#: model:product.middle.category,name:product_classification.product_middle_category_teijin_use
+msgid "Teijin Use"
+msgstr "帝人用"
+
+#. module: product_classification
 #: model:ir.model.constraint,message:product_classification.constraint_product_consumable_classification_code_uniq
 msgid "The code of a consumable classification must be unique."
 msgstr "消耗品分類のコードは一意である必要があります。"
@@ -421,6 +498,16 @@ msgstr "機器分類のコードは一意である必要があります。"
 #: model:ir.model.constraint,message:product_classification.constraint_product_equipment_classification_sub_code_uniq
 msgid "The code of an equipment sub-classification must be unique."
 msgstr "機器分類サブのコードは一意である必要があります。"
+
+#. module: product_classification
+#: model:product.minor.category,name:product_classification.product_minor_category_travel_support
+msgid "Travel Support"
+msgstr "旅行対応"
+
+#. module: product_classification
+#: model:product.minor.category,name:product_classification.product_minor_category_tube
+msgid "Tube"
+msgstr "チューブ"
 
 #. module: product_classification
 #: model:product.equipment.classification,name:product_classification.product_equipment_classification_ultrasonic_bone_healing

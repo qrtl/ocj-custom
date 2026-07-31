@@ -41,10 +41,10 @@ class ProductTemplate(models.Model):
     middle_category_id = fields.Many2one(
         comodel_name="product.middle.category",
         string="Middle Category",
-        help="Middle-level product category. Used in the Navi in Flow integration.",
+        help="Middle-level product category.",
     )
     minor_category_id = fields.Many2one(
         comodel_name="product.minor.category",
         string="Minor Category",
-        help="Minor-level product category. Used in the Navi in Flow integration.",
+        help="Minor-level product category.",
     )
