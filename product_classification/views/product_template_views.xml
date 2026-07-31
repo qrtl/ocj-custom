@@ -5,10 +5,6 @@
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_form_view" />
         <field name="arch" type="xml">
-            <field name="categ_id" position="after">
-                <field name="middle_category_id" options="{'no_quick_create': True}" />
-                <field name="minor_category_id" options="{'no_quick_create': True}" />
-            </field>
             <xpath expr="//notebook" position="inside">
                 <page name="classification" string="Classification">
                     <group>
@@ -27,6 +23,14 @@
                             <field
                                 name="consumable_classification_id"
                                 invisible="product_kind != 'consumable'"
+                                options="{'no_quick_create': True}"
+                            />
+                            <field
+                                name="middle_category_id"
+                                options="{'no_quick_create': True}"
+                            />
+                            <field
+                                name="minor_category_id"
                                 options="{'no_quick_create': True}"
                             />
                         </group>
