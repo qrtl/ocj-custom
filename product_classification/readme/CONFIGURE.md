@@ -6,7 +6,6 @@ external integration).
 To maintain the available classifications:
 
 1. Go to *Inventory > Configuration > Products* and open *Equipment
-   Classifications*, *Equipment Sub-Classifications*, *Consumable
-   Classifications*, *Middle Categories*, *Minor Categories* or
-   *Manufacturers*.
+   Classifications*, *Consumable Classifications*, *Middle Categories*,
+   *Minor Categories* or *Manufacturers*.
 2. Create the entries with a name and, preferably, a numeric code.

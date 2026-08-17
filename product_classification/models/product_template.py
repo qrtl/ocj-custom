@@ -27,12 +27,6 @@ class ProductTemplate(models.Model):
         help="Primary classification of an equipment or accessory product. "
         "Used in the Navi in Flow integration.",
     )
-    equipment_classification_sub_id = fields.Many2one(
-        comodel_name="product.equipment.classification.sub",
-        string="Equipment Sub-Classification",
-        help="Sub-classification for auxiliary equipment or accessories. "
-        "Used in the Navi in Flow integration.",
-    )
     consumable_classification_id = fields.Many2one(
         comodel_name="product.consumable.classification",
         string="Consumable Classification",
