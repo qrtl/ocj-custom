@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="product_template_view_form" model="ir.ui.view">
+        <field name="name">product.template.form.classification</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="classification" string="Classification">
+                    <group>
+                        <group>
+                            <field name="product_kind" />
+                            <field
+                                name="equipment_classification_id"
+                                invisible="product_kind not in ('equipment', 'accessory')"
+                                options="{'no_quick_create': True}"
+                            />
+                            <field
+                                name="middle_category_id"
+                                options="{'no_quick_create': True}"
+                            />
+                            <field
+                                name="minor_category_id"
+                                options="{'no_quick_create': True}"
+                            />
+                        </group>
+                        <group>
+                            <field
+                                name="manufacturer_id"
+                                options="{'no_quick_create': True}"
+                            />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="product_template_view_search" model="ir.ui.view">
+        <field name="name">product.template.search.classification</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_search_view" />
+        <field name="arch" type="xml">
+            <field name="product_tag_ids" position="after">
+                <field name="equipment_classification_id" />
+                <field name="middle_category_id" />
+                <field name="minor_category_id" />
+                <field name="manufacturer_id" />
+                <separator />
+                <filter
+                    string="Equipment"
+                    name="kind_equipment"
+                    domain="[('product_kind', '=', 'equipment')]"
+                />
+                <filter
+                    string="Accessory"
+                    name="kind_accessory"
+                    domain="[('product_kind', '=', 'accessory')]"
+                />
+                <filter
+                    string="Consumable"
+                    name="kind_consumable"
+                    domain="[('product_kind', '=', 'consumable')]"
+                />
+            </field>
+            <xpath expr="//search/group" position="inside">
+                <filter
+                    string="Product Kind"
+                    name="group_by_product_kind"
+                    context="{'group_by': 'product_kind'}"
+                />
+                <filter
+                    string="Equipment Classification"
+                    name="group_by_equipment_classification_id"
+                    context="{'group_by': 'equipment_classification_id'}"
+                />
+                <filter
+                    string="Middle Category"
+                    name="group_by_middle_category_id"
+                    context="{'group_by': 'middle_category_id'}"
+                />
+                <filter
+                    string="Minor Category"
+                    name="group_by_minor_category_id"
+                    context="{'group_by': 'minor_category_id'}"
+                />
+                <filter
+                    string="Manufacturer"
+                    name="group_by_manufacturer_id"
+                    context="{'group_by': 'manufacturer_id'}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
