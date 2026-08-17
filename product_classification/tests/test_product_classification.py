@@ -14,9 +14,6 @@ class TestProductClassification(TransactionCase):
         cls.classification = cls.env["product.equipment.classification"].create(
             {"name": "Ventilator", "code": "100"}
         )
-        cls.consumable_classification = cls.env[
-            "product.consumable.classification"
-        ].create({"name": "Mask", "code": "400"})
         cls.manufacturer = cls.env["product.manufacturer"].create(
             {"name": "Acme Medical", "code": "300"}
         )
@@ -44,30 +41,11 @@ class TestProductClassification(TransactionCase):
         self.assertEqual(self.product.product_kind, "accessory")
         self.assertEqual(self.product.equipment_classification_id, self.classification)
 
-    def test_assign_consumable_classification(self):
-        self.product.write(
-            {
-                "product_kind": "consumable",
-                "consumable_classification_id": self.consumable_classification.id,
-            }
-        )
-        self.assertEqual(self.product.product_kind, "consumable")
-        self.assertEqual(
-            self.product.consumable_classification_id, self.consumable_classification
-        )
-
     @mute_logger("odoo.sql_db")
     def test_classification_code_unique(self):
         with self.assertRaises(IntegrityError):
             self.env["product.equipment.classification"].create(
                 {"name": "Duplicate", "code": "100"}
-            )
-
-    @mute_logger("odoo.sql_db")
-    def test_consumable_classification_code_unique(self):
-        with self.assertRaises(IntegrityError):
-            self.env["product.consumable.classification"].create(
-                {"name": "Duplicate", "code": "400"}
             )
 
     @mute_logger("odoo.sql_db")

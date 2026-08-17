@@ -27,7 +27,6 @@ msgid "Accessory"
 msgstr "付属品"
 
 #. module: product_classification
-#: model:ir.model.fields,field_description:product_classification.field_product_consumable_classification__active
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__active
 #: model:ir.model.fields,field_description:product_classification.field_product_manufacturer__active
 #: model:ir.model.fields,field_description:product_classification.field_product_middle_category__active
@@ -36,8 +35,6 @@ msgid "Active"
 msgstr "有効"
 
 #. module: product_classification
-#: model_terms:ir.ui.view,arch_db:product_classification.product_consumable_classification_view_form
-#: model_terms:ir.ui.view,arch_db:product_classification.product_consumable_classification_view_search
 #: model_terms:ir.ui.view,arch_db:product_classification.product_equipment_classification_view_form
 #: model_terms:ir.ui.view,arch_db:product_classification.product_equipment_classification_view_search
 #: model_terms:ir.ui.view,arch_db:product_classification.product_manufacturer_view_form
@@ -56,13 +53,6 @@ msgid "Classification"
 msgstr "分類"
 
 #. module: product_classification
-#: model:ir.model.fields,help:product_classification.field_product_product__consumable_classification_id
-#: model:ir.model.fields,help:product_classification.field_product_template__consumable_classification_id
-msgid "Classification of a consumable product."
-msgstr "消耗品の分類。"
-
-#. module: product_classification
-#: model:ir.model.fields,field_description:product_classification.field_product_consumable_classification__code
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__code
 #: model:ir.model.fields,field_description:product_classification.field_product_manufacturer__code
 #: model:ir.model.fields,field_description:product_classification.field_product_middle_category__code
@@ -77,25 +67,11 @@ msgid "Consumable"
 msgstr "消耗品"
 
 #. module: product_classification
-#: model:ir.model.fields,field_description:product_classification.field_product_product__consumable_classification_id
-#: model:ir.model.fields,field_description:product_classification.field_product_template__consumable_classification_id
-#: model_terms:ir.ui.view,arch_db:product_classification.product_template_view_search
-msgid "Consumable Classification"
-msgstr "消耗品分類"
-
-#. module: product_classification
-#: model:ir.actions.act_window,name:product_classification.product_consumable_classification_action
-#: model:ir.ui.menu,name:product_classification.product_consumable_classification_menu
-msgid "Consumable Classifications"
-msgstr "消耗品分類"
-
-#. module: product_classification
 #: model:product.equipment.classification,name:product_classification.product_equipment_classification_cough_assist
 msgid "Cough Assist Device"
 msgstr "排痰補助装置"
 
 #. module: product_classification
-#: model:ir.model.fields,field_description:product_classification.field_product_consumable_classification__create_uid
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__create_uid
 #: model:ir.model.fields,field_description:product_classification.field_product_manufacturer__create_uid
 #: model:ir.model.fields,field_description:product_classification.field_product_middle_category__create_uid
@@ -104,7 +80,6 @@ msgid "Created by"
 msgstr "作成者"
 
 #. module: product_classification
-#: model:ir.model.fields,field_description:product_classification.field_product_consumable_classification__create_date
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__create_date
 #: model:ir.model.fields,field_description:product_classification.field_product_manufacturer__create_date
 #: model:ir.model.fields,field_description:product_classification.field_product_middle_category__create_date
@@ -113,7 +88,6 @@ msgid "Created on"
 msgstr "作成日"
 
 #. module: product_classification
-#: model:ir.model.fields,field_description:product_classification.field_product_consumable_classification__display_name
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__display_name
 #: model:ir.model.fields,field_description:product_classification.field_product_manufacturer__display_name
 #: model:ir.model.fields,field_description:product_classification.field_product_middle_category__display_name
@@ -147,7 +121,6 @@ msgid "Equipment Sub-Classification"
 msgstr "機器分類サブ"
 
 #. module: product_classification
-#: model:ir.model.fields,help:product_classification.field_product_consumable_classification__code
 #: model:ir.model.fields,help:product_classification.field_product_equipment_classification__code
 #: model:ir.model.fields,help:product_classification.field_product_manufacturer__code
 #: model:ir.model.fields,help:product_classification.field_product_middle_category__code
@@ -181,7 +154,6 @@ msgid "High-Flow Therapy"
 msgstr "ハイフローセラピー"
 
 #. module: product_classification
-#: model:ir.model.fields,field_description:product_classification.field_product_consumable_classification__id
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__id
 #: model:ir.model.fields,field_description:product_classification.field_product_manufacturer__id
 #: model:ir.model.fields,field_description:product_classification.field_product_middle_category__id
@@ -191,7 +163,6 @@ msgid "ID"
 msgstr "ID"
 
 #. module: product_classification
-#: model:ir.model.fields,field_description:product_classification.field_product_consumable_classification__write_uid
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__write_uid
 #: model:ir.model.fields,field_description:product_classification.field_product_manufacturer__write_uid
 #: model:ir.model.fields,field_description:product_classification.field_product_middle_category__write_uid
@@ -200,7 +171,6 @@ msgid "Last Updated by"
 msgstr "最終更新者"
 
 #. module: product_classification
-#: model:ir.model.fields,field_description:product_classification.field_product_consumable_classification__write_date
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__write_date
 #: model:ir.model.fields,field_description:product_classification.field_product_manufacturer__write_date
 #: model:ir.model.fields,field_description:product_classification.field_product_middle_category__write_date
@@ -271,7 +241,6 @@ msgid "Minor-level product category."
 msgstr "プロダクトの小分類。"
 
 #. module: product_classification
-#: model:ir.model.fields,field_description:product_classification.field_product_consumable_classification__name
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__name
 #: model:ir.model.fields,field_description:product_classification.field_product_manufacturer__name
 #: model:ir.model.fields,field_description:product_classification.field_product_middle_category__name
@@ -313,11 +282,6 @@ msgid "Product"
 msgstr "プロダクト"
 
 #. module: product_classification
-#: model:ir.model,name:product_classification.model_product_consumable_classification
-msgid "Product Consumable Classification"
-msgstr "消耗品分類"
-
-#. module: product_classification
 #: model:ir.model,name:product_classification.model_product_equipment_classification
 msgid "Product Equipment Classification"
 msgstr "機器分類"
@@ -350,18 +314,12 @@ msgid "Pulse Oximeter"
 msgstr "パルスオキシメータ"
 
 #. module: product_classification
-#: model:ir.model.fields,field_description:product_classification.field_product_consumable_classification__sequence
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__sequence
 #: model:ir.model.fields,field_description:product_classification.field_product_manufacturer__sequence
 #: model:ir.model.fields,field_description:product_classification.field_product_middle_category__sequence
 #: model:ir.model.fields,field_description:product_classification.field_product_minor_category__sequence
 msgid "Sequence"
 msgstr "シーケンス"
-
-#. module: product_classification
-#: model:ir.model.constraint,message:product_classification.constraint_product_consumable_classification_code_uniq
-msgid "The code of a consumable classification must be unique."
-msgstr "消耗品分類のコードは一意である必要があります。"
 
 #. module: product_classification
 #: model:ir.model.constraint,message:product_classification.constraint_product_manufacturer_code_uniq

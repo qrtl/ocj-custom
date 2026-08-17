@@ -1,8 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_product_equipment_classification_user,product.equipment.classification user,model_product_equipment_classification,base.group_user,1,0,0,0
 access_product_equipment_classification_admin,product.equipment.classification admin,model_product_equipment_classification,base.group_system,1,1,1,1
-access_product_consumable_classification_user,product.consumable.classification user,model_product_consumable_classification,base.group_user,1,0,0,0
-access_product_consumable_classification_admin,product.consumable.classification admin,model_product_consumable_classification,base.group_system,1,1,1,1
 access_product_middle_category_user,product.middle.category user,model_product_middle_category,base.group_user,1,0,0,0
 access_product_middle_category_admin,product.middle.category admin,model_product_middle_category,base.group_system,1,1,1,1
 access_product_minor_category_user,product.minor.category user,model_product_minor_category,base.group_user,1,0,0,0

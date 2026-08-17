@@ -16,7 +16,6 @@
         "security/ir.model.access.csv",
         "data/product_equipment_classification_data.xml",
         "views/product_equipment_classification_views.xml",
-        "views/product_consumable_classification_views.xml",
         "views/product_middle_category_views.xml",
         "views/product_minor_category_views.xml",
         "views/product_manufacturer_views.xml",

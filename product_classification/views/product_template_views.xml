@@ -16,11 +16,6 @@
                                 options="{'no_quick_create': True}"
                             />
                             <field
-                                name="consumable_classification_id"
-                                invisible="product_kind != 'consumable'"
-                                options="{'no_quick_create': True}"
-                            />
-                            <field
                                 name="middle_category_id"
                                 options="{'no_quick_create': True}"
                             />
@@ -48,7 +43,6 @@
         <field name="arch" type="xml">
             <field name="product_tag_ids" position="after">
                 <field name="equipment_classification_id" />
-                <field name="consumable_classification_id" />
                 <field name="middle_category_id" />
                 <field name="minor_category_id" />
                 <field name="manufacturer_id" />
@@ -79,11 +73,6 @@
                     string="Equipment Classification"
                     name="group_by_equipment_classification_id"
                     context="{'group_by': 'equipment_classification_id'}"
-                />
-                <filter
-                    string="Consumable Classification"
-                    name="group_by_consumable_classification_id"
-                    context="{'group_by': 'consumable_classification_id'}"
                 />
                 <filter
                     string="Middle Category"

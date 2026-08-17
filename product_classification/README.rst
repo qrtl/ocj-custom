@@ -34,7 +34,6 @@ Kind*) and linked to a **Manufacturer** (メーカー), then given a
 classification:
 
 - **Equipment Classification** (機器分類) for equipment and accessories.
-- **Consumable Classification** for consumable products.
 
 Products can also be given a **Middle Category** (中分類) and a **Minor
 Category** (小分類).
@@ -61,8 +60,8 @@ company-specific data module or the external integration).
 To maintain the available classifications:
 
 1. Go to *Inventory > Configuration > Products* and open *Equipment
-   Classifications*, *Consumable Classifications*, *Middle Categories*,
-   *Minor Categories* or *Manufacturers*.
+   Classifications*, *Middle Categories*, *Minor Categories* or
+   *Manufacturers*.
 2. Create the entries with a name and, preferably, a numeric code.
 
 Usage
@@ -72,9 +71,9 @@ To classify a product:
 
 1. Open a product and go to the *Classification* tab.
 2. Set the **Product Kind** (equipment or consumable), the
-   **Manufacturer** and the relevant classification. The equipment or
-   consumable classification fields appear according to the selected
-   kind.
+   **Manufacturer** and the relevant classification. The equipment
+   classification field appears only when the kind is equipment or
+   accessory.
 
 Products can be searched and filtered by manufacturer and classification
 from the product list view.
