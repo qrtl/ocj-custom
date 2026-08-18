@@ -13,6 +13,12 @@
                     <group>
                         <field name="product_kind" />
                         <field
+                            name="manufacturer_id"
+                            options="{'no_quick_create': True}"
+                        />
+                    </group>
+                    <group>
+                        <field
                             name="equipment_classification_id"
                             invisible="product_kind not in ('equipment', 'accessory')"
                             options="{'no_quick_create': True}"
@@ -23,12 +29,6 @@
                         />
                         <field
                             name="minor_category_id"
-                            options="{'no_quick_create': True}"
-                        />
-                    </group>
-                    <group>
-                        <field
-                            name="manufacturer_id"
                             options="{'no_quick_create': True}"
                         />
                     </group>
