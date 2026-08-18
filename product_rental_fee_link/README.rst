@@ -33,8 +33,8 @@ is what tells equipment and accessories apart from the other goods.
 When rental fees are managed as products separate from the equipment
 itself (one *rental fee* product per equipment model), nothing in the
 standard data model ties the two together. This module adds a dedicated
-**Rental Fee Product** link on the product, restricted to non-storable
-service products.
+**Rental Fee Product** link on the product, restricted to service
+products.
 
 Why a dedicated field rather than *Optional Products*:
 ``optional_product_ids`` is a many2many meant for cross-sell suggestions
@@ -51,9 +51,9 @@ validated, searched, and used as the source for integrations.
 Usage
 =====
 
-On an equipment product, set **Rental Fee Product** next to the product
-category. Only non-storable service products can be selected, and a
-product cannot point at itself.
+On an equipment product, set **Rental Fee Product** in the
+**Classification** section, directly under **Product Kind**. Only
+service products can be selected, and a product cannot point at itself.
 
 The field is shown only when the product kind is equipment or accessory.
 That is the only distinction available: equipment, accessories and

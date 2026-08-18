@@ -1,6 +1,6 @@
-On an equipment product, set **Rental Fee Product** next to the product
-category. Only non-storable service products can be selected, and a product
-cannot point at itself.
+On an equipment product, set **Rental Fee Product** in the **Classification**
+section, directly under **Product Kind**. Only service products can be
+selected, and a product cannot point at itself.
 
 The field is shown only when the product kind is equipment or accessory. That
 is the only distinction available: equipment, accessories and consumables are

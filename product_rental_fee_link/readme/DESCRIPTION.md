@@ -5,7 +5,7 @@ equipment and accessories apart from the other goods.
 When rental fees are managed as products separate from the equipment itself
 (one *rental fee* product per equipment model), nothing in the standard data
 model ties the two together. This module adds a dedicated **Rental Fee Product**
-link on the product, restricted to non-storable service products.
+link on the product, restricted to service products.
 
 Why a dedicated field rather than *Optional Products*: `optional_product_ids` is
 a many2many meant for cross-sell suggestions in the quotation product

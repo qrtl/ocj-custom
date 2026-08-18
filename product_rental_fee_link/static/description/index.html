@@ -381,8 +381,8 @@ is what tells equipment and accessories apart from the other goods.</p>
 <p>When rental fees are managed as products separate from the equipment
 itself (one <em>rental fee</em> product per equipment model), nothing in the
 standard data model ties the two together. This module adds a dedicated
-<strong>Rental Fee Product</strong> link on the product, restricted to non-storable
-service products.</p>
+<strong>Rental Fee Product</strong> link on the product, restricted to service
+products.</p>
 <p>Why a dedicated field rather than <em>Optional Products</em>:
 <tt class="docutils literal">optional_product_ids</tt> is a many2many meant for cross-sell suggestions
 in the quotation product configurator. It cannot express a single,
@@ -403,9 +403,9 @@ validated, searched, and used as the source for integrations.</p>
 </div>
 <div class="section" id="usage">
 <h2><a class="toc-backref" href="#toc-entry-1">Usage</a></h2>
-<p>On an equipment product, set <strong>Rental Fee Product</strong> next to the product
-category. Only non-storable service products can be selected, and a
-product cannot point at itself.</p>
+<p>On an equipment product, set <strong>Rental Fee Product</strong> in the
+<strong>Classification</strong> section, directly under <strong>Product Kind</strong>. Only
+service products can be selected, and a product cannot point at itself.</p>
 <p>The field is shown only when the product kind is equipment or accessory.
 That is the only distinction available: equipment, accessories and
 consumables are all goods, so the product type cannot tell them apart,
