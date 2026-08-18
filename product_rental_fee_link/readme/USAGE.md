@@ -1,12 +1,16 @@
-On an equipment product (Goods), set **Rental Fee Product** next to the product
+On an equipment product, set **Rental Fee Product** next to the product
 category. Only non-storable service products can be selected, and a product
 cannot point at itself.
 
-The field is hidden on service products, since a rental fee product is not
-itself rented.
+The field is shown only when the product kind is equipment or accessory. That
+is the only distinction available: equipment, accessories and consumables are
+all goods, so the product type cannot tell them apart, and a rental fee product
+is not itself rented.
 
 To find equipment that still needs the link, use the **Rental Fee Product
-Missing** filter in the product search view.
+Missing** filter in the product search view. It lists equipment and accessories
+only, so consumables do not drown out the products that are actually missing a
+fee product.
 
 Several equipment products may share the same rental fee product; this is not
 restricted, because the same fee often applies to more than one model.

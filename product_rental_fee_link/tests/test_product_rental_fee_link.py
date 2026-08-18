@@ -10,8 +10,17 @@ class TestProductRentalFeeLink(TransactionCase):
     def setUpClass(cls):
         super().setUpClass()
         Template = cls.env["product.template"]
+        cls.classification = cls.env["product.equipment.classification"].create(
+            {"name": "Oxygen Concentrator", "code": "100"}
+        )
         cls.equipment = Template.create(
-            {"name": "Oxygen Concentrator", "type": "consu", "is_storable": True}
+            {
+                "name": "Oxygen Concentrator",
+                "type": "consu",
+                "is_storable": True,
+                "product_kind": "equipment",
+                "equipment_classification_id": cls.classification.id,
+            }
         )
         cls.rental_fee = Template.create(
             {"name": "Oxygen Concentrator Rental Fee", "type": "service"}

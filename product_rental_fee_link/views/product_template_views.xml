@@ -8,7 +8,7 @@
             <field name="categ_id" position="after">
                 <field
                     name="rental_fee_product_tmpl_id"
-                    invisible="type == 'service'"
+                    invisible="product_kind not in ('equipment', 'accessory')"
                     options="{'no_quick_create': True}"
                 />
             </field>
@@ -26,7 +26,7 @@
                 <filter
                     string="Rental Fee Product Missing"
                     name="rental_fee_product_missing"
-                    domain="[('rental_fee_product_tmpl_id', '=', False), ('type', '!=', 'service')]"
+                    domain="[('rental_fee_product_tmpl_id', '=', False), ('product_kind', 'in', ('equipment', 'accessory'))]"
                 />
             </field>
         </field>

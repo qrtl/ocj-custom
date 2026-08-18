@@ -1,3 +1,7 @@
+.. image:: https://odoo-community.org/readme-banner-image
+   :target: https://odoo-community.org/get-involved?utm_source=readme
+   :alt: Odoo Community Association
+
 =======================
 Product Rental Fee Link
 =======================
@@ -16,14 +20,15 @@ Product Rental Fee Link
 .. |badge2| image:: https://img.shields.io/badge/license-LGPL--3-blue.png
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
-.. |badge3| image:: https://img.shields.io/badge/github-qrtl%2Focj--custom-lightgray.png?logo=github
-    :target: https://github.com/qrtl/ocj-custom/tree/19.0/product_rental_fee_link
-    :alt: qrtl/ocj-custom
+.. |badge3| image:: https://img.shields.io/badge/github-qrtl%2FOCJ Custom-lightgray.png?logo=github
+    :target: https://github.com/qrtl/OCJ Custom/tree/19.0/product_rental_fee_link
+    :alt: qrtl/OCJ Custom
 
 |badge1| |badge2| |badge3|
 
 This module lets you point an equipment product at the service product
-used to bill its rental.
+used to bill its rental. It builds on ``product_classification``, which
+is what tells equipment and accessories apart from the other goods.
 
 When rental fees are managed as products separate from the equipment
 itself (one *rental fee* product per equipment model), nothing in the
@@ -46,15 +51,19 @@ validated, searched, and used as the source for integrations.
 Usage
 =====
 
-On an equipment product (Goods), set **Rental Fee Product** next to the
-product category. Only non-storable service products can be selected,
-and a product cannot point at itself.
+On an equipment product, set **Rental Fee Product** next to the product
+category. Only non-storable service products can be selected, and a
+product cannot point at itself.
 
-The field is hidden on service products, since a rental fee product is
-not itself rented.
+The field is shown only when the product kind is equipment or accessory.
+That is the only distinction available: equipment, accessories and
+consumables are all goods, so the product type cannot tell them apart,
+and a rental fee product is not itself rented.
 
 To find equipment that still needs the link, use the **Rental Fee
-Product Missing** filter in the product search view.
+Product Missing** filter in the product search view. It lists equipment
+and accessories only, so consumables do not drown out the products that
+are actually missing a fee product.
 
 Several equipment products may share the same rental fee product; this
 is not restricted, because the same fee often applies to more than one
@@ -69,10 +78,10 @@ corresponding product codes.
 Bug Tracker
 ===========
 
-Bugs are tracked on `GitHub Issues <https://github.com/qrtl/ocj-custom/issues>`_.
+Bugs are tracked on `GitHub Issues <https://github.com/qrtl/OCJ Custom/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/qrtl/ocj-custom/issues/new?body=module:%20product_rental_fee_link%0Aversion:%2019.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/qrtl/OCJ Custom/issues/new?body=module:%20product_rental_fee_link%0Aversion:%2019.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -95,6 +104,6 @@ Current maintainer:
 
 |maintainer-yostashiro| 
 
-This module is part of the `qrtl/ocj-custom <https://github.com/qrtl/ocj-custom/tree/19.0/product_rental_fee_link>`_ project on GitHub.
+This module is part of the `qrtl/OCJ Custom <https://github.com/qrtl/OCJ Custom/tree/19.0/product_rental_fee_link>`_ project on GitHub.
 
 You are welcome to contribute.

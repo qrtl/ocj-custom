@@ -1,5 +1,6 @@
 This module lets you point an equipment product at the service product used to
-bill its rental.
+bill its rental. It builds on ``product_classification``, which is what tells
+equipment and accessories apart from the other goods.
 
 When rental fees are managed as products separate from the equipment itself
 (one *rental fee* product per equipment model), nothing in the standard data

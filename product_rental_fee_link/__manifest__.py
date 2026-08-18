@@ -11,7 +11,7 @@
     "summary": "Link an equipment product to the service product used to bill "
     "its rental",
     "installable": True,
-    "depends": ["stock"],
+    "depends": ["product_classification"],
     "data": [
         "views/product_template_views.xml",
     ],
