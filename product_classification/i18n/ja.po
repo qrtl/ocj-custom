@@ -16,6 +16,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: product_classification
+#: code:addons/product_classification/models/product_template.py:0
+msgid ""
+"%(product)s is an equipment or an accessory, so it needs an equipment "
+"classification."
+msgstr "%(product)s は機器または付属品のため、機器分類が必要です。"
+
+#. module: product_classification
 #: model:product.equipment.classification,name:product_classification.product_equipment_classification_asv
 msgid "ASV"
 msgstr "ASV"
@@ -51,6 +58,11 @@ msgstr "CPAP"
 #: model_terms:ir.ui.view,arch_db:product_classification.product_template_view_form
 msgid "Classification"
 msgstr "分類"
+
+#. module: product_classification
+#: model_terms:ir.ui.view,arch_db:product_classification.product_template_view_search
+msgid "Classification Missing"
+msgstr "機器分類が未設定"
 
 #. module: product_classification
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__code
@@ -114,11 +126,6 @@ msgstr "機器分類"
 #: model:ir.ui.menu,name:product_classification.product_equipment_classification_menu
 msgid "Equipment Classifications"
 msgstr "機器分類"
-
-#. module: product_classification
-#: model_terms:ir.ui.view,arch_db:product_classification.product_template_view_search
-msgid "Equipment Sub-Classification"
-msgstr "機器分類サブ"
 
 #. module: product_classification
 #: model:ir.model.fields,help:product_classification.field_product_equipment_classification__code
@@ -292,6 +299,11 @@ msgstr "機器分類"
 #: model_terms:ir.ui.view,arch_db:product_classification.product_template_view_search
 msgid "Product Kind"
 msgstr "プロダクト種別"
+
+#. module: product_classification
+#: model_terms:ir.ui.view,arch_db:product_classification.product_template_view_search
+msgid "Product Kind Not Set"
+msgstr "プロダクト種別が未設定"
 
 #. module: product_classification
 #: model:ir.model,name:product_classification.model_product_manufacturer

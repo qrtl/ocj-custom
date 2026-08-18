@@ -3,6 +3,7 @@
 
 from psycopg2 import IntegrityError
 
+from odoo.exceptions import ValidationError
 from odoo.tests.common import TransactionCase
 from odoo.tools import mute_logger
 
@@ -40,6 +41,30 @@ class TestProductClassification(TransactionCase):
         )
         self.assertEqual(self.product.product_kind, "accessory")
         self.assertEqual(self.product.equipment_classification_id, self.classification)
+
+    def test_equipment_requires_classification(self):
+        with self.assertRaises(ValidationError):
+            self.product.write({"product_kind": "equipment"})
+
+    def test_accessory_requires_classification(self):
+        with self.assertRaises(ValidationError):
+            self.env["product.template"].create(
+                {"name": "Test Accessory", "product_kind": "accessory"}
+            )
+
+    def test_consumable_does_not_require_classification(self):
+        self.product.write({"product_kind": "consumable"})
+        self.assertFalse(self.product.equipment_classification_id)
+
+    def test_classification_cleared_on_equipment(self):
+        self.product.write(
+            {
+                "product_kind": "equipment",
+                "equipment_classification_id": self.classification.id,
+            }
+        )
+        with self.assertRaises(ValidationError):
+            self.product.equipment_classification_id = False
 
     @mute_logger("odoo.sql_db")
     def test_classification_code_unique(self):
