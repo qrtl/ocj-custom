@@ -1,6 +1,7 @@
 # Copyright 2026 Quartile (https://www.quartile.co)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
 
+from odoo import Command
 from odoo.exceptions import ValidationError
 from odoo.tests.common import TransactionCase
 
@@ -60,19 +61,17 @@ class TestProductRentalFeeLink(TransactionCase):
                 "name": "Price Category",
                 "create_variant": "always",
                 "value_ids": [
-                    (0, 0, {"name": "First Unit"}),
-                    (0, 0, {"name": "Second Unit"}),
+                    Command.create({"name": "First Unit"}),
+                    Command.create({"name": "Second Unit"}),
                 ],
             }
         )
         self.rental_fee.attribute_line_ids = [
-            (
-                0,
-                0,
+            Command.create(
                 {
                     "attribute_id": attribute.id,
-                    "value_ids": [(6, 0, attribute.value_ids.ids)],
-                },
+                    "value_ids": [Command.set(attribute.value_ids.ids)],
+                }
             )
         ]
         self.equipment.rental_fee_product_tmpl_id = self.rental_fee
