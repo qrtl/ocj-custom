@@ -5,33 +5,34 @@
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_form_view" />
         <field name="arch" type="xml">
-            <xpath expr="//notebook" position="inside">
-                <page name="classification" string="Classification">
+            <xpath
+                expr="//page[@name='general_information']/group[@name='internal_notes']"
+                position="before"
+            >
+                <group name="classification" string="Classification">
                     <group>
-                        <group>
-                            <field name="product_kind" />
-                            <field
-                                name="equipment_classification_id"
-                                invisible="product_kind not in ('equipment', 'accessory')"
-                                options="{'no_quick_create': True}"
-                            />
-                            <field
-                                name="middle_category_id"
-                                options="{'no_quick_create': True}"
-                            />
-                            <field
-                                name="minor_category_id"
-                                options="{'no_quick_create': True}"
-                            />
-                        </group>
-                        <group>
-                            <field
-                                name="manufacturer_id"
-                                options="{'no_quick_create': True}"
-                            />
-                        </group>
+                        <field name="product_kind" />
+                        <field
+                            name="manufacturer_id"
+                            options="{'no_quick_create': True}"
+                        />
                     </group>
-                </page>
+                    <group>
+                        <field
+                            name="equipment_classification_id"
+                            invisible="product_kind not in ('equipment', 'accessory')"
+                            options="{'no_quick_create': True}"
+                        />
+                        <field
+                            name="middle_category_id"
+                            options="{'no_quick_create': True}"
+                        />
+                        <field
+                            name="minor_category_id"
+                            options="{'no_quick_create': True}"
+                        />
+                    </group>
+                </group>
             </xpath>
         </field>
     </record>
@@ -61,6 +62,17 @@
                     string="Consumable"
                     name="kind_consumable"
                     domain="[('product_kind', '=', 'consumable')]"
+                />
+                <separator />
+                <filter
+                    string="Classification Missing"
+                    name="classification_missing"
+                    domain="[('product_kind', 'in', ('equipment', 'accessory')), ('equipment_classification_id', '=', False)]"
+                />
+                <filter
+                    string="Product Kind Not Set"
+                    name="kind_not_set"
+                    domain="[('product_kind', '=', False)]"
                 />
             </field>
             <xpath expr="//search/group" position="inside">
