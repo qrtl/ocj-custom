@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="product_template_view_form" model="ir.ui.view">
+        <field name="name">product.template.form.rental.fee.link</field>
+        <field name="model">product.template</field>
+        <field
+            name="inherit_id"
+            ref="product_classification.product_template_view_form"
+        />
+        <field name="arch" type="xml">
+            <field name="product_kind" position="after">
+                <field
+                    name="rental_fee_product_tmpl_id"
+                    invisible="product_kind not in ('equipment', 'accessory')"
+                    options="{'no_quick_create': True}"
+                />
+            </field>
+        </field>
+    </record>
+
+    <record id="product_template_view_search" model="ir.ui.view">
+        <field name="name">product.template.search.rental.fee.link</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_search_view" />
+        <field name="arch" type="xml">
+            <field name="product_tag_ids" position="after">
+                <field name="rental_fee_product_tmpl_id" />
+                <separator />
+                <filter
+                    string="Rental Fee Product Missing"
+                    name="rental_fee_product_missing"
+                    domain="[('rental_fee_product_tmpl_id', '=', False), ('product_kind', 'in', ('equipment', 'accessory'))]"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>

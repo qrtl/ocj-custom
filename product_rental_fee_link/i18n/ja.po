@@ -1,0 +1,66 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* product_rental_fee_link
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-30 05:51+0000\n"
+"PO-Revision-Date: 2026-07-30 05:51+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: product_rental_fee_link
+#. odoo-python
+#: code:addons/product_rental_fee_link/models/product_template.py:0
+msgid "A product cannot be its own rental fee product."
+msgstr "プロダクト自身をレンタル費用品目に設定することはできません。"
+
+#. module: product_rental_fee_link
+#: model:ir.model.fields,field_description:product_rental_fee_link.field_product_template__display_name
+msgid "Display Name"
+msgstr "表示名"
+
+#. module: product_rental_fee_link
+#: model:ir.model.fields,field_description:product_rental_fee_link.field_product_template__id
+msgid "ID"
+msgstr ""
+
+#. module: product_rental_fee_link
+#: model:ir.model,name:product_rental_fee_link.model_product_template
+msgid "Product"
+msgstr "プロダクト"
+
+#. module: product_rental_fee_link
+#: model:ir.model.fields,field_description:product_rental_fee_link.field_product_product__rental_fee_product_tmpl_id
+#: model:ir.model.fields,field_description:product_rental_fee_link.field_product_template__rental_fee_product_tmpl_id
+msgid "Rental Fee Product"
+msgstr "レンタル費用品目"
+
+#. module: product_rental_fee_link
+#: model_terms:ir.ui.view,arch_db:product_rental_fee_link.product_template_view_search
+msgid "Rental Fee Product Missing"
+msgstr "レンタル費用品目 未設定"
+
+#. module: product_rental_fee_link
+#: model:ir.model.fields,help:product_rental_fee_link.field_product_product__rental_fee_product_tmpl_id
+#: model:ir.model.fields,help:product_rental_fee_link.field_product_template__rental_fee_product_tmpl_id
+msgid ""
+"Service product used to bill the rental of this equipment. The rental fee is"
+" managed as a product separate from the equipment itself, so this link is "
+"what ties the two together - e.g. to derive the product codes to send to an "
+"external system from the variants of the rental fee product."
+msgstr ""
+"この機種の課金に使うレンタル費用品目。レンタル費用は機器そのものとは別の品目として管理するため、両者を結びつけるのはこの項目です"
+"（例: 外部システムへ配信する商品CDを、レンタル費用品目のバリアントから導出する）。"
+
+#. module: product_rental_fee_link
+#. odoo-python
+#: code:addons/product_rental_fee_link/models/product_template.py:0
+msgid "The rental fee product must be a service, but %(product)s is not."
+msgstr "レンタル費用品目はサービス品目でなければなりません（%(product)s はサービス品目ではありません）。"
