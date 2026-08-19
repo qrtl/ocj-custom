@@ -27,26 +27,26 @@ class TestProductRentalFeeLink(TransactionCase):
             {"name": "Oxygen Concentrator Rental Fee", "type": "service"}
         )
 
-    def test_01_link_service_product(self):
+    def test_link_service_product(self):
         self.equipment.rental_fee_product_tmpl_id = self.rental_fee
         self.assertEqual(self.equipment.rental_fee_product_tmpl_id, self.rental_fee)
 
-    def test_02_goods_not_allowed(self):
+    def test_goods_not_allowed(self):
         with self.assertRaises(ValidationError):
             self.equipment.rental_fee_product_tmpl_id = self.equipment.copy()
 
-    def test_03_self_reference_not_allowed(self):
+    def test_self_reference_not_allowed(self):
         with self.assertRaises(ValidationError):
             self.equipment.rental_fee_product_tmpl_id = self.equipment
 
-    def test_04_storable_service_is_allowed(self):
+    def test_storable_service_is_allowed(self):
         # "Track Inventory" can be switched on for a service by a user default,
         # so it must not disqualify a service from being a rental fee product.
         self.rental_fee.is_storable = True
         self.equipment.rental_fee_product_tmpl_id = self.rental_fee
         self.assertEqual(self.equipment.rental_fee_product_tmpl_id, self.rental_fee)
 
-    def test_05_shared_between_equipments(self):
+    def test_shared_between_equipments(self):
         other_equipment = self.equipment.copy({"name": "Oxygen Concentrator 2"})
         self.equipment.rental_fee_product_tmpl_id = self.rental_fee
         other_equipment.rental_fee_product_tmpl_id = self.rental_fee
@@ -55,7 +55,7 @@ class TestProductRentalFeeLink(TransactionCase):
             self.equipment.rental_fee_product_tmpl_id,
         )
 
-    def test_06_variants_of_linked_product_are_billable_items(self):
+    def test_variants_of_linked_product_are_billable_items(self):
         attribute = self.env["product.attribute"].create(
             {
                 "name": "Price Category",
