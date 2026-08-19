@@ -25,8 +25,9 @@ class ProductTemplate(models.Model):
     equipment_classification_id = fields.Many2one(
         comodel_name="product.equipment.classification",
         string="Equipment Classification",
-        help="Primary classification of an equipment or accessory product. "
-        "Used in the Navi in Flow integration.",
+        help="Primary classification of an equipment or accessory product, or "
+        "of a service that relates to equipment of that classification, such as "
+        "a fee billed for renting it. Used in the Navi in Flow integration.",
     )
     middle_category_id = fields.Many2one(
         comodel_name="product.middle.category",

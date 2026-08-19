@@ -4,10 +4,14 @@ To classify a product:
    tab, below the product category and pricing.
 2. Set the **Product Kind** (equipment, accessory or consumable), the
    **Manufacturer** and the relevant classification. The equipment
-   classification field appears only when the kind is equipment or accessory.
+   classification field appears when the kind is equipment or accessory, and on
+   service products, where it records the equipment a service relates to - a fee
+   billed for renting equipment of that classification, for example. A service
+   has no product kind of its own, since it is not itself one of the goods.
 
 An equipment or accessory product cannot be saved without an equipment
-classification. The check runs only when the product kind or the classification
+classification. A service is not held to that: the classification is optional
+there, and only meaningful for a service that relates to equipment. The check runs only when the product kind or the classification
 itself is written, so products that predate the rule can still be edited for
 other fields while their classification is being filled in.
 

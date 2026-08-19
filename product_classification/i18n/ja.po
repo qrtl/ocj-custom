@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-29 09:38+0000\n"
-"PO-Revision-Date: 2026-07-29 09:38+0000\n"
+"POT-Creation-Date: 2026-08-19 14:38+0000\n"
+"PO-Revision-Date: 2026-08-19 14:38+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: product_classification
+#. odoo-python
 #: code:addons/product_classification/models/product_template.py:0
 msgid ""
 "%(product)s is an equipment or an accessory, so it needs an equipment "
@@ -279,9 +280,10 @@ msgstr "携帯酸素"
 #: model:ir.model.fields,help:product_classification.field_product_product__equipment_classification_id
 #: model:ir.model.fields,help:product_classification.field_product_template__equipment_classification_id
 msgid ""
-"Primary classification of an equipment or accessory product. Used in the "
-"Navi in Flow integration."
-msgstr "機器または付属品プロダクトの主分類。ナビフロー連携で使用されます。"
+"Primary classification of an equipment or accessory product, or of a service"
+" that relates to equipment of that classification, such as a fee billed for "
+"renting it. Used in the Navi in Flow integration."
+msgstr "機器または付属品プロダクトの主分類。当該分類の機器に関係するサービス（機器のレンタル費用など）にも設定できます。ナビフロー連携で使用されます。"
 
 #. module: product_classification
 #: model:ir.model,name:product_classification.model_product_template
