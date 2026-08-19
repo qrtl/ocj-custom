@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-30 05:51+0000\n"
-"PO-Revision-Date: 2026-07-30 05:51+0000\n"
+"POT-Creation-Date: 2026-08-19 14:20+0000\n"
+"PO-Revision-Date: 2026-08-19 14:20+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -22,19 +22,44 @@ msgid "A product cannot be its own rental fee product."
 msgstr "プロダクト自身をレンタル費用品目に設定することはできません。"
 
 #. module: product_rental_fee_link
+#: model:ir.model.fields,help:product_rental_fee_link.field_product_product__rented_equipment_classification_id
+#: model:ir.model.fields,help:product_rental_fee_link.field_product_template__rented_equipment_classification_id
+msgid ""
+"Classification of the equipment this rental fee bills, taken from the "
+"equipment itself so it does not have to be entered twice. Empty unless the "
+"equipment pointing at this product agree on one classification, since there "
+"is then no single value to report."
+msgstr "このレンタル費用が課金する対象機器の機器分類。機器側の値を参照するため、二重に入力する必要はありません。この品目を参照する機器の機器分類が一致しない場合は、報告すべき単一の値が存在しないため空になります。"
+
+#. module: product_rental_fee_link
 #: model:ir.model.fields,field_description:product_rental_fee_link.field_product_template__display_name
 msgid "Display Name"
 msgstr "表示名"
 
 #. module: product_rental_fee_link
+#: model:ir.model.fields,help:product_rental_fee_link.field_product_product__rental_fee_for_product_tmpl_ids
+#: model:ir.model.fields,help:product_rental_fee_link.field_product_template__rental_fee_for_product_tmpl_ids
+msgid ""
+"Equipment products whose rental this product bills. The inverse of Rental "
+"Fee Product, so a fee product can be read from the equipment that points at "
+"it instead of the link being followed one way only."
+msgstr "この品目がレンタル費用を課金する対象の機器。レンタル費用品目の逆側の項目で、リンクを片方向にしか辿れない状態を解消し、レンタル費用品目の側から参照できるようにします。"
+
+#. module: product_rental_fee_link
 #: model:ir.model.fields,field_description:product_rental_fee_link.field_product_template__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: product_rental_fee_link
 #: model:ir.model,name:product_rental_fee_link.model_product_template
 msgid "Product"
 msgstr "プロダクト"
+
+#. module: product_rental_fee_link
+#: model:ir.model.fields,field_description:product_rental_fee_link.field_product_product__rental_fee_for_product_tmpl_ids
+#: model:ir.model.fields,field_description:product_rental_fee_link.field_product_template__rental_fee_for_product_tmpl_ids
+msgid "Rental Fee For"
+msgstr "レンタル費用の対象機器"
 
 #. module: product_rental_fee_link
 #: model:ir.model.fields,field_description:product_rental_fee_link.field_product_product__rental_fee_product_tmpl_id
@@ -46,6 +71,12 @@ msgstr "レンタル費用品目"
 #: model_terms:ir.ui.view,arch_db:product_rental_fee_link.product_template_view_search
 msgid "Rental Fee Product Missing"
 msgstr "レンタル費用品目 未設定"
+
+#. module: product_rental_fee_link
+#: model:ir.model.fields,field_description:product_rental_fee_link.field_product_product__rented_equipment_classification_id
+#: model:ir.model.fields,field_description:product_rental_fee_link.field_product_template__rented_equipment_classification_id
+msgid "Rented Equipment Classification"
+msgstr "レンタル対象機器の機器分類"
 
 #. module: product_rental_fee_link
 #: model:ir.model.fields,help:product_rental_fee_link.field_product_product__rental_fee_product_tmpl_id
