@@ -377,12 +377,13 @@ ul.auto-toc {
 <p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/lgpl-3.0-standalone.html"><img alt="License: LGPL-3" src="https://img.shields.io/badge/license-LGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/qrtl/OCJCustom/tree/19.0/product_classification"><img alt="qrtl/OCJ Custom" src="https://img.shields.io/badge/github-qrtl%2FOCJCustom-lightgray.png?logo=github" /></a></p>
 <p>This module adds classification master data to products so equipment and
 consumables can be categorized consistently.</p>
-<p>Each product can be flagged as <strong>equipment</strong> or <strong>consumable</strong> (<em>Product
-Kind</em>) and linked to a <strong>Manufacturer</strong> (メーカー), then given a
-classification:</p>
+<p>Each product can be flagged as <strong>equipment</strong>, <strong>accessory</strong>,
+<strong>consumable</strong> or <strong>rental fee</strong> (<em>Product Kind</em>) and linked to a
+<strong>Manufacturer</strong> (メーカー), then given a classification:</p>
 <ul class="simple">
 <li><strong>Equipment Classification</strong> (機器分類) for equipment and
-accessories.</li>
+accessories, and for the rental fee charged against equipment of that
+classification.</li>
 </ul>
 <p>Products can also be given a <strong>Middle Category</strong> (中分類) and a <strong>Minor
 Category</strong> (小分類).</p>
@@ -424,15 +425,21 @@ Classifications</em>, <em>Middle Categories</em>, <em>Minor Categories</em> or
 <ol class="arabic simple">
 <li>Open a product; the <em>Classification</em> section is on the <em>General
 Information</em> tab, below the product category and pricing.</li>
-<li>Set the <strong>Product Kind</strong> (equipment, accessory or consumable), the
-<strong>Manufacturer</strong> and the relevant classification. The equipment
-classification field appears only when the kind is equipment or
-accessory.</li>
+<li>Set the <strong>Product Kind</strong> (equipment, accessory, consumable or rental
+fee), the <strong>Manufacturer</strong> and the relevant classification. The
+equipment classification field appears when the kind is equipment,
+accessory or rental fee.</li>
 </ol>
-<p>An equipment or accessory product cannot be saved without an equipment
-classification. The check runs only when the product kind or the
-classification itself is written, so products that predate the rule can
-still be edited for other fields while their classification is being
+<p><em>Rental Fee</em> is the one kind that is not goods: it is the service billed
+for renting equipment, and it carries the classification of the
+equipment the fee is charged for, which is what an integration reports
+on a rental line. Keeping it in the same field as the goods means one
+field decides what a product is, rather than that question being split
+between the product kind and the product type.</p>
+<p>An equipment, accessory or rental fee product cannot be saved without an
+equipment classification. The check runs only when the product kind or
+the classification itself is written, so products that predate the rule
+can still be edited for other fields while their classification is being
 filled in.</p>
 <p>Products can be searched and filtered by manufacturer and classification
 from the product list view. The <em>Classification Missing</em> and <em>Product

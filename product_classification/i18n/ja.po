@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-29 09:38+0000\n"
-"PO-Revision-Date: 2026-07-29 09:38+0000\n"
+"POT-Creation-Date: 2026-08-19 15:42+0000\n"
+"PO-Revision-Date: 2026-08-19 15:42+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,11 +16,12 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: product_classification
+#. odoo-python
 #: code:addons/product_classification/models/product_template.py:0
 msgid ""
-"%(product)s is an equipment or an accessory, so it needs an equipment "
-"classification."
-msgstr "%(product)s は機器または付属品のため、機器分類が必要です。"
+"%(product)s is an equipment, an accessory or a rental fee, so it needs an "
+"equipment classification."
+msgstr "%(product)s は機器・付属品・レンタル料のいずれかのため、機器分類が必要です。"
 
 #. module: product_classification
 #: model:product.equipment.classification,name:product_classification.product_equipment_classification_asv
@@ -279,9 +280,9 @@ msgstr "携帯酸素"
 #: model:ir.model.fields,help:product_classification.field_product_product__equipment_classification_id
 #: model:ir.model.fields,help:product_classification.field_product_template__equipment_classification_id
 msgid ""
-"Primary classification of an equipment or accessory product. Used in the "
-"Navi in Flow integration."
-msgstr "機器または付属品プロダクトの主分類。ナビフロー連携で使用されます。"
+"Primary classification of an equipment or accessory product, or of the "
+"equipment a rental fee is charged for. Used in the Navi in Flow integration."
+msgstr "機器または付属品プロダクトの主分類、またはレンタル料の課金対象となる機器の分類。ナビフロー連携で使用されます。"
 
 #. module: product_classification
 #: model:ir.model,name:product_classification.model_product_template
@@ -326,6 +327,11 @@ msgid "Pulse Oximeter"
 msgstr "パルスオキシメータ"
 
 #. module: product_classification
+#: model:ir.model.fields.selection,name:product_classification.selection__product_template__product_kind__rental_fee
+msgid "Rental Fee"
+msgstr "レンタル料"
+
+#. module: product_classification
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__sequence
 #: model:ir.model.fields,field_description:product_classification.field_product_manufacturer__sequence
 #: model:ir.model.fields,field_description:product_classification.field_product_middle_category__sequence
@@ -362,6 +368,7 @@ msgstr "超音波骨折治療器"
 #: model:ir.model.fields,help:product_classification.field_product_product__product_kind
 #: model:ir.model.fields,help:product_classification.field_product_template__product_kind
 msgid ""
-"Whether the product is an equipment, an accessory or a consumable. Used in "
-"the Navi in Flow integration."
-msgstr "プロダクトが機器・付属品・消耗品のいずれか。ナビフロー連携で使用されます。"
+"What the product is: one of the goods - equipment, an accessory or a "
+"consumable - or the fee charged for renting equipment, which is a service "
+"rather than goods. Used in the Navi in Flow integration."
+msgstr "プロダクトの区分。機器・付属品・消耗品はいずれもモノですが、レンタル料は機器の貸出に対して請求するサービスです。ナビフロー連携で使用されます。"
