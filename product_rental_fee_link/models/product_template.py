@@ -18,6 +18,41 @@ class ProductTemplate(models.Model):
         "codes to send to an external system from the variants of the rental fee "
         "product.",
     )
+    rental_fee_for_product_tmpl_ids = fields.One2many(
+        comodel_name="product.template",
+        inverse_name="rental_fee_product_tmpl_id",
+        string="Rental Fee For",
+        help="Equipment products whose rental this product bills. The inverse "
+        "of Rental Fee Product, so a fee product can be read from the equipment "
+        "that points at it instead of the link being followed one way only.",
+    )
+    rented_equipment_classification_id = fields.Many2one(
+        comodel_name="product.equipment.classification",
+        string="Rented Equipment Classification",
+        compute="_compute_rented_equipment_classification_id",
+        store=True,
+        help="Classification of the equipment this rental fee bills, taken from "
+        "the equipment itself so it does not have to be entered twice. Empty "
+        "unless the equipment pointing at this product agree on one "
+        "classification, since there is then no single value to report.",
+    )
+
+    # Stored, so it can be searched: an integration selecting fee products needs
+    # this in a domain. The dotted dependency is deliberate here - the value
+    # mirrors the equipment and has to follow it, unlike a field merely
+    # defaulted from a parent.
+    @api.depends(
+        "rental_fee_for_product_tmpl_ids",
+        "rental_fee_for_product_tmpl_ids.equipment_classification_id",
+    )
+    def _compute_rented_equipment_classification_id(self):
+        for template in self:
+            classifications = (
+                template.rental_fee_for_product_tmpl_ids.equipment_classification_id
+            )
+            template.rented_equipment_classification_id = (
+                classifications if len(classifications) == 1 else False
+            )
 
     @api.constrains("rental_fee_product_tmpl_id", "type")
     def _check_rental_fee_product_tmpl_id(self):

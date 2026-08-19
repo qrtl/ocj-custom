@@ -69,6 +69,14 @@ Several equipment products may share the same rental fee product; this
 is not restricted, because the same fee often applies to more than one
 model.
 
+**Rented Equipment Classification** on the fee product is derived from
+the equipment that points at it, so the classification is entered once,
+on the equipment. It is shown on the fee product only once a value
+exists, and stays empty while the equipment sharing that fee product
+disagree on a classification: there is no single value to report, and
+picking one would be a guess. It is stored, so an integration can select
+fee products on it.
+
 If the rental fee product carries variants (for example a *price
 category* attribute for first unit / second unit / in-hospital use), the
 variants of the linked product are the set of billable items for that

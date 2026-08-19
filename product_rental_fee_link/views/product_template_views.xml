@@ -14,6 +14,11 @@
                     invisible="product_kind not in ('equipment', 'accessory')"
                     options="{'no_quick_create': True}"
                 />
+                <field
+                    name="rented_equipment_classification_id"
+                    invisible="not rented_equipment_classification_id"
+                    readonly="1"
+                />
             </field>
         </field>
     </record>
