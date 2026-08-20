@@ -20,7 +20,7 @@
                     <group>
                         <field
                             name="equipment_classification_id"
-                            invisible="product_kind not in ('equipment', 'accessory')"
+                            invisible="product_kind not in ('equipment', 'accessory', 'rental_fee')"
                             options="{'no_quick_create': True}"
                         />
                         <field
@@ -67,7 +67,7 @@
                 <filter
                     string="Classification Missing"
                     name="classification_missing"
-                    domain="[('product_kind', 'in', ('equipment', 'accessory')), ('equipment_classification_id', '=', False)]"
+                    domain="[('product_kind', 'in', ('equipment', 'accessory', 'rental_fee')), ('equipment_classification_id', '=', False)]"
                 />
                 <filter
                     string="Product Kind Not Set"

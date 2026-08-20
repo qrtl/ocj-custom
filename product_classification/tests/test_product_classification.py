@@ -52,6 +52,41 @@ class TestProductClassification(TransactionCase):
                 {"name": "Test Accessory", "product_kind": "accessory"}
             )
 
+    def test_rental_fee_requires_classification(self):
+        # The classification is what the fee is charged against, so a rental fee
+        # without one cannot be reported as a rental at all.
+        with self.assertRaises(ValidationError):
+            self.env["product.template"].create(
+                {
+                    "name": "Test Rental Fee",
+                    "type": "service",
+                    "product_kind": "rental_fee",
+                }
+            )
+
+    def test_rental_fee_keeps_its_classification(self):
+        rental_fee = self.env["product.template"].create(
+            {
+                "name": "Test Rental Fee",
+                "type": "service",
+                "product_kind": "rental_fee",
+                "equipment_classification_id": self.classification.id,
+            }
+        )
+        self.assertEqual(rental_fee.equipment_classification_id, self.classification)
+
+    def test_classification_cleared_on_rental_fee(self):
+        rental_fee = self.env["product.template"].create(
+            {
+                "name": "Test Rental Fee",
+                "type": "service",
+                "product_kind": "rental_fee",
+                "equipment_classification_id": self.classification.id,
+            }
+        )
+        with self.assertRaises(ValidationError):
+            rental_fee.equipment_classification_id = False
+
     def test_consumable_does_not_require_classification(self):
         self.product.write({"product_kind": "consumable"})
         self.assertFalse(self.product.equipment_classification_id)
