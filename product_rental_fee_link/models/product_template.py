@@ -8,33 +8,38 @@ from odoo.exceptions import ValidationError
 class ProductTemplate(models.Model):
     _inherit = "product.template"
 
-    rental_fee_product_tmpl_id = fields.Many2one(
+    equipment_tmpl_id = fields.Many2one(
         comodel_name="product.template",
-        string="Rental Fee Product",
-        domain=[("type", "=", "service")],
-        help="Service product used to bill the rental of this equipment. The "
-        "rental fee is managed as a product separate from the equipment itself, "
-        "so this link is what ties the two together - e.g. to derive the product "
-        "codes to send to an external system from the variants of the rental fee "
-        "product.",
+        string="Billed Equipment",
+        domain="[('product_kind', 'in', ('equipment', 'accessory'))]",
+        help="The equipment or accessory this rental fee bills. An equipment "
+        "or accessory may have several rental fee products - e.g. a base fee "
+        "and a fee for a specific accessory bundle - so this link is what "
+        "ties a fee back to what it is charged for.",
+    )
+    rental_fee_product_tmpl_ids = fields.One2many(
+        comodel_name="product.template",
+        inverse_name="equipment_tmpl_id",
+        string="Rental Fee Products",
+        help="Service products used to bill the rental of this equipment or "
+        "accessory. Used in the Navi in Flow integration.",
     )
 
-    @api.constrains("rental_fee_product_tmpl_id", "type")
-    def _check_rental_fee_product_tmpl_id(self):
+    @api.constrains("equipment_tmpl_id", "type")
+    def _check_equipment_tmpl_id(self):
         # The product type is the discriminator here; is_storable is deliberately
         # not checked, as it only means "track inventory" and can be turned on by
         # a user default even for services (core clears it on recompute anyway).
-        for template in self.filtered("rental_fee_product_tmpl_id"):
-            fee_product = template.rental_fee_product_tmpl_id
-            if fee_product == template:
+        for template in self.filtered("equipment_tmpl_id"):
+            if template.equipment_tmpl_id == template:
                 raise ValidationError(
-                    self.env._("A product cannot be its own rental fee product.")
+                    self.env._("A product cannot be its own billed equipment.")
                 )
-            if fee_product.type != "service":
+            if template.type != "service":
                 raise ValidationError(
                     self.env._(
-                        "The rental fee product must be a service, but "
-                        "%(product)s is not.",
-                        product=fee_product.display_name,
+                        "%(product)s bills the rental of an equipment or "
+                        "accessory, so it must be a service.",
+                        product=template.display_name,
                     )
                 )

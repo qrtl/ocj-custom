@@ -1,11 +1,12 @@
-This module lets you point an equipment product at the service product used to
-bill its rental. It builds on ``product_classification``, which is what tells
-equipment and accessories apart from the other goods.
+This module lets you point a rental fee service product at the equipment or
+accessory product whose rental it bills. It builds on ``product_classification``,
+which is what tells equipment and accessories apart from the other goods.
 
-When rental fees are managed as products separate from the equipment itself
-(one *rental fee* product per equipment model), nothing in the standard data
-model ties the two together. This module adds a dedicated **Rental Fee Product**
-link on the product, restricted to service products.
+When rental fees are managed as products separate from the equipment itself,
+nothing in the standard data model ties the two together. This module adds a
+dedicated **Billed Equipment** link on the rental fee product, restricted to
+equipment and accessory products, together with the reverse **Rental Fee
+Products** list on the equipment or accessory itself.
 
 Why a dedicated field rather than *Optional Products*: `optional_product_ids` is
 a many2many meant for cross-sell suggestions in the quotation product

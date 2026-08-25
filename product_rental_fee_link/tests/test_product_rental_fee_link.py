@@ -27,32 +27,37 @@ class TestProductRentalFeeLink(TransactionCase):
             {"name": "Oxygen Concentrator Rental Fee", "type": "service"}
         )
 
-    def test_link_service_product(self):
-        self.equipment.rental_fee_product_tmpl_id = self.rental_fee
-        self.assertEqual(self.equipment.rental_fee_product_tmpl_id, self.rental_fee)
+    def test_link_equipment(self):
+        self.rental_fee.equipment_tmpl_id = self.equipment
+        self.assertEqual(self.rental_fee.equipment_tmpl_id, self.equipment)
+        self.assertEqual(self.equipment.rental_fee_product_tmpl_ids, self.rental_fee)
 
     def test_goods_not_allowed(self):
         with self.assertRaises(ValidationError):
-            self.equipment.rental_fee_product_tmpl_id = self.equipment.copy()
+            self.equipment.copy().equipment_tmpl_id = self.equipment
 
     def test_self_reference_not_allowed(self):
         with self.assertRaises(ValidationError):
-            self.equipment.rental_fee_product_tmpl_id = self.equipment
+            self.rental_fee.equipment_tmpl_id = self.rental_fee
 
     def test_storable_service_is_allowed(self):
         # "Track Inventory" can be switched on for a service by a user default,
-        # so it must not disqualify a service from being a rental fee product.
+        # so it must not disqualify a service from billing a rental.
         self.rental_fee.is_storable = True
-        self.equipment.rental_fee_product_tmpl_id = self.rental_fee
-        self.assertEqual(self.equipment.rental_fee_product_tmpl_id, self.rental_fee)
+        self.rental_fee.equipment_tmpl_id = self.equipment
+        self.assertEqual(self.rental_fee.equipment_tmpl_id, self.equipment)
 
-    def test_shared_between_equipments(self):
-        other_equipment = self.equipment.copy({"name": "Oxygen Concentrator 2"})
-        self.equipment.rental_fee_product_tmpl_id = self.rental_fee
-        other_equipment.rental_fee_product_tmpl_id = self.rental_fee
+    def test_equipment_can_have_several_rental_fee_products(self):
+        # A base fee and a fee for a specific accessory bundle are separate
+        # service products, both billing the same equipment.
+        other_rental_fee = self.env["product.template"].create(
+            {"name": "Oxygen Concentrator Rental Fee (Bundle)", "type": "service"}
+        )
+        self.rental_fee.equipment_tmpl_id = self.equipment
+        other_rental_fee.equipment_tmpl_id = self.equipment
         self.assertEqual(
-            other_equipment.rental_fee_product_tmpl_id,
-            self.equipment.rental_fee_product_tmpl_id,
+            self.equipment.rental_fee_product_tmpl_ids,
+            self.rental_fee | other_rental_fee,
         )
 
     def test_variants_of_linked_product_are_billable_items(self):
@@ -74,7 +79,5 @@ class TestProductRentalFeeLink(TransactionCase):
                 }
             )
         ]
-        self.equipment.rental_fee_product_tmpl_id = self.rental_fee
-        self.assertEqual(
-            len(self.equipment.rental_fee_product_tmpl_id.product_variant_ids), 2
-        )
+        self.rental_fee.equipment_tmpl_id = self.equipment
+        self.assertEqual(len(self.rental_fee.product_variant_ids), 2)

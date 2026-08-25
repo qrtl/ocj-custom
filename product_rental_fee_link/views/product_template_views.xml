@@ -10,10 +10,18 @@
         <field name="arch" type="xml">
             <field name="product_kind" position="after">
                 <field
-                    name="rental_fee_product_tmpl_id"
-                    invisible="product_kind not in ('equipment', 'accessory')"
+                    name="equipment_tmpl_id"
+                    invisible="product_kind != 'rental_fee'"
                     options="{'no_quick_create': True}"
                 />
+                <field
+                    name="rental_fee_product_tmpl_ids"
+                    invisible="product_kind not in ('equipment', 'accessory')"
+                >
+                    <list>
+                        <field name="name" />
+                    </list>
+                </field>
             </field>
         </field>
     </record>
@@ -24,12 +32,12 @@
         <field name="inherit_id" ref="product.product_template_search_view" />
         <field name="arch" type="xml">
             <field name="product_tag_ids" position="after">
-                <field name="rental_fee_product_tmpl_id" />
+                <field name="equipment_tmpl_id" />
                 <separator />
                 <filter
                     string="Rental Fee Product Missing"
                     name="rental_fee_product_missing"
-                    domain="[('rental_fee_product_tmpl_id', '=', False), ('product_kind', 'in', ('equipment', 'accessory'))]"
+                    domain="[('rental_fee_product_tmpl_ids', '=', False), ('product_kind', 'in', ('equipment', 'accessory'))]"
                 />
             </field>
         </field>
