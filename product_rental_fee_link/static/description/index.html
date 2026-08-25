@@ -405,21 +405,20 @@ validated, searched, and used as the source for integrations.</p>
 </div>
 <div class="section" id="usage">
 <h2><a class="toc-backref" href="#toc-entry-1">Usage</a></h2>
-<p>On a rental fee service product, set <strong>Billed Equipment</strong> in the
-<strong>Classification</strong> section, directly under <strong>Product Kind</strong>. Only
-equipment and accessory products can be selected, and a product cannot
-point at itself.</p>
-<p>The field is shown only when the product kind is rental fee. On an
-equipment or accessory product, the reverse <strong>Rental Fee Products</strong> list
-shows every service product billing its rental.</p>
+<p>On an equipment or accessory product, use the <strong>Rental Fee Products</strong>
+list in the <strong>Classification</strong> section, directly under <strong>Product Kind</strong>,
+to add the service products used to bill its rental. Adding a line there
+sets the link on the service product automatically; there is no field to
+set it from the service product’s own form.</p>
+<p>An equipment or accessory may have several rental fee products - for
+example a base fee and a separate fee for a specific accessory bundle -
+each its own service product rather than a single one carrying every
+price as a variant. A rental fee product bills exactly one equipment or
+accessory - it cannot be shared between several.</p>
 <p>To find equipment that still needs a rental fee product, use the
 <strong>Rental Fee Product Missing</strong> filter in the product search view. It
 lists equipment and accessories only, so consumables do not drown out
 the products that are actually missing a fee product.</p>
-<p>An equipment or accessory may have several rental fee products - for
-example a base fee and a separate fee for a specific accessory bundle -
-each its own service product rather than a single one carrying every
-price as a variant.</p>
 <p>If a rental fee product carries variants (for example a <em>price category</em>
 attribute for first unit / second unit / in-hospital use), the variants
 of that product are the set of billable items for the equipment it bills

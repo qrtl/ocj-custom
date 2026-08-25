@@ -10,11 +10,6 @@
         <field name="arch" type="xml">
             <field name="product_kind" position="after">
                 <field
-                    name="equipment_tmpl_id"
-                    invisible="product_kind != 'rental_fee'"
-                    options="{'no_quick_create': True}"
-                />
-                <field
                     name="rental_fee_product_tmpl_ids"
                     invisible="product_kind not in ('equipment', 'accessory')"
                 >

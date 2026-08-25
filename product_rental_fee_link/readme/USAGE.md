@@ -1,19 +1,19 @@
-On a rental fee service product, set **Billed Equipment** in the
-**Classification** section, directly under **Product Kind**. Only equipment
-and accessory products can be selected, and a product cannot point at itself.
+On an equipment or accessory product, use the **Rental Fee Products** list
+in the **Classification** section, directly under **Product Kind**, to
+add the service products used to bill its rental. Adding a line there sets
+the link on the service product automatically; there is no field to set it
+from the service product's own form.
 
-The field is shown only when the product kind is rental fee. On an equipment
-or accessory product, the reverse **Rental Fee Products** list shows every
-service product billing its rental.
+An equipment or accessory may have several rental fee products - for
+example a base fee and a separate fee for a specific accessory bundle -
+each its own service product rather than a single one carrying every price
+as a variant. A rental fee product bills exactly one equipment or
+accessory - it cannot be shared between several.
 
 To find equipment that still needs a rental fee product, use the **Rental
 Fee Product Missing** filter in the product search view. It lists equipment
-and accessories only, so consumables do not drown out the products that are
-actually missing a fee product.
-
-An equipment or accessory may have several rental fee products - for example
-a base fee and a separate fee for a specific accessory bundle - each its own
-service product rather than a single one carrying every price as a variant.
+and accessories only, so consumables do not drown out the products that
+are actually missing a fee product.
 
 If a rental fee product carries variants (for example a *price category*
 attribute for first unit / second unit / in-hospital use), the variants of
