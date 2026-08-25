@@ -12,6 +12,7 @@
                 <field
                     name="rental_fee_product_tmpl_ids"
                     invisible="product_kind not in ('equipment', 'accessory')"
+                    options="{'no_quick_create': True}"
                 >
                     <list>
                         <field name="name" />
@@ -27,7 +28,8 @@
         <field name="inherit_id" ref="product.product_template_search_view" />
         <field name="arch" type="xml">
             <field name="product_tag_ids" position="after">
-                <field name="equipment_tmpl_id" />
+                <field name="rental_fee_product_tmpl_ids" />
+                <field name="equipment_tmpl_ids" />
                 <separator />
                 <filter
                     string="Rental Fee Product Missing"

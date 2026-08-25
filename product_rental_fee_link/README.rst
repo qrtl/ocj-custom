@@ -26,24 +26,24 @@ Product Rental Fee Link
 
 |badge1| |badge2| |badge3|
 
-This module lets you point a rental fee service product at the equipment
-or accessory product whose rental it bills. It builds on
+This module lets you link rental fee service products to the equipment
+or accessory products whose rental they bill. It builds on
 ``product_classification``, which is what tells equipment and
 accessories apart from the other goods.
 
 When rental fees are managed as products separate from the equipment
 itself, nothing in the standard data model ties the two together. This
-module adds a dedicated **Billed Equipment** link on the rental fee
-product, restricted to equipment and accessory products, together with
-the reverse **Rental Fee Products** list on the equipment or accessory
-itself.
+module adds a many2many link between them: **Billed Equipment** on the
+rental fee product, and its mirror **Rental Fee Products** on the
+equipment or accessory. Either side can add existing records or create
+new ones.
 
 Why a dedicated field rather than *Optional Products*:
 ``optional_product_ids`` is a many2many meant for cross-sell suggestions
-in the quotation product configurator. It cannot express a single,
-verifiable relationship, it carries no type restriction, and its meaning
-collides with genuine cross-sell entries. A dedicated many2one can be
-validated, searched, and used as the source for integrations.
+in the quotation product configurator. It cannot express a restricted,
+type-checked relationship, and its meaning collides with genuine
+cross-sell entries. A dedicated field can be validated, searched, and
+used as the source for integrations.
 
 **Table of contents**
 
@@ -55,20 +55,24 @@ Usage
 
 On an equipment or accessory product, use the **Rental Fee Products**
 list in the **Classification** section, directly under **Product Kind**,
-to add the service products used to bill its rental. Adding a line there
-sets the link on the service product automatically; there is no field to
-set it from the service product's own form.
+to link the service products used to bill its rental. Because the link
+is a many2many, "Add a line" can search for an already existing rental
+fee product or create a new one - there is no separate field to set on
+the rental fee product's own form.
 
 An equipment or accessory may have several rental fee products - for
 example a base fee and a separate fee for a specific accessory bundle -
 each its own service product rather than a single one carrying every
-price as a variant. A rental fee product bills exactly one equipment or
-accessory - it cannot be shared between several.
+price as a variant. A rental fee product may in turn bill several
+equipment or accessory products, when the same fee genuinely applies to
+more than one.
 
 To find equipment that still needs a rental fee product, use the
 **Rental Fee Product Missing** filter in the product search view. It
 lists equipment and accessories only, so consumables do not drown out
-the products that are actually missing a fee product.
+the products that are actually missing a fee product. The same search
+view also lets you filter by **Billed Equipment** to look up a rental
+fee product's equipment from the other direction.
 
 If a rental fee product carries variants (for example a *price category*
 attribute for first unit / second unit / in-hospital use), the variants

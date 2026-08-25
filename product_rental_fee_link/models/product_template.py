@@ -8,38 +8,64 @@ from odoo.exceptions import ValidationError
 class ProductTemplate(models.Model):
     _inherit = "product.template"
 
-    equipment_tmpl_id = fields.Many2one(
+    rental_fee_product_tmpl_ids = fields.Many2many(
         comodel_name="product.template",
-        string="Billed Equipment",
-        domain="[('product_kind', 'in', ('equipment', 'accessory'))]",
-        help="The equipment or accessory this rental fee bills. An equipment "
-        "or accessory may have several rental fee products - e.g. a base fee "
-        "and a fee for a specific accessory bundle - so this link is what "
-        "ties a fee back to what it is charged for.",
-    )
-    rental_fee_product_tmpl_ids = fields.One2many(
-        comodel_name="product.template",
-        inverse_name="equipment_tmpl_id",
+        relation="product_template_rental_fee_rel",
+        column1="equipment_tmpl_id",
+        column2="rental_fee_product_tmpl_id",
         string="Rental Fee Products",
+        domain=[("type", "=", "service")],
         help="Service products used to bill the rental of this equipment or "
-        "accessory. Used in the Navi in Flow integration.",
+        "accessory - e.g. a base fee and a separate fee for a specific "
+        "accessory bundle. Used in the Navi in Flow integration.",
+    )
+    equipment_tmpl_ids = fields.Many2many(
+        comodel_name="product.template",
+        relation="product_template_rental_fee_rel",
+        column1="rental_fee_product_tmpl_id",
+        column2="equipment_tmpl_id",
+        string="Billed Equipment",
+        domain=[("product_kind", "in", ("equipment", "accessory"))],
+        help="Equipment or accessory products whose rental this service bills.",
     )
 
-    @api.constrains("equipment_tmpl_id", "type")
-    def _check_equipment_tmpl_id(self):
+    @api.constrains("rental_fee_product_tmpl_ids")
+    def _check_rental_fee_product_tmpl_ids(self):
         # The product type is the discriminator here; is_storable is deliberately
         # not checked, as it only means "track inventory" and can be turned on by
         # a user default even for services (core clears it on recompute anyway).
-        for template in self.filtered("equipment_tmpl_id"):
-            if template.equipment_tmpl_id == template:
+        for template in self.filtered("rental_fee_product_tmpl_ids"):
+            if template in template.rental_fee_product_tmpl_ids:
+                raise ValidationError(
+                    self.env._("A product cannot be its own rental fee product.")
+                )
+            non_service = template.rental_fee_product_tmpl_ids.filtered(
+                lambda p: p.type != "service"
+            )
+            if non_service:
+                raise ValidationError(
+                    self.env._(
+                        "The rental fee product must be a service, but "
+                        "%(product)s is not.",
+                        product=non_service[0].display_name,
+                    )
+                )
+
+    @api.constrains("equipment_tmpl_ids")
+    def _check_equipment_tmpl_ids(self):
+        for template in self.filtered("equipment_tmpl_ids"):
+            if template in template.equipment_tmpl_ids:
                 raise ValidationError(
                     self.env._("A product cannot be its own billed equipment.")
                 )
-            if template.type != "service":
+            wrong_kind = template.equipment_tmpl_ids.filtered(
+                lambda p: p.product_kind not in ("equipment", "accessory")
+            )
+            if wrong_kind:
                 raise ValidationError(
                     self.env._(
-                        "%(product)s bills the rental of an equipment or "
-                        "accessory, so it must be a service.",
-                        product=template.display_name,
+                        "%(product)s is neither equipment nor an accessory, so "
+                        "a rental fee product cannot bill it.",
+                        product=wrong_kind[0].display_name,
                     )
                 )
