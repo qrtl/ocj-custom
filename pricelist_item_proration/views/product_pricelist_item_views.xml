@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="product_pricelist_item_view_form" model="ir.ui.view">
+        <field name="name">product.pricelist.item.form.proration</field>
+        <field name="model">product.pricelist.item</field>
+        <field name="inherit_id" ref="product.product_pricelist_item_form_view" />
+        <field name="arch" type="xml">
+            <!-- Beside the validity dates: proration is a property of the
+                 period being charged, not of how the price is computed. -->
+            <group name="pricelist_rule_limits" position="inside">
+                <field name="is_prorated" />
+                <field
+                    name="proration_method"
+                    invisible="not is_prorated"
+                    required="is_prorated"
+                />
+                <field
+                    name="proration_rounding"
+                    invisible="not is_prorated"
+                    required="is_prorated"
+                />
+            </group>
+        </field>
+    </record>
+</odoo>
