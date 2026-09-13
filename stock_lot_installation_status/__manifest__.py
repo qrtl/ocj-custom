@@ -6,7 +6,7 @@
     "category": "Inventory/Inventory",
     "website": "https://www.quartile.co",
     "author": "Quartile",
-    "maintainer": "Quartile",
+    "maintainers": ["yostashiro"],
     "license": "LGPL-3",
     "summary": "Track installation status on serial/lot numbers",
     "installable": True,

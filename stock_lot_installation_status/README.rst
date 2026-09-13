@@ -89,6 +89,14 @@ Authors
 Maintainers
 -----------
 
+.. |maintainer-yostashiro| image:: https://github.com/yostashiro.png?size=40px
+    :target: https://github.com/yostashiro
+    :alt: yostashiro
+
+Current maintainer:
+
+|maintainer-yostashiro| 
+
 This module is part of the `qrtl/OCJ Custom <https://github.com/qrtl/OCJ Custom/tree/19.0/stock_lot_installation_status>`_ project on GitHub.
 
 You are welcome to contribute.

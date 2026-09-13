@@ -64,6 +64,38 @@ class TestInstallationStatus(TransactionCase):
         self.lot.write({"installation_status": "installed"})
         self.assertGreater(self.lot.installation_completed_date, old_date)
 
+    def test_rewrite_same_status_keeps_dates(self):
+        old_date = fields.Datetime.now() - timedelta(days=30)
+        self.lot.write(
+            {
+                "installation_status": "installed",
+                "installation_status_change_date": old_date,
+                "installation_completed_date": old_date,
+            }
+        )
+        # Re-writing the status the lot already carries (mass update, repeated
+        # import) is not a transition and must leave the dates alone.
+        self.lot.write({"installation_status": "installed"})
+        self.assertEqual(self.lot.installation_status_change_date, old_date)
+        self.assertEqual(self.lot.installation_completed_date, old_date)
+
+    def test_mixed_recordset_only_stamps_transitions(self):
+        other = self.env["stock.lot"].create(
+            {"name": "LOT-0003", "product_id": self.product.id}
+        )
+        old_date = fields.Datetime.now() - timedelta(days=30)
+        self.lot.write(
+            {
+                "installation_status": "installed",
+                "installation_status_change_date": old_date,
+                "installation_completed_date": old_date,
+            }
+        )
+        # self.lot is already installed, other is not: one write, two outcomes.
+        (self.lot | other).write({"installation_status": "installed"})
+        self.assertEqual(self.lot.installation_completed_date, old_date)
+        self.assertGreater(other.installation_completed_date, old_date)
+
     def test_other_write_does_not_touch_dates(self):
         self.lot.installation_status = "installed"
         change_date = self.lot.installation_status_change_date

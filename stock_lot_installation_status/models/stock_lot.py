@@ -28,26 +28,41 @@ class StockLot(models.Model):
         help="Date and time when the installation status was changed to Installed.",
     )
 
-    def _apply_installation_status_dates(self, vals):
-        # Only auto-populate the date fields when the caller is not already
-        # editing them in the same call (manual edits take priority).
+    def _installation_status_dates(self, status, vals):
+        # Stamp the dates the caller is not already setting itself, so that a
+        # manually provided date always wins over the automatic one.
         now = fields.Datetime.now()
+        res = {}
         if "installation_status_change_date" not in vals:
-            vals["installation_status_change_date"] = now
-        if (
-            vals["installation_status"] == "installed"
-            and "installation_completed_date" not in vals
-        ):
-            vals["installation_completed_date"] = now
+            res["installation_status_change_date"] = now
+        if status == "installed" and "installation_completed_date" not in vals:
+            res["installation_completed_date"] = now
+        return res
 
     @api.model_create_multi
     def create(self, vals_list):
+        new_vals_list = []
         for vals in vals_list:
-            if "installation_status" in vals:
-                self._apply_installation_status_dates(vals)
-        return super().create(vals_list)
+            status = vals.get("installation_status")
+            if status:
+                vals = {**vals, **self._installation_status_dates(status, vals)}
+            new_vals_list.append(vals)
+        return super().create(new_vals_list)
 
     def write(self, vals):
-        if "installation_status" in vals:
-            self._apply_installation_status_dates(vals)
-        return super().write(vals)
+        if "installation_status" not in vals:
+            return super().write(vals)
+        status = vals["installation_status"]
+        # Only an actual transition may refresh the dates: re-writing the
+        # status a lot already carries (mass update, repeated import) must not
+        # overwrite the historical installation date.
+        changed = self.filtered(lambda lot: lot.installation_status != status)
+        res = True
+        unchanged = self - changed
+        if unchanged:
+            res = super(StockLot, unchanged).write(vals)
+        if changed:
+            res = super(StockLot, changed).write(
+                {**vals, **self._installation_status_dates(status, vals)}
+            )
+        return res
