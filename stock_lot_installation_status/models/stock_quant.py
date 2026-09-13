@@ -19,3 +19,7 @@ class StockQuant(models.Model):
         related="lot_id.installation_completed_date",
         store=True,
     )
+    first_installation_date = fields.Datetime(
+        related="lot_id.first_installation_date",
+        store=True,
+    )

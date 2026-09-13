@@ -27,16 +27,29 @@ class StockLot(models.Model):
         tracking=True,
         help="Date and time when the installation status was changed to Installed.",
     )
+    first_installation_date = fields.Datetime(
+        tracking=True,
+        help="Date and time of the first installation. Kept across later "
+        "installations; the service life is counted from it.",
+    )
 
     def _installation_status_dates(self, status, vals):
-        # Stamp the dates the caller is not already setting itself, so that a
-        # manually provided date always wins over the automatic one.
+        """Dates to stamp for a transition to ``status``, caller's values kept.
+
+        Per record: first_installation_date depends on this lot. create()
+        calls it on the empty recordset, where it reads as unset.
+        """
         now = fields.Datetime.now()
         res = {}
         if "installation_status_change_date" not in vals:
             res["installation_status_change_date"] = now
-        if status == "installed" and "installation_completed_date" not in vals:
-            res["installation_completed_date"] = now
+        if status != "installed":
+            return res
+        completed = vals.get("installation_completed_date", now)
+        if "installation_completed_date" not in vals:
+            res["installation_completed_date"] = completed
+        if "first_installation_date" not in vals and not self.first_installation_date:
+            res["first_installation_date"] = completed
         return res
 
     @api.model_create_multi
@@ -53,16 +66,14 @@ class StockLot(models.Model):
         if "installation_status" not in vals:
             return super().write(vals)
         status = vals["installation_status"]
-        # Only an actual transition may refresh the dates: re-writing the
-        # status a lot already carries (mass update, repeated import) must not
-        # overwrite the historical installation date.
-        changed = self.filtered(lambda lot: lot.installation_status != status)
         res = True
-        unchanged = self - changed
-        if unchanged:
-            res = super(StockLot, unchanged).write(vals)
-        if changed:
-            res = super(StockLot, changed).write(
-                {**vals, **self._installation_status_dates(status, vals)}
-            )
+        for lot in self:
+            # Only a real transition refreshes the dates, so a re-write of the
+            # current status does not overwrite the installation history.
+            if lot.installation_status == status:
+                res = super(StockLot, lot).write(vals)
+            else:
+                res = super(StockLot, lot).write(
+                    {**vals, **lot._installation_status_dates(status, vals)}
+                )
         return res

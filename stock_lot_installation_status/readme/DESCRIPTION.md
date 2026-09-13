@@ -6,6 +6,7 @@ It adds the following information to each serial/lot number:
 - Installation status (Not Installed / Installed)
 - Installation status change date
 - Installation completion date
+- First installation date
 
 The status change date and completion date are maintained automatically when the
 installation status changes, and changes are logged in the lot's chatter. The same

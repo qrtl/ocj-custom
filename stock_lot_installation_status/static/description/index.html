@@ -383,6 +383,7 @@ ul.auto-toc {
 <li>Installation status (Not Installed / Installed)</li>
 <li>Installation status change date</li>
 <li>Installation completion date</li>
+<li>First installation date</li>
 </ul>
 <p>The status change date and completion date are maintained automatically
 when the installation status changes, and changes are logged in the
@@ -416,10 +417,21 @@ Status</em>.</li>
 Date</em> is set to the current date.</li>
 <li>When the status changes back to <em>Not Installed</em>, the <em>Installation
 Completion Date</em> is kept (it is not cleared).</li>
+<li>The <em>First Installation Date</em> is set the first time the status
+becomes <em>Installed</em> and is never refreshed afterwards, so a lot that
+is recovered and installed again keeps its original date. The
+<em>Installation Completion Date</em> follows the latest installation
+instead.</li>
 </ul>
-<p>The installation status, status change date and completion date are also
-shown (read-only) on inventory quants under <em>Inventory &gt; Reporting &gt;
-Locations</em>, and can be used to filter and group records.</p>
+<p>The <em>First Installation Date</em> is read-only for everyone except a system
+administrator, who can correct it — the automatic value is only as good
+as the first status change recorded in Odoo, so equipment installed
+before this module was in use has to be filled in by hand. Changes to
+all four values are logged in the lot’s chatter.</p>
+<p>The installation status and the three dates are also shown (read-only)
+on inventory quants under <em>Inventory &gt; Reporting &gt; Locations</em>, and can
+be used to filter and group records. The <em>First Installation Date</em>
+column is hidden by default.</p>
 </div>
 <div class="section" id="bug-tracker">
 <h2><a class="toc-backref" href="#toc-entry-2">Bug Tracker</a></h2>

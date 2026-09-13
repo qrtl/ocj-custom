@@ -10,6 +10,13 @@
                     <field name="installation_status" />
                     <field name="installation_status_change_date" />
                     <field name="installation_completed_date" />
+                    <!-- Correctable by a system administrator only. -->
+                    <field
+                        name="first_installation_date"
+                        readonly="1"
+                        groups="!base.group_system"
+                    />
+                    <field name="first_installation_date" groups="base.group_system" />
                 </group>
             </xpath>
         </field>

@@ -8,6 +8,7 @@
             <xpath expr="//field[@name='lot_id']" position="after">
                 <field name="installation_status" optional="show" />
                 <field name="installation_completed_date" optional="show" />
+                <field name="first_installation_date" optional="hide" />
             </xpath>
         </field>
     </record>
@@ -20,6 +21,7 @@
             <xpath expr="//field[@name='lot_id']" position="after">
                 <field name="installation_status" optional="show" />
                 <field name="installation_completed_date" optional="show" />
+                <field name="first_installation_date" optional="hide" />
             </xpath>
         </field>
     </record>

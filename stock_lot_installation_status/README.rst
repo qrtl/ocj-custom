@@ -35,6 +35,7 @@ It adds the following information to each serial/lot number:
 -  Installation status (Not Installed / Installed)
 -  Installation status change date
 -  Installation completion date
+-  First installation date
 
 The status change date and completion date are maintained automatically
 when the installation status changes, and changes are logged in the
@@ -63,10 +64,22 @@ When the status changes:
    Date* is set to the current date.
 -  When the status changes back to *Not Installed*, the *Installation
    Completion Date* is kept (it is not cleared).
+-  The *First Installation Date* is set the first time the status
+   becomes *Installed* and is never refreshed afterwards, so a lot that
+   is recovered and installed again keeps its original date. The
+   *Installation Completion Date* follows the latest installation
+   instead.
 
-The installation status, status change date and completion date are also
-shown (read-only) on inventory quants under *Inventory > Reporting >
-Locations*, and can be used to filter and group records.
+The *First Installation Date* is read-only for everyone except a system
+administrator, who can correct it — the automatic value is only as good
+as the first status change recorded in Odoo, so equipment installed
+before this module was in use has to be filled in by hand. Changes to
+all four values are logged in the lot's chatter.
+
+The installation status and the three dates are also shown (read-only)
+on inventory quants under *Inventory > Reporting > Locations*, and can
+be used to filter and group records. The *First Installation Date*
+column is hidden by default.
 
 Bug Tracker
 ===========

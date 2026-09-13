@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-17 14:15+0000\n"
-"PO-Revision-Date: 2026-06-17 14:15+0000\n"
+"POT-Creation-Date: 2026-09-13 15:03+0000\n"
+"PO-Revision-Date: 2026-09-13 15:03+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -17,12 +17,22 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: stock_lot_installation_status
+#: model:ir.model.fields,help:stock_lot_installation_status.field_stock_lot__first_installation_date
+#: model:ir.model.fields,help:stock_lot_installation_status.field_stock_quant__first_installation_date
+msgid ""
+"Date and time of the first installation. Kept across later installations; "
+"the service life is counted from it."
+msgstr "初回設置の日時。その後の設置でも保持され、耐用年数はこの日を起点とする。"
+
+#. module: stock_lot_installation_status
 #: model:ir.model.fields,help:stock_lot_installation_status.field_stock_lot__installation_completed_date
+#: model:ir.model.fields,help:stock_lot_installation_status.field_stock_quant__installation_completed_date
 msgid "Date and time when the installation status was changed to Installed."
 msgstr "設置ステータスが「設置済」に変更された日時。"
 
 #. module: stock_lot_installation_status
 #: model:ir.model.fields,help:stock_lot_installation_status.field_stock_lot__installation_status_change_date
+#: model:ir.model.fields,help:stock_lot_installation_status.field_stock_quant__installation_status_change_date
 msgid "Date and time when the installation status was last changed."
 msgstr "設置ステータスが最後に変更された日時。"
 
@@ -31,6 +41,12 @@ msgstr "設置ステータスが最後に変更された日時。"
 #: model:ir.model.fields,field_description:stock_lot_installation_status.field_stock_quant__display_name
 msgid "Display Name"
 msgstr "表示名"
+
+#. module: stock_lot_installation_status
+#: model:ir.model.fields,field_description:stock_lot_installation_status.field_stock_lot__first_installation_date
+#: model:ir.model.fields,field_description:stock_lot_installation_status.field_stock_quant__first_installation_date
+msgid "First Installation Date"
+msgstr "初回設置日"
 
 #. module: stock_lot_installation_status
 #: model:ir.model.fields,field_description:stock_lot_installation_status.field_stock_lot__id
@@ -66,6 +82,7 @@ msgstr "設置ステータス変更日"
 
 #. module: stock_lot_installation_status
 #: model:ir.model.fields,help:stock_lot_installation_status.field_stock_lot__installation_status
+#: model:ir.model.fields,help:stock_lot_installation_status.field_stock_quant__installation_status
 msgid "Installation status of this serial/lot number."
 msgstr "このシリアル/ロット番号の設置ステータス。"
 
@@ -77,7 +94,7 @@ msgstr "設置済"
 #. module: stock_lot_installation_status
 #: model:ir.model,name:stock_lot_installation_status.model_stock_lot
 msgid "Lot/Serial"
-msgstr "ロット/シリアル番号"
+msgstr "ロット/シリアル"
 
 #. module: stock_lot_installation_status
 #: model:ir.model.fields.selection,name:stock_lot_installation_status.selection__stock_lot__installation_status__not_installed
@@ -87,4 +104,4 @@ msgstr "未設置"
 #. module: stock_lot_installation_status
 #: model:ir.model,name:stock_lot_installation_status.model_stock_quant
 msgid "Quants"
-msgstr "数量"
+msgstr "保管ロット"

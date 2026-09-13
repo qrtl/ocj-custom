@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-17 14:17+0000\n"
-"PO-Revision-Date: 2026-06-17 14:17+0000\n"
+"POT-Creation-Date: 2026-09-13 15:04+0000\n"
+"PO-Revision-Date: 2026-09-13 15:04+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,12 +16,22 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_lot_installation_status
+#: model:ir.model.fields,help:stock_lot_installation_status.field_stock_lot__first_installation_date
+#: model:ir.model.fields,help:stock_lot_installation_status.field_stock_quant__first_installation_date
+msgid ""
+"Date and time of the first installation. Kept across later installations; "
+"the service life is counted from it."
+msgstr ""
+
+#. module: stock_lot_installation_status
 #: model:ir.model.fields,help:stock_lot_installation_status.field_stock_lot__installation_completed_date
+#: model:ir.model.fields,help:stock_lot_installation_status.field_stock_quant__installation_completed_date
 msgid "Date and time when the installation status was changed to Installed."
 msgstr ""
 
 #. module: stock_lot_installation_status
 #: model:ir.model.fields,help:stock_lot_installation_status.field_stock_lot__installation_status_change_date
+#: model:ir.model.fields,help:stock_lot_installation_status.field_stock_quant__installation_status_change_date
 msgid "Date and time when the installation status was last changed."
 msgstr ""
 
@@ -29,6 +39,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_lot_installation_status.field_stock_lot__display_name
 #: model:ir.model.fields,field_description:stock_lot_installation_status.field_stock_quant__display_name
 msgid "Display Name"
+msgstr ""
+
+#. module: stock_lot_installation_status
+#: model:ir.model.fields,field_description:stock_lot_installation_status.field_stock_lot__first_installation_date
+#: model:ir.model.fields,field_description:stock_lot_installation_status.field_stock_quant__first_installation_date
+msgid "First Installation Date"
 msgstr ""
 
 #. module: stock_lot_installation_status
@@ -65,6 +81,7 @@ msgstr ""
 
 #. module: stock_lot_installation_status
 #: model:ir.model.fields,help:stock_lot_installation_status.field_stock_lot__installation_status
+#: model:ir.model.fields,help:stock_lot_installation_status.field_stock_quant__installation_status
 msgid "Installation status of this serial/lot number."
 msgstr ""
 

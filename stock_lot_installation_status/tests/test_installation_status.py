@@ -73,8 +73,7 @@ class TestInstallationStatus(TransactionCase):
                 "installation_completed_date": old_date,
             }
         )
-        # Re-writing the status the lot already carries (mass update, repeated
-        # import) is not a transition and must leave the dates alone.
+        # Not a transition, so the dates must not move.
         self.lot.write({"installation_status": "installed"})
         self.assertEqual(self.lot.installation_status_change_date, old_date)
         self.assertEqual(self.lot.installation_completed_date, old_date)
@@ -91,7 +90,7 @@ class TestInstallationStatus(TransactionCase):
                 "installation_completed_date": old_date,
             }
         )
-        # self.lot is already installed, other is not: one write, two outcomes.
+        # One write, two outcomes.
         (self.lot | other).write({"installation_status": "installed"})
         self.assertEqual(self.lot.installation_completed_date, old_date)
         self.assertGreater(other.installation_completed_date, old_date)
@@ -118,6 +117,83 @@ class TestInstallationStatus(TransactionCase):
         self.assertEqual(self.lot.installation_status_change_date, manual_date)
         self.assertEqual(self.lot.installation_completed_date, manual_date)
 
+    def test_first_installation_date_is_set_on_the_first_install(self):
+        self.lot.installation_status = "installed"
+        self.assertEqual(
+            self.lot.first_installation_date, self.lot.installation_completed_date
+        )
+
+    def test_first_installation_date_survives_a_reinstall(self):
+        original = fields.Datetime.now() - timedelta(days=400)
+        self.lot.write(
+            {
+                "installation_status": "installed",
+                "installation_completed_date": original,
+            }
+        )
+        self.assertEqual(self.lot.first_installation_date, original)
+        # Recovered, then installed again: only the completion date moves.
+        self.lot.write({"installation_status": "not_installed"})
+        self.lot.write({"installation_status": "installed"})
+        self.assertEqual(self.lot.first_installation_date, original)
+        self.assertGreater(self.lot.installation_completed_date, original)
+
+    def test_first_installation_date_is_not_set_by_a_recovery(self):
+        self.lot.write({"installation_status": "not_installed"})
+        self.assertFalse(self.lot.first_installation_date)
+
+    def test_first_installation_date_created_as_installed(self):
+        lot = self.env["stock.lot"].create(
+            {
+                "name": "LOT-0004",
+                "product_id": self.product.id,
+                "installation_status": "installed",
+            }
+        )
+        self.assertEqual(lot.first_installation_date, lot.installation_completed_date)
+
+    def test_first_installation_date_accepts_a_manual_correction(self):
+        corrected = fields.Datetime.now() - timedelta(days=900)
+        self.lot.installation_status = "installed"
+        self.lot.first_installation_date = corrected
+        # A later installation must not undo it.
+        self.lot.write({"installation_status": "not_installed"})
+        self.lot.write({"installation_status": "installed"})
+        self.assertEqual(self.lot.first_installation_date, corrected)
+
+    def test_mixed_recordset_splits_on_the_first_installation(self):
+        original = fields.Datetime.now() - timedelta(days=400)
+        self.lot.write(
+            {
+                "installation_status": "installed",
+                "installation_completed_date": original,
+            }
+        )
+        self.lot.write({"installation_status": "not_installed"})
+        never = self.env["stock.lot"].create(
+            {"name": "LOT-0005", "product_id": self.product.id}
+        )
+        # One write: the veteran keeps its date, the new lot gets one.
+        (self.lot | never).write({"installation_status": "installed"})
+        self.assertEqual(self.lot.first_installation_date, original)
+        self.assertEqual(
+            never.first_installation_date, never.installation_completed_date
+        )
+
+    def test_first_installation_date_is_tracked(self):
+        # Tracking runs on precommit; draining the fixture's own batch first
+        # stops Odoo folding the change into the creation.
+        self.env.flush_all()
+        self.env.cr.precommit.run()
+        self.lot.installation_status = "installed"
+        self.env.flush_all()
+        self.env.cr.precommit.run()
+        messages = self.env["mail.message"].search(
+            [("model", "=", "stock.lot"), ("res_id", "=", self.lot.id)]
+        )
+        tracked = messages.tracking_value_ids.field_id.mapped("name")
+        self.assertIn("first_installation_date", tracked)
+
     def test_quant_related_fields(self):
         self.lot.installation_status = "installed"
         quant = self.env["stock.quant"].create(
@@ -131,4 +207,7 @@ class TestInstallationStatus(TransactionCase):
         self.assertEqual(
             quant.installation_completed_date,
             self.lot.installation_completed_date,
+        )
+        self.assertEqual(
+            quant.first_installation_date, self.lot.first_installation_date
         )
