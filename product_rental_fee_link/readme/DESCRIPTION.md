@@ -15,3 +15,18 @@ is a many2many meant for cross-sell suggestions in the quotation product
 configurator. It cannot express a restricted, type-checked relationship, and
 its meaning collides with genuine cross-sell entries. A dedicated field can
 be validated, searched, and used as the source for integrations.
+
+A rental fee product can also carry the **set** of equipment and accessories
+it bills as one item - a concentrator together with a demand valve and a
+flow meter, say - in **Set Components** on its own tab. That list is the
+product's identity for a lookup: `_find_by_rental_set()` answers with the
+rental fee products whose set is *exactly* the combination asked for, so a
+combination names one product and an integration can turn a selection of
+equipment into the product that bills it.
+
+The match is exact on purpose. Whether a partly installed set is billed as
+the set or as its members individually is a billing decision, and nothing
+on the product records it - a caller that wants both answers asks about
+both combinations. Components are equipment and accessories only, and they
+are variants (`product.product`), which is the record a serial, a stock
+line and the equipment-model interface all carry.

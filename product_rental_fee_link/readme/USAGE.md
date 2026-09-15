@@ -24,3 +24,16 @@ attribute for first unit / second unit / in-hospital use), the variants of
 that product are the set of billable items for the equipment it bills -
 which is what an integration reads to publish the corresponding product
 codes.
+
+On a rental fee product - any service - the **Rental Set** tab holds **Set
+Components**: the equipment and accessories that this one product bills
+together. Add the variants that make up the set; consumables are billed on
+their own and cannot be part of it. Two rental fee products cannot carry
+the same combination, so the set is refused with the name of the product
+that already bills it.
+
+The equipment side is read-only: **Rental Fee Sets**, under **Product
+Kind**, lists the sets a piece of equipment or an accessory belongs to. Use
+the **Rental Set** filter in the product search view to list the rental fee
+products that have a set, and search by **Set Components** to find the sets
+a given piece of equipment appears in.
