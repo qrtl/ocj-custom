@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="stock_lot_quality_status_view_list" model="ir.ui.view">
+        <field name="name">stock.lot.quality.status.list</field>
+        <field name="model">stock.lot.quality.status</field>
+        <field name="arch" type="xml">
+            <list
+                editable="bottom"
+                decoration-success="shippability == 'yes'"
+                decoration-warning="shippability == 'conditional'"
+                decoration-danger="shippability == 'no'"
+            >
+                <field name="sequence" widget="handle" />
+                <field name="name" />
+                <field name="code" optional="hide" />
+                <field name="category" />
+                <field name="shippability" />
+                <field name="shippability_note" optional="show" />
+                <field name="shipping_priority" />
+                <field name="is_default" />
+                <field name="description" optional="hide" />
+            </list>
+        </field>
+    </record>
+
+    <record id="stock_lot_quality_status_view_form" model="ir.ui.view">
+        <field name="name">stock.lot.quality.status.form</field>
+        <field name="model">stock.lot.quality.status</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="text-bg-danger"
+                        invisible="active"
+                    />
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="code" />
+                            <field name="category" />
+                            <field name="sequence" />
+                            <field name="is_default" />
+                            <field name="active" invisible="1" />
+                        </group>
+                        <group>
+                            <field name="shippability" />
+                            <field name="shippability_note" />
+                            <field name="shipping_priority" />
+                        </group>
+                    </group>
+                    <group string="Description">
+                        <field name="description" nolabel="1" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="stock_lot_quality_status_view_search" model="ir.ui.view">
+        <field name="name">stock.lot.quality.status.search</field>
+        <field name="model">stock.lot.quality.status</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="code" />
+                <field name="category" />
+                <filter
+                    name="shippable"
+                    string="Shippable"
+                    domain="[('shippability', '=', 'yes')]"
+                />
+                <filter
+                    name="conditional"
+                    string="Conditional"
+                    domain="[('shippability', '=', 'conditional')]"
+                />
+                <filter
+                    name="not_shippable"
+                    string="Not Shippable"
+                    domain="[('shippability', '=', 'no')]"
+                />
+                <separator />
+                <filter
+                    name="archived"
+                    string="Archived"
+                    domain="[('active', '=', False)]"
+                />
+                <group>
+                    <filter
+                        name="group_by_category"
+                        string="Major Category"
+                        context="{'group_by': 'category'}"
+                    />
+                    <filter
+                        name="group_by_shippability"
+                        string="Shippability"
+                        context="{'group_by': 'shippability'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="stock_lot_quality_status_action" model="ir.actions.act_window">
+        <field name="name">Quality Statuses</field>
+        <field name="res_model">stock.lot.quality.status</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a quality status
+            </p>
+            <p>
+                Quality statuses can be assigned to serial/lot numbers to
+                classify their inventory condition.
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+        id="stock_lot_quality_status_menu"
+        action="stock_lot_quality_status_action"
+        parent="stock.menu_stock_config_settings"
+        sequence="100"
+        groups="stock.group_stock_manager"
+    />
+</odoo>

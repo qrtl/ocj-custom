@@ -1,0 +1,233 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_lot_quality_status
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: stock_lot_quality_status
+#: model:ir.model.fields,field_description:stock_lot_quality_status.field_stock_lot_quality_status__active
+msgid "Active"
+msgstr "有効"
+
+#. module: stock_lot_quality_status
+#: model_terms:ir.ui.view,arch_db:stock_lot_quality_status.stock_lot_quality_status_view_form
+#: model_terms:ir.ui.view,arch_db:stock_lot_quality_status.stock_lot_quality_status_view_search
+msgid "Archived"
+msgstr "アーカイブ済み"
+
+#. module: stock_lot_quality_status
+#: model:ir.model.fields,field_description:stock_lot_quality_status.field_stock_lot_quality_status__code
+msgid "Code"
+msgstr "コード"
+
+#. module: stock_lot_quality_status
+#: model:ir.model.fields.selection,name:stock_lot_quality_status.selection__stock_lot_quality_status__shippability__conditional
+#: model_terms:ir.ui.view,arch_db:stock_lot_quality_status.stock_lot_quality_status_view_search
+msgid "Conditional"
+msgstr "条件付"
+
+#. module: stock_lot_quality_status
+#: model_terms:ir.actions.act_window,help:stock_lot_quality_status.stock_lot_quality_status_action
+msgid "Create a quality status"
+msgstr "品質区分を作成"
+
+#. module: stock_lot_quality_status
+#: model:ir.model.fields,field_description:stock_lot_quality_status.field_stock_lot_quality_status__create_uid
+msgid "Created by"
+msgstr "作成者"
+
+#. module: stock_lot_quality_status
+#: model:ir.model.fields,field_description:stock_lot_quality_status.field_stock_lot_quality_status__create_date
+msgid "Created on"
+msgstr "作成日"
+
+#. module: stock_lot_quality_status
+#: model:ir.model.fields,field_description:stock_lot_quality_status.field_stock_lot_quality_status__is_default
+msgid "Default for New Lots"
+msgstr "新規ロットのデフォルト"
+
+#. module: stock_lot_quality_status
+#: model:ir.model.fields,field_description:stock_lot_quality_status.field_stock_lot_quality_status__description
+#: model_terms:ir.ui.view,arch_db:stock_lot_quality_status.stock_lot_quality_status_view_form
+msgid "Description"
+msgstr "説明"
+
+#. module: stock_lot_quality_status
+#: model:ir.model.fields,field_description:stock_lot_quality_status.field_stock_lot__display_name
+#: model:ir.model.fields,field_description:stock_lot_quality_status.field_stock_lot_quality_status__display_name
+#: model:ir.model.fields,field_description:stock_lot_quality_status.field_stock_quant__display_name
+msgid "Display Name"
+msgstr "表示名"
+
+#. module: stock_lot_quality_status
+#: model:ir.model.fields.selection,name:stock_lot_quality_status.selection__stock_lot_quality_status__category__excluded
+msgid "Excluded"
+msgstr "対象外"
+
+#. module: stock_lot_quality_status
+#: model:ir.model.fields,help:stock_lot_quality_status.field_stock_lot_quality_status__shippability_note
+msgid ""
+"Free-text qualifier for the shippability (e.g. ship A-grade first, repair "
+"vendor only, maintenance branch only)."
+msgstr "出荷可否の自由記入の補足（例：A先出し、修理先のみ、整備支店のみ）。"
+
+#. module: stock_lot_quality_status
+#: model:ir.model.fields,field_description:stock_lot_quality_status.field_stock_lot__id
+#: model:ir.model.fields,field_description:stock_lot_quality_status.field_stock_lot_quality_status__id
+#: model:ir.model.fields,field_description:stock_lot_quality_status.field_stock_quant__id
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_lot_quality_status
+#: model:ir.model.fields,field_description:stock_lot_quality_status.field_stock_lot_quality_status__write_uid
+msgid "Last Updated by"
+msgstr "最終更新者"
+
+#. module: stock_lot_quality_status
+#: model:ir.model.fields,field_description:stock_lot_quality_status.field_stock_lot_quality_status__write_date
+msgid "Last Updated on"
+msgstr "最終更新日"
+
+#. module: stock_lot_quality_status
+#: model:ir.model,name:stock_lot_quality_status.model_stock_lot
+msgid "Lot/Serial"
+msgstr "ロット/シリアル番号"
+
+#. module: stock_lot_quality_status
+#: model:ir.model.fields,field_description:stock_lot_quality_status.field_stock_lot_quality_status__category
+#: model_terms:ir.ui.view,arch_db:stock_lot_quality_status.stock_lot_quality_status_view_search
+msgid "Major Category"
+msgstr "大区分"
+
+#. module: stock_lot_quality_status
+#: model:ir.model.fields,field_description:stock_lot_quality_status.field_stock_lot_quality_status__name
+msgid "Name"
+msgstr "名前"
+
+#. module: stock_lot_quality_status
+#: model:ir.model.fields.selection,name:stock_lot_quality_status.selection__stock_lot_quality_status__shippability__no
+#: model_terms:ir.ui.view,arch_db:stock_lot_quality_status.stock_lot_quality_status_view_search
+msgid "Not Shippable"
+msgstr "不可"
+
+#. module: stock_lot_quality_status
+#. odoo-python
+#: code:addons/stock_lot_quality_status/models/stock_lot_quality_status.py:0
+msgid "Only one quality status can be set as the default for new lots."
+msgstr "新規ロットのデフォルトに設定できる品質区分は1つだけです。"
+
+#. module: stock_lot_quality_status
+#: model:ir.model.fields,help:stock_lot_quality_status.field_stock_lot_quality_status__code
+msgid "Optional short code for referencing this status."
+msgstr "この区分を参照するための任意の短縮コード。"
+
+#. module: stock_lot_quality_status
+#: model:ir.model.fields,help:stock_lot_quality_status.field_stock_lot_quality_status__shipping_priority
+msgid ""
+"Picking order among shippable statuses (lower is picked first). 0 means the "
+"status is not part of the shipping order."
+msgstr "出荷可能な区分の中でのピッキング順（小さいほど先にピックされます）。0はその区分が出荷順の対象外であることを意味します。"
+
+#. module: stock_lot_quality_status
+#: model:ir.model.fields,field_description:stock_lot_quality_status.field_stock_lot__quality_status_id
+#: model:ir.model.fields,field_description:stock_lot_quality_status.field_stock_quant__quality_status_id
+#: model_terms:ir.ui.view,arch_db:stock_lot_quality_status.quant_search_view
+#: model_terms:ir.ui.view,arch_db:stock_lot_quality_status.search_product_lot_filter
+msgid "Quality Status"
+msgstr "品質区分"
+
+#. module: stock_lot_quality_status
+#: model:ir.actions.act_window,name:stock_lot_quality_status.stock_lot_quality_status_action
+#: model:ir.ui.menu,name:stock_lot_quality_status.stock_lot_quality_status_menu
+msgid "Quality Statuses"
+msgstr "品質区分"
+
+#. module: stock_lot_quality_status
+#: model:ir.model.fields,help:stock_lot_quality_status.field_stock_lot__quality_status_id
+#: model:ir.model.fields,help:stock_lot_quality_status.field_stock_quant__quality_status_id
+msgid "Quality status of this serial/lot number."
+msgstr "このシリアル/ロット番号の品質区分。"
+
+#. module: stock_lot_quality_status
+#: model_terms:ir.actions.act_window,help:stock_lot_quality_status.stock_lot_quality_status_action
+msgid ""
+"Quality statuses can be assigned to serial/lot numbers to\n"
+"                classify their inventory condition."
+msgstr "品質区分はシリアル/ロット番号に割り当てて、在庫の状態を分類できます。"
+
+#. module: stock_lot_quality_status
+#: model:ir.model,name:stock_lot_quality_status.model_stock_quant
+msgid "Quants"
+msgstr "クアント"
+
+#. module: stock_lot_quality_status
+#: model:ir.model.fields,field_description:stock_lot_quality_status.field_stock_lot_quality_status__sequence
+msgid "Sequence"
+msgstr "シーケンス"
+
+#. module: stock_lot_quality_status
+#: model:ir.model.fields,field_description:stock_lot_quality_status.field_stock_lot_quality_status__shippability
+#: model_terms:ir.ui.view,arch_db:stock_lot_quality_status.stock_lot_quality_status_view_search
+msgid "Shippability"
+msgstr "出荷可否"
+
+#. module: stock_lot_quality_status
+#: model:ir.model.fields,field_description:stock_lot_quality_status.field_stock_lot_quality_status__shippability_note
+msgid "Shippability Note"
+msgstr "出荷可否備考"
+
+#. module: stock_lot_quality_status
+#: model:ir.model.fields.selection,name:stock_lot_quality_status.selection__stock_lot_quality_status__shippability__yes
+#: model_terms:ir.ui.view,arch_db:stock_lot_quality_status.stock_lot_quality_status_view_search
+msgid "Shippable"
+msgstr "可"
+
+#. module: stock_lot_quality_status
+#: model:ir.model.fields,field_description:stock_lot_quality_status.field_stock_lot_quality_status__shipping_priority
+msgid "Shipping Priority"
+msgstr "出荷順"
+
+#. module: stock_lot_quality_status
+#: model:ir.model,name:stock_lot_quality_status.model_stock_lot_quality_status
+msgid "Stock Lot Quality Status"
+msgstr "在庫ロット品質区分"
+
+#. module: stock_lot_quality_status
+#: model:ir.model.fields,help:stock_lot_quality_status.field_stock_lot_quality_status__category
+msgid ""
+"Stock-activity grouping used as the aggregation axis for inventory and "
+"accounting reports."
+msgstr "在庫・会計レポートの集約軸として用いる在庫活性度のグルーピング。"
+
+#. module: stock_lot_quality_status
+#: model:ir.model.fields,help:stock_lot_quality_status.field_stock_lot_quality_status__is_default
+msgid ""
+"The status assigned to newly created lots/serials when none is set. Only one"
+" status can be the default."
+msgstr "未設定の場合に新規作成されたロット/シリアルに割り当てられる区分。デフォルトに設定できる区分は1つだけです。"
+
+#. module: stock_lot_quality_status
+#: model:ir.model.fields.selection,name:stock_lot_quality_status.selection__stock_lot_quality_status__category__usable
+msgid "Usable Stock"
+msgstr "使える在庫"
+
+#. module: stock_lot_quality_status
+#: model:ir.model.fields.selection,name:stock_lot_quality_status.selection__stock_lot_quality_status__category__usable_unshippable
+msgid "Usable Stock (Not Shippable)"
+msgstr "使える在庫(出荷不可)"
+
+#. module: stock_lot_quality_status
+#: model:ir.model.fields,help:stock_lot_quality_status.field_stock_lot_quality_status__shippability
+msgid "Whether stock with this status can be shipped to patients."
+msgstr "この区分の在庫を患者に出荷できるかどうか。"
+
