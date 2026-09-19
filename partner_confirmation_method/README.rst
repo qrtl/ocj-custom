@@ -43,7 +43,7 @@ Usage
 =====
 
 Open a partner, go to the *Sales & Purchase* tab and set **Confirmation
-Method** in the *Misc* group. The field is required and defaults to
+Method** in the *Sales* group. The field is required and defaults to
 *Fax*.
 
 Bug Tracker
