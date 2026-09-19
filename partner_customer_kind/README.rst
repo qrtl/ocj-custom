@@ -66,13 +66,13 @@ Authors
 Maintainers
 -----------
 
-.. |maintainer-yostashiro| image:: https://github.com/yostashiro.png?size=40px
-    :target: https://github.com/yostashiro
-    :alt: yostashiro
+.. |maintainer-smorita7749| image:: https://github.com/smorita7749.png?size=40px
+    :target: https://github.com/smorita7749
+    :alt: smorita7749
 
 Current maintainer:
 
-|maintainer-yostashiro| 
+|maintainer-smorita7749| 
 
 This module is part of the `qrtl/OCJ Custom <https://github.com/qrtl/OCJ Custom/tree/19.0/partner_customer_kind>`_ project on GitHub.
 

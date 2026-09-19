@@ -6,7 +6,7 @@
     "category": "Sales/CRM",
     "website": "https://www.quartile.co",
     "author": "Quartile",
-    "maintainers": ["yostashiro"],
+    "maintainers": ["smorita7749"],
     "license": "LGPL-3",
     "summary": "Classify partners by customer kind "
     "(hospital, dealer, individual, veterinary hospital)",
