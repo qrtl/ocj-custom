@@ -30,29 +30,6 @@
             <field name="user_id" position="after">
                 <field name="customer_kind" />
             </field>
-            <filter name="type_company" position="after">
-                <separator />
-                <filter
-                    name="customer_kind_hospital"
-                    string="Hospital"
-                    domain="[('customer_kind', '=', 'hospital')]"
-                />
-                <filter
-                    name="customer_kind_dealer"
-                    string="Dealer"
-                    domain="[('customer_kind', '=', 'dealer')]"
-                />
-                <filter
-                    name="customer_kind_individual"
-                    string="Individual"
-                    domain="[('customer_kind', '=', 'individual')]"
-                />
-                <filter
-                    name="customer_kind_veterinary_hospital"
-                    string="Veterinary Hospital"
-                    domain="[('customer_kind', '=', 'veterinary_hospital')]"
-                />
-            </filter>
             <filter name="salesperson" position="after">
                 <filter
                     name="group_customer_kind"
