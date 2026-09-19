@@ -6,10 +6,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-19 14:12+0000\n"
+"POT-Creation-Date: 2026-09-19 14:59+0000\n"
 "PO-Revision-Date: 2026-09-19 14:12+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -22,8 +23,9 @@ msgid ""
 "Category of the customer: hospital, dealer, individual or veterinary "
 "hospital. Delivered to navi in flow as the customer kind of the customer "
 "master."
-msgstr "得意先の区分（病院・代理店・個人・動物病院）。ナビフローの得意先マスタの得意先区分として連携される。"
-
+msgstr ""
+"得意先の区分（病院・代理店・個人・動物病院）。ナビフローの得意先マスタの得意"
+"先区分として連携される。"
 
 #. module: partner_customer_kind
 #: model:ir.model,name:partner_customer_kind.model_res_partner
@@ -33,15 +35,15 @@ msgstr "連絡先"
 #. module: partner_customer_kind
 #: model:ir.model.fields,field_description:partner_customer_kind.field_res_partner__customer_kind
 #: model:ir.model.fields,field_description:partner_customer_kind.field_res_users__customer_kind
+#: model_terms:ir.ui.view,arch_db:partner_customer_kind.res_partner_view_search
 msgid "Customer Kind"
 msgstr "得意先区分"
 
-
 #. module: partner_customer_kind
 #: model:ir.model.fields.selection,name:partner_customer_kind.selection__res_partner__customer_kind__dealer
+#: model_terms:ir.ui.view,arch_db:partner_customer_kind.res_partner_view_search
 msgid "Dealer"
 msgstr "代理店"
-
 
 #. module: partner_customer_kind
 #: model:ir.model.fields,field_description:partner_customer_kind.field_res_partner__display_name
@@ -50,23 +52,23 @@ msgstr "表示名"
 
 #. module: partner_customer_kind
 #: model:ir.model.fields.selection,name:partner_customer_kind.selection__res_partner__customer_kind__hospital
+#: model_terms:ir.ui.view,arch_db:partner_customer_kind.res_partner_view_search
 msgid "Hospital"
 msgstr "病院"
-
 
 #. module: partner_customer_kind
 #: model:ir.model.fields,field_description:partner_customer_kind.field_res_partner__id
 msgid "ID"
 msgstr "ID"
 
-
 #. module: partner_customer_kind
 #: model:ir.model.fields.selection,name:partner_customer_kind.selection__res_partner__customer_kind__individual
+#: model_terms:ir.ui.view,arch_db:partner_customer_kind.res_partner_view_search
 msgid "Individual"
 msgstr "個人"
 
-
 #. module: partner_customer_kind
 #: model:ir.model.fields.selection,name:partner_customer_kind.selection__res_partner__customer_kind__veterinary_hospital
+#: model_terms:ir.ui.view,arch_db:partner_customer_kind.res_partner_view_search
 msgid "Veterinary Hospital"
 msgstr "動物病院"
