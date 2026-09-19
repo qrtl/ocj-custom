@@ -1,0 +1,66 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* partner_confirmation_method
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-19 14:12+0000\n"
+"PO-Revision-Date: 2026-09-19 14:12+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: partner_confirmation_method
+#: model:ir.model.fields,field_description:partner_confirmation_method.field_res_partner__confirmation_method
+#: model:ir.model.fields,field_description:partner_confirmation_method.field_res_users__confirmation_method
+msgid "Confirmation Method"
+msgstr "確認方法"
+
+
+#. module: partner_confirmation_method
+#: model:ir.model,name:partner_confirmation_method.model_res_partner
+msgid "Contact"
+msgstr "連絡先"
+
+#. module: partner_confirmation_method
+#: model:ir.model.fields,field_description:partner_confirmation_method.field_res_partner__display_name
+msgid "Display Name"
+msgstr "表示名"
+
+#. module: partner_confirmation_method
+#: model:ir.model.fields.selection,name:partner_confirmation_method.selection__res_partner__confirmation_method__fax
+msgid "Fax"
+msgstr "FAX"
+
+
+#. module: partner_confirmation_method
+#: model:ir.model.fields,help:partner_confirmation_method.field_res_partner__confirmation_method
+#: model:ir.model.fields,help:partner_confirmation_method.field_res_users__confirmation_method
+msgid ""
+"How the customer is contacted to confirm an order or a delivery: by fax, "
+"over the web or by a member of staff. Delivered to navi in flow as the "
+"confirmation method of the customer master."
+msgstr "注文や納品の確認を得意先とどの方法で行うか（FAX・Web・担当）。ナビフローの得意先マスタの確認方法として連携される。"
+
+
+#. module: partner_confirmation_method
+#: model:ir.model.fields,field_description:partner_confirmation_method.field_res_partner__id
+msgid "ID"
+msgstr "ID"
+
+
+#. module: partner_confirmation_method
+#: model:ir.model.fields.selection,name:partner_confirmation_method.selection__res_partner__confirmation_method__staff
+msgid "Staff"
+msgstr "担当"
+
+
+#. module: partner_confirmation_method
+#: model:ir.model.fields.selection,name:partner_confirmation_method.selection__res_partner__confirmation_method__web
+msgid "Web"
+msgstr "Web"

@@ -1,0 +1,72 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* partner_customer_kind
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-19 14:12+0000\n"
+"PO-Revision-Date: 2026-09-19 14:12+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: partner_customer_kind
+#: model:ir.model.fields,help:partner_customer_kind.field_res_partner__customer_kind
+#: model:ir.model.fields,help:partner_customer_kind.field_res_users__customer_kind
+msgid ""
+"Category of the customer: hospital, dealer, individual or veterinary "
+"hospital. Delivered to navi in flow as the customer kind of the customer "
+"master."
+msgstr "得意先の区分（病院・代理店・個人・動物病院）。ナビフローの得意先マスタの得意先区分として連携される。"
+
+
+#. module: partner_customer_kind
+#: model:ir.model,name:partner_customer_kind.model_res_partner
+msgid "Contact"
+msgstr "連絡先"
+
+#. module: partner_customer_kind
+#: model:ir.model.fields,field_description:partner_customer_kind.field_res_partner__customer_kind
+#: model:ir.model.fields,field_description:partner_customer_kind.field_res_users__customer_kind
+msgid "Customer Kind"
+msgstr "得意先区分"
+
+
+#. module: partner_customer_kind
+#: model:ir.model.fields.selection,name:partner_customer_kind.selection__res_partner__customer_kind__dealer
+msgid "Dealer"
+msgstr "代理店"
+
+
+#. module: partner_customer_kind
+#: model:ir.model.fields,field_description:partner_customer_kind.field_res_partner__display_name
+msgid "Display Name"
+msgstr "表示名"
+
+#. module: partner_customer_kind
+#: model:ir.model.fields.selection,name:partner_customer_kind.selection__res_partner__customer_kind__hospital
+msgid "Hospital"
+msgstr "病院"
+
+
+#. module: partner_customer_kind
+#: model:ir.model.fields,field_description:partner_customer_kind.field_res_partner__id
+msgid "ID"
+msgstr "ID"
+
+
+#. module: partner_customer_kind
+#: model:ir.model.fields.selection,name:partner_customer_kind.selection__res_partner__customer_kind__individual
+msgid "Individual"
+msgstr "個人"
+
+
+#. module: partner_customer_kind
+#: model:ir.model.fields.selection,name:partner_customer_kind.selection__res_partner__customer_kind__veterinary_hospital
+msgid "Veterinary Hospital"
+msgstr "動物病院"
