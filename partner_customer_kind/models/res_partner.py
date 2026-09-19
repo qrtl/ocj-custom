@@ -14,5 +14,6 @@ class ResPartner(models.Model):
             ("veterinary_hospital", "Veterinary Hospital"),
         ],
         help="Category of the customer: hospital, dealer, individual or "
-        "veterinary hospital.",
+        "veterinary hospital. Delivered to navi in flow as the customer "
+        "kind of the customer master.",
     )

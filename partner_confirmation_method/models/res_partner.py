@@ -15,5 +15,6 @@ class ResPartner(models.Model):
         default="fax",
         required=True,
         help="How the customer is contacted to confirm an order or a "
-        "delivery: by fax, over the web or by a member of staff.",
+        "delivery: by fax, over the web or by a member of staff. Delivered "
+        "to navi in flow as the confirmation method of the customer master.",
     )
