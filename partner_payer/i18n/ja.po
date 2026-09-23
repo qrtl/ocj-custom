@@ -1,0 +1,56 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* partner_payer
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: partner_payer
+#: model:ir.model.fields,help:partner_payer.field_res_partner__payer_partner_id
+msgid ""
+"Contact that settles the invoices of this customer, when payment comes from "
+"another entity: the head office of a group paying for its members, for "
+"instance. Leave it empty when the customer pays its own invoices. The "
+"invoices are still issued to, and accounted for, this customer; only the "
+"money arrives from the payer."
+msgstr ""
+"この顧客の請求を実際に支払う連絡先。グループの本部が配下の請求をまとめて支払"
+"う場合などに設定する。顧客自身が支払う場合は空欄にする。請求書の発行先・計上"
+"先はこの顧客のままで、入金だけが支払人から届く。"
+
+#. module: partner_payer
+#: model:ir.model.fields,field_description:partner_payer.field_res_partner__payer_partner_id
+msgid "Payer"
+msgstr "支払人"
+
+#. module: partner_payer
+#: code:addons/partner_payer/models/res_partner.py:0
+msgid "%(name)s cannot be its own payer."
+msgstr "%(name)s を自身の支払人にはできません。"
+
+#. module: partner_payer
+#: code:addons/partner_payer/models/res_partner.py:0
+msgid ""
+"%(name)s is the payer of other customers, so it cannot be paid for by "
+"%(payer)s."
+msgstr ""
+"%(name)s は他の顧客の支払人になっているため、%(payer)s に支払ってもらうことは"
+"できません。"
+
+#. module: partner_payer
+#: code:addons/partner_payer/models/res_partner.py:0
+msgid ""
+"%(payer)s is paid for by %(outer)s, so it cannot be the payer of %(name)s. "
+"Point both customers at the same payer instead."
+msgstr ""
+"%(payer)s は %(outer)s に支払ってもらう設定のため、%(name)s の支払人にはでき"
+"ません。両方の顧客を同じ支払人に向けてください。"
