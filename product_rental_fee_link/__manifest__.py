@@ -2,14 +2,14 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
 {
     "name": "Product Rental Fee Link",
-    "version": "19.0.1.0.0",
+    "version": "19.0.1.1.0",
     "category": "Inventory/Inventory",
     "website": "https://www.quartile.co",
     "author": "Quartile",
     "maintainers": ["yostashiro"],
     "license": "LGPL-3",
-    "summary": "Link an equipment product to the service product used to bill "
-    "its rental",
+    "summary": "Record the set of equipment a rental fee service product "
+    "bills, and look a product up by that combination",
     "installable": True,
     "depends": ["product_classification"],
     "data": [
