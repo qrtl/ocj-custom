@@ -8,8 +8,8 @@
     "author": "Quartile",
     "maintainers": ["yostashiro"],
     "license": "LGPL-3",
-    "summary": "Link a rental fee service product to the equipment or "
-    "accessory it bills",
+    "summary": "Record the set of equipment a rental fee service product "
+    "bills, and look a product up by that combination",
     "installable": True,
     "depends": ["product_classification"],
     "data": [

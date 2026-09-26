@@ -125,6 +125,13 @@ class TestProductRentalFeeSet(TransactionCase):
         )
         self.assertFalse(self.flow_meter.rental_set_fee_tmpl_ids)
 
+    def test_storable_service_can_bill_a_set(self):
+        # "Track Inventory" can be switched on for a service by a user default,
+        # so it must not disqualify a service from billing a set.
+        self.rental_fee.is_storable = True
+        self._set_components(self.rental_fee, self.concentrator)
+        self.assertEqual(self.rental_fee.rental_set_component_ids, self.concentrator)
+
     def test_goods_cannot_bill_a_set(self):
         with self.assertRaises(ValidationError):
             self._set_components(self.concentrator.product_tmpl_id, self.demand_valve)

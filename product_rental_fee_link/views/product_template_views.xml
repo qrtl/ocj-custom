@@ -8,39 +8,18 @@
             ref="product_classification.product_template_view_form"
         />
         <field name="arch" type="xml">
-            <field name="product_kind" position="after">
-                <field
-                    name="rental_fee_product_tmpl_ids"
-                    invisible="product_kind not in ('equipment', 'accessory')"
-                    options="{'no_quick_create': True}"
-                >
-                    <list>
-                        <field name="name" />
-                    </list>
-                </field>
-                <!-- The mirror of the set, read-only: a set is maintained from
-                     the rental fee product, which is where it is one list
-                     rather than one row per member. -->
-                <field
-                    name="rental_set_fee_tmpl_ids"
-                    invisible="product_kind not in ('equipment', 'accessory')"
-                >
-                    <list>
-                        <field name="name" />
-                    </list>
-                </field>
-            </field>
-            <!-- A page of its own: the set is a list of products, which does
-                 not fit the Classification group, and it is the one thing a
-                 rental fee product is configured for. -->
+            <!-- One page for both directions of the same relation: what a
+                 rental fee bills, and which rental fees bill a product. A
+                 page rather than a group, because each side is a list. -->
             <xpath expr="//page[@name='general_information']" position="after">
                 <page
                     name="rental_set"
                     string="Rental Set"
-                    invisible="type != 'service'"
+                    invisible="type != 'service' and product_kind not in ('equipment', 'accessory')"
                 >
                     <field
                         name="rental_set_component_ids"
+                        invisible="type != 'service'"
                         options="{'no_quick_create': True}"
                     >
                         <list>
@@ -50,8 +29,21 @@
                             <field name="equipment_classification_id" />
                         </list>
                     </field>
+                    <!-- Read-only: a set is maintained from the rental fee
+                         product, which is where it is one list rather than one
+                         row per member. -->
+                    <field name="rental_set_fee_tmpl_ids" invisible="type == 'service'">
+                        <list>
+                            <field name="default_code" />
+                            <field name="name" />
+                        </list>
+                    </field>
                     <group>
-                        <field name="rental_set_key" groups="base.group_no_one" />
+                        <field
+                            name="rental_set_key"
+                            groups="base.group_no_one"
+                            invisible="type != 'service'"
+                        />
                     </group>
                 </page>
             </xpath>
@@ -64,19 +56,20 @@
         <field name="inherit_id" ref="product.product_template_search_view" />
         <field name="arch" type="xml">
             <field name="product_tag_ids" position="after">
-                <field name="rental_fee_product_tmpl_ids" />
-                <field name="equipment_tmpl_ids" />
                 <field name="rental_set_component_ids" />
                 <separator />
-                <filter
-                    string="Rental Fee Product Missing"
-                    name="rental_fee_product_missing"
-                    domain="[('rental_fee_product_tmpl_ids', '=', False), ('product_kind', 'in', ('equipment', 'accessory'))]"
-                />
                 <filter
                     string="Rental Set"
                     name="rental_set"
                     domain="[('rental_set_key', '!=', False)]"
+                />
+                <!-- Equipment no rental fee bills. Read through the variants:
+                     the relation is held there, and the template-side mirror
+                     is computed, so it cannot be searched. -->
+                <filter
+                    string="Rental Fee Product Missing"
+                    name="rental_fee_product_missing"
+                    domain="[('product_variant_ids.rental_set_fee_tmpl_ids', '=', False), ('product_kind', 'in', ('equipment', 'accessory'))]"
                 />
             </field>
         </field>

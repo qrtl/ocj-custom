@@ -372,36 +372,39 @@ ul.auto-toc {
 !! source digest: sha256:cd91e3917d3563e4af97a4bde7bef1cb579cce2450d30aa5d06150cd08052441
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 <p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/lgpl-3.0-standalone.html"><img alt="License: LGPL-3" src="https://img.shields.io/badge/license-LGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/qrtl/OCJCustom/tree/19.0/product_rental_fee_link"><img alt="qrtl/OCJ Custom" src="https://img.shields.io/badge/github-qrtl%2FOCJCustom-lightgray.png?logo=github" /></a></p>
-<p>This module lets you link rental fee service products to the equipment
-or accessory products whose rental they bill. It builds on
+<p>This module lets you record the products a rental fee service product
+bills, as the exact set it bills them in. It builds on
 <tt class="docutils literal">product_classification</tt>, which is what tells equipment and
 accessories apart from the other goods.</p>
-<p>When rental fees are managed as products separate from the equipment
-itself, nothing in the standard data model ties the two together. This
-module adds a many2many link between them: <strong>Billed Equipment</strong> on the
-rental fee product, and its mirror <strong>Rental Fee Products</strong> on the
-equipment or accessory. Either side can add existing records or create
-new ones.</p>
+<p>Rental fees are managed as service products, separate from the equipment
+itself, and nothing in the standard data model ties the two together. A
+fee is often charged for a combination rather than a single machine - a
+concentrator together with a demand valve and a flow meter, say - and
+the combination is what decides which product prices it.</p>
+<p><strong>Set Components</strong> on the rental fee product holds that combination, and
+<strong>Rental Fee Sets</strong> on the equipment or accessory shows it from the
+other side: which fees bill this product. A fee for a single machine is
+a set of one, so both directions are answered by the same relation.</p>
+<p><tt class="docutils literal">_find_by_rental_set()</tt> returns the rental fee products whose set is
+<em>exactly</em> the combination asked for, which is what turns a selection of
+equipment into the product that bills it. The match is exact on purpose:
+whether a partly installed set is billed as the set or as its members
+individually is a billing decision, and nothing on the product records
+it - so the caller asks about each combination it wants priced.</p>
+<p>Two details worth knowing:</p>
+<ul class="simple">
+<li><strong>Components are variants</strong> (<tt class="docutils literal">product.product</tt>), not templates.
+That is the record a serial, a stock line and the equipment-model
+interface all carry, so a combination coming from outside can be
+compared with what is stored, with no template hop in between.</li>
+<li><strong>Consumables are not part of a set.</strong> They are billed on their own.</li>
+</ul>
 <p>Why a dedicated field rather than <em>Optional Products</em>:
 <tt class="docutils literal">optional_product_ids</tt> is a many2many meant for cross-sell suggestions
 in the quotation product configurator. It cannot express a restricted,
 type-checked relationship, and its meaning collides with genuine
 cross-sell entries. A dedicated field can be validated, searched, and
 used as the source for integrations.</p>
-<p>A rental fee product can also carry the <strong>set</strong> of equipment and
-accessories it bills as one item - a concentrator together with a demand
-valve and a flow meter, say - in <strong>Set Components</strong> on its own tab. That
-list is the product’s identity for a lookup: <tt class="docutils literal">_find_by_rental_set()</tt>
-answers with the rental fee products whose set is <em>exactly</em> the
-combination asked for, so a combination names one product and an
-integration can turn a selection of equipment into the product that
-bills it.</p>
-<p>The match is exact on purpose. Whether a partly installed set is billed
-as the set or as its members individually is a billing decision, and
-nothing on the product records it - a caller that wants both answers
-asks about both combinations. Components are equipment and accessories
-only, and they are variants (<tt class="docutils literal">product.product</tt>), which is the record a
-serial, a stock line and the equipment-model interface all carry.</p>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
@@ -416,40 +419,25 @@ serial, a stock line and the equipment-model interface all carry.</p>
 </div>
 <div class="section" id="usage">
 <h2><a class="toc-backref" href="#toc-entry-1">Usage</a></h2>
-<p>On an equipment or accessory product, use the <strong>Rental Fee Products</strong>
-list in the <strong>Classification</strong> section, directly under <strong>Product Kind</strong>,
-to link the service products used to bill its rental. Because the link
-is a many2many, “Add a line” can search for an already existing rental
-fee product or create a new one - there is no separate field to set on
-the rental fee product’s own form.</p>
-<p>An equipment or accessory may have several rental fee products - for
-example a base fee and a separate fee for a specific accessory bundle -
-each its own service product rather than a single one carrying every
-price as a variant. A rental fee product may in turn bill several
-equipment or accessory products, when the same fee genuinely applies to
-more than one.</p>
-<p>To find equipment that still needs a rental fee product, use the
-<strong>Rental Fee Product Missing</strong> filter in the product search view. It
-lists equipment and accessories only, so consumables do not drown out
-the products that are actually missing a fee product. The same search
-view also lets you filter by <strong>Billed Equipment</strong> to look up a rental
-fee product’s equipment from the other direction.</p>
-<p>If a rental fee product carries variants (for example a <em>price category</em>
-attribute for first unit / second unit / in-hospital use), the variants
-of that product are the set of billable items for the equipment it bills
-- which is what an integration reads to publish the corresponding
-product codes.</p>
 <p>On a rental fee product - any service - the <strong>Rental Set</strong> tab holds
 <strong>Set Components</strong>: the equipment and accessories that this one product
-bills together. Add the variants that make up the set; consumables are
-billed on their own and cannot be part of it. Two rental fee products
-cannot carry the same combination, so the set is refused with the name
-of the product that already bills it.</p>
-<p>The equipment side is read-only: <strong>Rental Fee Sets</strong>, under <strong>Product
-Kind</strong>, lists the sets a piece of equipment or an accessory belongs to.
-Use the <strong>Rental Set</strong> filter in the product search view to list the
-rental fee products that have a set, and search by <strong>Set Components</strong> to
-find the sets a given piece of equipment appears in.</p>
+bills together. “Add a line” searches the existing equipment and
+accessories; consumables are billed on their own and are not offered.</p>
+<p>Register a fee for a single machine as a set of one. That is what makes
+the product findable both ways: from the machine, and from a lookup that
+asks about that machine alone.</p>
+<p>Two rental fee products cannot carry the same combination. Entering one
+that is already billed is refused, naming the product that bills it - a
+combination identifies one rental fee product, which is what lets a
+lookup answer with a single product.</p>
+<p>On an equipment or accessory, the same tab shows <strong>Rental Fee Sets</strong>
+read-only: the rental fee products whose set contains it. A set is
+maintained from the fee product, which is where it is one list rather
+than one row per member.</p>
+<p>In the product search view, the <strong>Rental Set</strong> filter lists the rental
+fee products that have a set, <strong>Rental Fee Product Missing</strong> lists the
+equipment and accessories no set contains yet, and <strong>Set Components</strong>
+searches the sets a given machine appears in.</p>
 </div>
 <div class="section" id="bug-tracker">
 <h2><a class="toc-backref" href="#toc-entry-2">Bug Tracker</a></h2>

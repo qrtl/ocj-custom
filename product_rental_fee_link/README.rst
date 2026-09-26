@@ -26,17 +26,36 @@ Product Rental Fee Link
 
 |badge1| |badge2| |badge3|
 
-This module lets you link rental fee service products to the equipment
-or accessory products whose rental they bill. It builds on
+This module lets you record the products a rental fee service product
+bills, as the exact set it bills them in. It builds on
 ``product_classification``, which is what tells equipment and
 accessories apart from the other goods.
 
-When rental fees are managed as products separate from the equipment
-itself, nothing in the standard data model ties the two together. This
-module adds a many2many link between them: **Billed Equipment** on the
-rental fee product, and its mirror **Rental Fee Products** on the
-equipment or accessory. Either side can add existing records or create
-new ones.
+Rental fees are managed as service products, separate from the equipment
+itself, and nothing in the standard data model ties the two together. A
+fee is often charged for a combination rather than a single machine - a
+concentrator together with a demand valve and a flow meter, say - and
+the combination is what decides which product prices it.
+
+**Set Components** on the rental fee product holds that combination, and
+**Rental Fee Sets** on the equipment or accessory shows it from the
+other side: which fees bill this product. A fee for a single machine is
+a set of one, so both directions are answered by the same relation.
+
+``_find_by_rental_set()`` returns the rental fee products whose set is
+*exactly* the combination asked for, which is what turns a selection of
+equipment into the product that bills it. The match is exact on purpose:
+whether a partly installed set is billed as the set or as its members
+individually is a billing decision, and nothing on the product records
+it - so the caller asks about each combination it wants priced.
+
+Two details worth knowing:
+
+-  **Components are variants** (``product.product``), not templates.
+   That is the record a serial, a stock line and the equipment-model
+   interface all carry, so a combination coming from outside can be
+   compared with what is stored, with no template hop in between.
+-  **Consumables are not part of a set.** They are billed on their own.
 
 Why a dedicated field rather than *Optional Products*:
 ``optional_product_ids`` is a many2many meant for cross-sell suggestions
@@ -44,22 +63,6 @@ in the quotation product configurator. It cannot express a restricted,
 type-checked relationship, and its meaning collides with genuine
 cross-sell entries. A dedicated field can be validated, searched, and
 used as the source for integrations.
-
-A rental fee product can also carry the **set** of equipment and
-accessories it bills as one item - a concentrator together with a demand
-valve and a flow meter, say - in **Set Components** on its own tab. That
-list is the product's identity for a lookup: ``_find_by_rental_set()``
-answers with the rental fee products whose set is *exactly* the
-combination asked for, so a combination names one product and an
-integration can turn a selection of equipment into the product that
-bills it.
-
-The match is exact on purpose. Whether a partly installed set is billed
-as the set or as its members individually is a billing decision, and
-nothing on the product records it - a caller that wants both answers
-asks about both combinations. Components are equipment and accessories
-only, and they are variants (``product.product``), which is the record a
-serial, a stock line and the equipment-model interface all carry.
 
 **Table of contents**
 
@@ -69,45 +72,29 @@ serial, a stock line and the equipment-model interface all carry.
 Usage
 =====
 
-On an equipment or accessory product, use the **Rental Fee Products**
-list in the **Classification** section, directly under **Product Kind**,
-to link the service products used to bill its rental. Because the link
-is a many2many, "Add a line" can search for an already existing rental
-fee product or create a new one - there is no separate field to set on
-the rental fee product's own form.
-
-An equipment or accessory may have several rental fee products - for
-example a base fee and a separate fee for a specific accessory bundle -
-each its own service product rather than a single one carrying every
-price as a variant. A rental fee product may in turn bill several
-equipment or accessory products, when the same fee genuinely applies to
-more than one.
-
-To find equipment that still needs a rental fee product, use the
-**Rental Fee Product Missing** filter in the product search view. It
-lists equipment and accessories only, so consumables do not drown out
-the products that are actually missing a fee product. The same search
-view also lets you filter by **Billed Equipment** to look up a rental
-fee product's equipment from the other direction.
-
-If a rental fee product carries variants (for example a *price category*
-attribute for first unit / second unit / in-hospital use), the variants
-of that product are the set of billable items for the equipment it bills
-- which is what an integration reads to publish the corresponding
-product codes.
-
 On a rental fee product - any service - the **Rental Set** tab holds
 **Set Components**: the equipment and accessories that this one product
-bills together. Add the variants that make up the set; consumables are
-billed on their own and cannot be part of it. Two rental fee products
-cannot carry the same combination, so the set is refused with the name
-of the product that already bills it.
+bills together. "Add a line" searches the existing equipment and
+accessories; consumables are billed on their own and are not offered.
 
-The equipment side is read-only: **Rental Fee Sets**, under **Product
-Kind**, lists the sets a piece of equipment or an accessory belongs to.
-Use the **Rental Set** filter in the product search view to list the
-rental fee products that have a set, and search by **Set Components** to
-find the sets a given piece of equipment appears in.
+Register a fee for a single machine as a set of one. That is what makes
+the product findable both ways: from the machine, and from a lookup that
+asks about that machine alone.
+
+Two rental fee products cannot carry the same combination. Entering one
+that is already billed is refused, naming the product that bills it - a
+combination identifies one rental fee product, which is what lets a
+lookup answer with a single product.
+
+On an equipment or accessory, the same tab shows **Rental Fee Sets**
+read-only: the rental fee products whose set contains it. A set is
+maintained from the fee product, which is where it is one list rather
+than one row per member.
+
+In the product search view, the **Rental Set** filter lists the rental
+fee products that have a set, **Rental Fee Product Missing** lists the
+equipment and accessories no set contains yet, and **Set Components**
+searches the sets a given machine appears in.
 
 Bug Tracker
 ===========
