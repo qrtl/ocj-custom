@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="stock_delivery_time_slot_view_list" model="ir.ui.view">
+        <field name="name">stock.delivery.time.slot.list</field>
+        <field name="model">stock.delivery.time.slot</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="sequence" widget="handle" />
+                <field name="code" />
+                <field name="name" />
+                <field name="active" column_invisible="True" />
+            </list>
+        </field>
+    </record>
+
+    <record id="stock_delivery_time_slot_view_search" model="ir.ui.view">
+        <field name="name">stock.delivery.time.slot.search</field>
+        <field name="model">stock.delivery.time.slot</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="code" />
+                <separator />
+                <filter
+                    name="archived"
+                    string="Archived"
+                    domain="[('active', '=', False)]"
+                />
+            </search>
+        </field>
+    </record>
+
+    <record id="stock_delivery_time_slot_action" model="ir.actions.act_window">
+        <field name="name">Delivery Time Slots</field>
+        <field name="res_model">stock.delivery.time.slot</field>
+        <field name="view_mode">list</field>
+    </record>
+
+    <menuitem
+        id="stock_delivery_time_slot_menu"
+        action="stock_delivery_time_slot_action"
+        parent="stock.menu_stock_config_settings"
+        sequence="110"
+        groups="stock.group_stock_manager"
+    />
+</odoo>
