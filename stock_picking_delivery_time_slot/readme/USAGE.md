@@ -1,8 +1,8 @@
 To maintain the time slots:
 
 1. Go to *Inventory > Configuration > Delivery Time Slots*.
-2. Edit, reorder or archive the slots as needed. The shipped slots are not reset
-   when the module is upgraded.
+2. The module does not ship any slots. Create the slots you need (or install a data
+   module that provides them), then edit, reorder or archive them as needed.
 
 To record the requested time slot on a delivery:
 

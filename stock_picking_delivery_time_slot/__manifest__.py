@@ -13,7 +13,6 @@
     "depends": ["stock"],
     "data": [
         "security/ir.model.access.csv",
-        "data/stock_delivery_time_slot_data.xml",
         "views/stock_delivery_time_slot_views.xml",
         "views/stock_picking_views.xml",
     ],
