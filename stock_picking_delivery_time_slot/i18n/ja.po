@@ -1,0 +1,112 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_picking_delivery_time_slot
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-26 14:14+0000\n"
+"PO-Revision-Date: 2026-09-26 14:14+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_picking_delivery_time_slot
+#: model:ir.model.fields,field_description:stock_picking_delivery_time_slot.field_stock_delivery_time_slot__active
+msgid "Active"
+msgstr "有効"
+
+#. module: stock_picking_delivery_time_slot
+#: model_terms:ir.ui.view,arch_db:stock_picking_delivery_time_slot.stock_delivery_time_slot_view_search
+msgid "Archived"
+msgstr "アーカイブ済"
+
+#. module: stock_picking_delivery_time_slot
+#: model:ir.model.fields,field_description:stock_picking_delivery_time_slot.field_stock_delivery_time_slot__code
+msgid "Code"
+msgstr "コード"
+
+#. module: stock_picking_delivery_time_slot
+#: model:ir.model.fields,field_description:stock_picking_delivery_time_slot.field_stock_delivery_time_slot__create_uid
+msgid "Created by"
+msgstr "作成者"
+
+#. module: stock_picking_delivery_time_slot
+#: model:ir.model.fields,field_description:stock_picking_delivery_time_slot.field_stock_delivery_time_slot__create_date
+msgid "Created on"
+msgstr "作成日"
+
+#. module: stock_picking_delivery_time_slot
+#: model:ir.model,name:stock_picking_delivery_time_slot.model_stock_delivery_time_slot
+#: model:ir.model.fields,field_description:stock_picking_delivery_time_slot.field_stock_picking__delivery_time_slot_id
+msgid "Delivery Time Slot"
+msgstr "配送希望時間帯"
+
+#. module: stock_picking_delivery_time_slot
+#: model:ir.actions.act_window,name:stock_picking_delivery_time_slot.stock_delivery_time_slot_action
+#: model:ir.ui.menu,name:stock_picking_delivery_time_slot.stock_delivery_time_slot_menu
+msgid "Delivery Time Slots"
+msgstr "配送希望時間帯"
+
+#. module: stock_picking_delivery_time_slot
+#: model:ir.model.fields,field_description:stock_picking_delivery_time_slot.field_stock_delivery_time_slot__display_name
+#: model:ir.model.fields,field_description:stock_picking_delivery_time_slot.field_stock_picking__display_name
+msgid "Display Name"
+msgstr "表示名"
+
+#. module: stock_picking_delivery_time_slot
+#: model:ir.model.fields,field_description:stock_picking_delivery_time_slot.field_stock_delivery_time_slot__id
+#: model:ir.model.fields,field_description:stock_picking_delivery_time_slot.field_stock_picking__id
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_picking_delivery_time_slot
+#: model:ir.model.fields,help:stock_picking_delivery_time_slot.field_stock_delivery_time_slot__code
+msgid ""
+"Key exchanged with external systems. Matches the carrier's time slot code "
+"where the carrier defines one."
+msgstr "外部システムと連携するキー。配送業者が時間帯コードを定めている場合は、そのコードと一致させる。"
+
+#. module: stock_picking_delivery_time_slot
+#: model:ir.model.fields,help:stock_picking_delivery_time_slot.field_stock_delivery_time_slot__name
+msgid "Label passed to the warehouse as is, and printed on the waybill."
+msgstr "倉庫へそのまま連携され、送り状に印字される名称。"
+
+#. module: stock_picking_delivery_time_slot
+#: model:ir.model.fields,field_description:stock_picking_delivery_time_slot.field_stock_delivery_time_slot__write_uid
+msgid "Last Updated by"
+msgstr "最終更新者"
+
+#. module: stock_picking_delivery_time_slot
+#: model:ir.model.fields,field_description:stock_picking_delivery_time_slot.field_stock_delivery_time_slot__write_date
+msgid "Last Updated on"
+msgstr "最終更新日"
+
+#. module: stock_picking_delivery_time_slot
+#: model:ir.model.fields,field_description:stock_picking_delivery_time_slot.field_stock_delivery_time_slot__name
+msgid "Name"
+msgstr "名称"
+
+#. module: stock_picking_delivery_time_slot
+#: model:ir.model.fields,field_description:stock_picking_delivery_time_slot.field_stock_delivery_time_slot__sequence
+msgid "Sequence"
+msgstr "シーケンス"
+
+#. module: stock_picking_delivery_time_slot
+#: model:ir.model.constraint,message:stock_picking_delivery_time_slot.constraint_stock_delivery_time_slot_code_uniq
+msgid "The code must be unique."
+msgstr "コードは一意である必要があります。"
+
+#. module: stock_picking_delivery_time_slot
+#: model:ir.model.fields,help:stock_picking_delivery_time_slot.field_stock_picking__delivery_time_slot_id
+msgid "Time slot the recipient requested for the delivery."
+msgstr "受取人が希望した配送の時間帯。"
+
+#. module: stock_picking_delivery_time_slot
+#: model:ir.model,name:stock_picking_delivery_time_slot.model_stock_picking
+msgid "Transfer"
+msgstr "転送"
