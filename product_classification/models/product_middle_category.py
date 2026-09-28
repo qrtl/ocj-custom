@@ -15,6 +15,12 @@ class ProductMiddleCategory(models.Model):
     )
     sequence = fields.Integer(default=10)
     active = fields.Boolean(default=True)
+    categ_id = fields.Many2one(
+        comodel_name="product.category",
+        string="Product Category",
+        ondelete="restrict",
+        help="Product category (major category) this middle category belongs to.",
+    )
 
     _code_uniq = models.Constraint(
         "unique(code)",

@@ -114,3 +114,14 @@ class TestProductClassification(TransactionCase):
             self.env["product.manufacturer"].create(
                 {"name": "Duplicate", "code": "300"}
             )
+
+    def test_minor_category_belongs_to_middle_category(self):
+        categ = self.env["product.category"].create({"name": "Consumables"})
+        middle = self.env["product.middle.category"].create(
+            {"name": "Filters", "categ_id": categ.id}
+        )
+        minor = self.env["product.minor.category"].create(
+            {"name": "Standard Filter", "middle_category_id": middle.id}
+        )
+        self.assertEqual(minor.middle_category_id, middle)
+        self.assertEqual(minor.middle_category_id.categ_id, categ)
