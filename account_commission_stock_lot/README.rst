@@ -60,13 +60,13 @@ Authors
 Maintainers
 -----------
 
-.. |maintainer-yostashiro| image:: https://github.com/yostashiro.png?size=40px
-    :target: https://github.com/yostashiro
-    :alt: yostashiro
+.. |maintainer-kanda999| image:: https://github.com/kanda999.png?size=40px
+    :target: https://github.com/kanda999
+    :alt: kanda999
 
 Current maintainer:
 
-|maintainer-yostashiro| 
+|maintainer-kanda999| 
 
 This module is part of the `qrtl/OCJ Custom <https://github.com/qrtl/OCJ Custom/tree/19.0/account_commission_stock_lot>`_ project on GitHub.
 

@@ -6,7 +6,7 @@
     "category": "Sales Management",
     "website": "https://www.quartile.co",
     "author": "Quartile",
-    "maintainers": ["yostashiro"],
+    "maintainers": ["kanda999"],
     "license": "AGPL-3",
     "summary": "Commission line menu with product and lot/serial number",
     "installable": True,
