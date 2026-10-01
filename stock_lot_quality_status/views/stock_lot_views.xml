@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_production_lot_form" model="ir.ui.view">
+        <field name="name">stock.lot.form.quality.status</field>
+        <field name="model">stock.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='ref']" position="after">
+                <field name="quality_status_id" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_production_lot_tree" model="ir.ui.view">
+        <field name="name">stock.lot.list.quality.status</field>
+        <field name="model">stock.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_id']" position="after">
+                <field name="quality_status_id" optional="show" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="search_product_lot_filter" model="ir.ui.view">
+        <field name="name">stock.lot.search.quality.status</field>
+        <field name="model">stock.lot</field>
+        <field name="inherit_id" ref="stock.search_product_lot_filter" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_id']" position="after">
+                <field name="quality_status_id" />
+            </xpath>
+            <xpath expr="//filter[@name='group_by_product']" position="before">
+                <filter
+                    name="group_by_quality_status"
+                    string="Quality Status"
+                    domain="[]"
+                    context="{'group_by': 'quality_status_id'}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
