@@ -1,21 +1,23 @@
-On an equipment product, set **Rental Fee Product** in the **Classification**
-section, directly under **Product Kind**. Only service products can be
-selected, and a product cannot point at itself.
+On a rental fee product - any service - the **Rental Set** tab holds **Set
+Components**: the equipment and accessories that this one product bills
+together. "Add a line" searches the existing equipment and accessories;
+consumables are billed on their own and are not offered.
 
-The field is shown only when the product kind is equipment or accessory. That
-is the only distinction available: equipment, accessories and consumables are
-all goods, so the product type cannot tell them apart, and a rental fee product
-is not itself rented.
+Register a fee for a single machine as a set of one. That is what makes the
+product findable both ways: from the machine, and from a lookup that asks
+about that machine alone.
 
-To find equipment that still needs the link, use the **Rental Fee Product
-Missing** filter in the product search view. It lists equipment and accessories
-only, so consumables do not drown out the products that are actually missing a
-fee product.
+Two rental fee products cannot carry the same combination. Entering one that
+is already billed is refused, naming the product that bills it - a
+combination identifies one rental fee product, which is what lets a lookup
+answer with a single product.
 
-Several equipment products may share the same rental fee product; this is not
-restricted, because the same fee often applies to more than one model.
+On an equipment or accessory, the same tab shows **Rental Fee Sets**
+read-only: the rental fee products whose set contains it. A set is
+maintained from the fee product, which is where it is one list rather than
+one row per member.
 
-If the rental fee product carries variants (for example a *price category*
-attribute for first unit / second unit / in-hospital use), the variants of the
-linked product are the set of billable items for that equipment - which is what
-an integration reads to publish the corresponding product codes.
+In the product search view, the **Rental Set** filter lists the rental fee
+products that have a set, **Rental Fee Product Missing** lists the equipment
+and accessories no set contains yet, and **Set Components** searches the sets
+a given machine appears in.
