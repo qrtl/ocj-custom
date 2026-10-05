@@ -7,10 +7,9 @@ Register a fee for a single machine as a set of one. That is what makes the
 product findable both ways: from the machine, and from a lookup that asks
 about that machine alone.
 
-Two rental fee products cannot carry the same combination. Entering one that
-is already billed is refused, naming the product that bills it - a
-combination identifies one rental fee product, which is what lets a lookup
-answer with a single product.
+Components are products, not variants, so an import can name them by the
+product's external ID (``rental_set_component_ids/id``) or internal reference.
+The same combination may be entered on several rental fee products.
 
 On an equipment or accessory, the same tab shows **Rental Fee Sets**
 read-only: the rental fee products whose set contains it. A set is

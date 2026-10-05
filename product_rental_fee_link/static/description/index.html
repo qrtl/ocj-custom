@@ -8,10 +8,11 @@
 
 /*
 :Author: David Goodger (goodger@python.org)
-:Id: $Id: html4css1.css 8954 2022-01-20 10:10:25Z milde $
+:Id: $Id: html4css1.css 9511 2024-01-13 09:50:07Z milde $
 :Copyright: This stylesheet has been placed in the public domain.
 
 Default cascading style sheet for the HTML output of Docutils.
+Despite the name, some widely supported CSS2 features are used.
 
 See https://docutils.sourceforge.io/docs/howto/html-stylesheets.html for how to
 customize this style sheet.
@@ -274,7 +275,7 @@ pre.literal-block, pre.doctest-block, pre.math, pre.code {
   margin-left: 2em ;
   margin-right: 2em }
 
-pre.code .ln { color: grey; } /* line numbers */
+pre.code .ln { color: gray; } /* line numbers */
 pre.code, code { background-color: #eeeeee }
 pre.code .comment, code .comment { color: #5C6576 }
 pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
@@ -300,7 +301,7 @@ span.option {
 span.pre {
   white-space: pre }
 
-span.problematic {
+span.problematic, pre.problematic {
   color: red }
 
 span.section-subtitle {
@@ -362,7 +363,9 @@ ul.auto-toc {
 <div class="document">
 
 
-<a class="reference external image-reference" href="https://odoo-community.org/get-involved?utm_source=readme"><img alt="Odoo Community Association" src="https://odoo-community.org/readme-banner-image" /></a>
+<a class="reference external image-reference" href="https://odoo-community.org/get-involved?utm_source=readme">
+<img alt="Odoo Community Association" src="https://odoo-community.org/readme-banner-image" />
+</a>
 <div class="section" id="product-rental-fee-link">
 <h1>Product Rental Fee Link</h1>
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -386,19 +389,14 @@ the combination is what decides which product prices it.</p>
 other side: which fees bill this product. A fee for a single machine is
 a set of one, so both directions are answered by the same relation.</p>
 <p><tt class="docutils literal">_find_by_rental_set()</tt> returns the rental fee products whose set is
-<em>exactly</em> the combination asked for, which is what turns a selection of
-equipment into the product that bills it. The match is exact on purpose:
-whether a partly installed set is billed as the set or as its members
-individually is a billing decision, and nothing on the product records
-it - so the caller asks about each combination it wants priced.</p>
-<p>Two details worth knowing:</p>
-<ul class="simple">
-<li><strong>Components are variants</strong> (<tt class="docutils literal">product.product</tt>), not templates.
-That is the record a serial, a stock line and the equipment-model
-interface all carry, so a combination coming from outside can be
-compared with what is stored, with no template hop in between.</li>
-<li><strong>Consumables are not part of a set.</strong> They are billed on their own.</li>
-</ul>
+<em>exactly</em> the combination of products asked for, which is what turns a
+selection of equipment into the products that bill it. Several rental
+fee products may bill the same combination, and all of them are
+returned. The match is exact on purpose: whether a partly installed set
+is billed as the set or as its members individually is a billing
+decision, and nothing on the product records it - so the caller asks
+about each combination it wants priced.</p>
+<p>Consumables are not part of a set: they are billed on their own.</p>
 <p>Why a dedicated field rather than <em>Optional Products</em>:
 <tt class="docutils literal">optional_product_ids</tt> is a many2many meant for cross-sell suggestions
 in the quotation product configurator. It cannot express a restricted,
@@ -426,10 +424,10 @@ accessories; consumables are billed on their own and are not offered.</p>
 <p>Register a fee for a single machine as a set of one. That is what makes
 the product findable both ways: from the machine, and from a lookup that
 asks about that machine alone.</p>
-<p>Two rental fee products cannot carry the same combination. Entering one
-that is already billed is refused, naming the product that bills it - a
-combination identifies one rental fee product, which is what lets a
-lookup answer with a single product.</p>
+<p>Components are products, not variants, so an import can name them by the
+product’s external ID (<tt class="docutils literal">rental_set_component_ids/id</tt>) or internal
+reference. The same combination may be entered on several rental fee
+products.</p>
 <p>On an equipment or accessory, the same tab shows <strong>Rental Fee Sets</strong>
 read-only: the rental fee products whose set contains it. A set is
 maintained from the fee product, which is where it is one list rather

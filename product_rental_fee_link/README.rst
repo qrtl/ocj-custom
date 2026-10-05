@@ -43,19 +43,15 @@ other side: which fees bill this product. A fee for a single machine is
 a set of one, so both directions are answered by the same relation.
 
 ``_find_by_rental_set()`` returns the rental fee products whose set is
-*exactly* the combination asked for, which is what turns a selection of
-equipment into the product that bills it. The match is exact on purpose:
-whether a partly installed set is billed as the set or as its members
-individually is a billing decision, and nothing on the product records
-it - so the caller asks about each combination it wants priced.
+*exactly* the combination of products asked for, which is what turns a
+selection of equipment into the products that bill it. Several rental
+fee products may bill the same combination, and all of them are
+returned. The match is exact on purpose: whether a partly installed set
+is billed as the set or as its members individually is a billing
+decision, and nothing on the product records it - so the caller asks
+about each combination it wants priced.
 
-Two details worth knowing:
-
--  **Components are variants** (``product.product``), not templates.
-   That is the record a serial, a stock line and the equipment-model
-   interface all carry, so a combination coming from outside can be
-   compared with what is stored, with no template hop in between.
--  **Consumables are not part of a set.** They are billed on their own.
+Consumables are not part of a set: they are billed on their own.
 
 Why a dedicated field rather than *Optional Products*:
 ``optional_product_ids`` is a many2many meant for cross-sell suggestions
@@ -81,10 +77,10 @@ Register a fee for a single machine as a set of one. That is what makes
 the product findable both ways: from the machine, and from a lookup that
 asks about that machine alone.
 
-Two rental fee products cannot carry the same combination. Entering one
-that is already billed is refused, naming the product that bills it - a
-combination identifies one rental fee product, which is what lets a
-lookup answer with a single product.
+Components are products, not variants, so an import can name them by the
+product's external ID (``rental_set_component_ids/id``) or internal
+reference. The same combination may be entered on several rental fee
+products.
 
 On an equipment or accessory, the same tab shows **Rental Fee Sets**
 read-only: the rental fee products whose set contains it. A set is

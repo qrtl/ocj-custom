@@ -14,19 +14,15 @@ side: which fees bill this product. A fee for a single machine is a set of
 one, so both directions are answered by the same relation.
 
 ``_find_by_rental_set()`` returns the rental fee products whose set is
-*exactly* the combination asked for, which is what turns a selection of
-equipment into the product that bills it. The match is exact on purpose:
+*exactly* the combination of products asked for, which is what turns a
+selection of equipment into the products that bill it. Several rental fee
+products may bill the same combination, and all of them are returned. The
+match is exact on purpose:
 whether a partly installed set is billed as the set or as its members
 individually is a billing decision, and nothing on the product records it -
 so the caller asks about each combination it wants priced.
 
-Two details worth knowing:
-
-- **Components are variants** (``product.product``), not templates. That is
-  the record a serial, a stock line and the equipment-model interface all
-  carry, so a combination coming from outside can be compared with what is
-  stored, with no template hop in between.
-- **Consumables are not part of a set.** They are billed on their own.
+Consumables are not part of a set: they are billed on their own.
 
 Why a dedicated field rather than *Optional Products*: ``optional_product_ids``
 is a many2many meant for cross-sell suggestions in the quotation product

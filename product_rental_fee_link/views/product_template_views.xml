@@ -24,7 +24,7 @@
                     >
                         <list>
                             <field name="default_code" />
-                            <field name="display_name" />
+                            <field name="name" />
                             <field name="product_kind" />
                             <field name="equipment_classification_id" />
                         </list>
@@ -32,7 +32,11 @@
                     <!-- Read-only: a set is maintained from the rental fee
                          product, which is where it is one list rather than one
                          row per member. -->
-                    <field name="rental_set_fee_tmpl_ids" invisible="type == 'service'">
+                    <field
+                        name="rental_set_fee_tmpl_ids"
+                        invisible="type == 'service'"
+                        readonly="1"
+                    >
                         <list>
                             <field name="default_code" />
                             <field name="name" />
@@ -63,13 +67,11 @@
                     name="rental_set"
                     domain="[('rental_set_key', '!=', False)]"
                 />
-                <!-- Equipment no rental fee bills. Read through the variants:
-                     the relation is held there, and the template-side mirror
-                     is computed, so it cannot be searched. -->
+                <!-- Equipment no rental fee bills. -->
                 <filter
                     string="Rental Fee Product Missing"
                     name="rental_fee_product_missing"
-                    domain="[('product_variant_ids.rental_set_fee_tmpl_ids', '=', False), ('product_kind', 'in', ('equipment', 'accessory'))]"
+                    domain="[('rental_set_fee_tmpl_ids', '=', False), ('product_kind', 'in', ('equipment', 'accessory'))]"
                 />
             </field>
         </field>

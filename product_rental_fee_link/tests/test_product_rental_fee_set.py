@@ -31,7 +31,7 @@ class TestProductRentalFeeSet(TransactionCase):
                 "product_kind": kind,
                 "equipment_classification_id": cls.classification.id,
             }
-        ).product_variant_id
+        )
 
     def _set_components(self, template, components):
         template.rental_set_component_ids = [Command.set(components.ids)]
@@ -120,10 +120,15 @@ class TestProductRentalFeeSet(TransactionCase):
     def test_sets_are_visible_from_the_component(self):
         self._set_components(self.rental_fee, self.concentrator | self.demand_valve)
         self.assertEqual(self.concentrator.rental_set_fee_tmpl_ids, self.rental_fee)
-        self.assertEqual(
-            self.concentrator.product_tmpl_id.rental_set_fee_tmpl_ids, self.rental_fee
-        )
         self.assertFalse(self.flow_meter.rental_set_fee_tmpl_ids)
+        missing = self.Template.search(
+            [
+                ("rental_set_fee_tmpl_ids", "=", False),
+                ("product_kind", "in", ("equipment", "accessory")),
+            ]
+        )
+        self.assertIn(self.flow_meter, missing)
+        self.assertNotIn(self.concentrator, missing)
 
     def test_storable_service_can_bill_a_set(self):
         # "Track Inventory" can be switched on for a service by a user default,
@@ -134,12 +139,12 @@ class TestProductRentalFeeSet(TransactionCase):
 
     def test_goods_cannot_bill_a_set(self):
         with self.assertRaises(ValidationError):
-            self._set_components(self.concentrator.product_tmpl_id, self.demand_valve)
+            self._set_components(self.concentrator, self.demand_valve)
 
     def test_consumable_cannot_be_a_component(self):
         consumable = self.Template.create(
             {"name": "Cannula", "type": "consu", "product_kind": "consumable"}
-        ).product_variant_id
+        )
         with self.assertRaises(ValidationError):
             self._set_components(self.rental_fee, consumable)
 
@@ -154,16 +159,22 @@ class TestProductRentalFeeSet(TransactionCase):
             }
         )
         with self.assertRaises(ValidationError):
-            self._set_components(self.rental_fee, self.rental_fee.product_variant_id)
+            self._set_components(self.rental_fee, self.rental_fee)
 
-    def test_a_combination_names_one_product(self):
+    def test_a_combination_can_be_billed_by_several_products(self):
         components = self.concentrator | self.flow_meter
         self._set_components(self.rental_fee, components)
         other_fee = self.Template.create(
             {"name": "Concentrator Set Rental Fee (2)", "type": "service"}
         )
-        with self.assertRaises(ValidationError):
-            self._set_components(other_fee, components)
+        self._set_components(other_fee, components)
+        self.assertEqual(
+            self.Template._find_by_rental_set(components.ids),
+            self.rental_fee | other_fee,
+        )
+        self.assertEqual(
+            self.concentrator.rental_set_fee_tmpl_ids, self.rental_fee | other_fee
+        )
 
     def test_archived_set_does_not_block_its_replacement(self):
         components = self.concentrator | self.flow_meter

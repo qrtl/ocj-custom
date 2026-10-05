@@ -12,16 +12,14 @@ RENTAL_SET_COMPONENT_KINDS = ("equipment", "accessory")
 class ProductTemplate(models.Model):
     _inherit = "product.template"
 
-    # The components are variants, not templates: what an external system holds
-    # and asks with is the id delivered by the equipment-model interface, which
-    # is a `product.product`. Storing the set at that granularity means the
-    # incoming combination and the stored one are the same kind of value, with
-    # no template hop that could be wrong without anyone seeing it.
+    # The components are templates: equipment and accessories are maintained,
+    # imported and referred to by their product, and a variant says nothing
+    # about which set it belongs to that its product does not.
     rental_set_component_ids = fields.Many2many(
-        comodel_name="product.product",
-        relation="product_template_rental_set_component_rel",
+        comodel_name="product.template",
+        relation="product_template_rental_set_rel",
         column1="fee_product_tmpl_id",
-        column2="component_product_id",
+        column2="component_tmpl_id",
         string="Set Components",
         domain=[("product_kind", "in", RENTAL_SET_COMPONENT_KINDS)],
         help="Equipment and accessories this rental fee product bills as one "
@@ -39,11 +37,11 @@ class ProductTemplate(models.Model):
     )
     rental_set_fee_tmpl_ids = fields.Many2many(
         comodel_name="product.template",
-        compute="_compute_rental_set_fee_tmpl_ids",
+        relation="product_template_rental_set_rel",
+        column1="component_tmpl_id",
+        column2="fee_product_tmpl_id",
         string="Rental Fee Sets",
-        help="Rental fee products whose set contains this product. The link "
-        "itself is held on the variant, since that is what a lookup asks "
-        "about; this gathers the sets of every variant of the product.",
+        help="Rental fee products whose set contains this product.",
     )
 
     @api.depends("rental_set_component_ids")
@@ -53,14 +51,8 @@ class ProductTemplate(models.Model):
                 template.rental_set_component_ids.ids
             )
 
-    def _compute_rental_set_fee_tmpl_ids(self):
-        for template in self:
-            template.rental_set_fee_tmpl_ids = (
-                template.product_variant_ids.rental_set_fee_tmpl_ids
-            )
-
     @api.model
-    def _rental_set_key(self, product_ids):
+    def _rental_set_key(self, product_tmpl_ids):
         """Return the stored key for a combination of component ids, or False.
 
         Order and repetition carry no meaning - a set is what it contains - so
@@ -68,20 +60,21 @@ class ProductTemplate(models.Model):
         method, which is what keeps the two sides from disagreeing about what
         "the same set" is.
         """
-        unique_ids = sorted(set(product_ids))
-        return ",".join(str(product_id) for product_id in unique_ids) or False
+        unique_ids = sorted(set(product_tmpl_ids))
+        return ",".join(str(tmpl_id) for tmpl_id in unique_ids) or False
 
     @api.model
-    def _find_by_rental_set(self, product_ids):
-        """Return the rental fee products billing exactly `product_ids`.
+    def _find_by_rental_set(self, product_tmpl_ids):
+        """Return the rental fee products billing exactly `product_tmpl_ids`.
 
         Exact, not "contains": what to charge when only part of a set is
         installed is a billing decision, and nothing on the product says it -
         so the caller asks about each combination it wants priced. An empty
         combination matches nothing, rather than every product that happens to
-        have no components.
+        have no components. Several products may bill the same combination,
+        and all of them are returned.
         """
-        key = self._rental_set_key(product_ids)
+        key = self._rental_set_key(product_tmpl_ids)
         if not key:
             return self.browse()
         return self.search([("rental_set_key", "=", key)])
@@ -105,7 +98,7 @@ class ProductTemplate(models.Model):
     def _check_rental_set_component_ids(self):
         for template in self.filtered("rental_set_component_ids"):
             components = template.rental_set_component_ids
-            if template in components.product_tmpl_id:
+            if template in components:
                 raise ValidationError(
                     self.env._("A product cannot be a component of its own set.")
                 )
@@ -118,31 +111,5 @@ class ProductTemplate(models.Model):
                         "%(product)s is neither equipment nor an accessory, so "
                         "a rental fee set cannot contain it.",
                         product=wrong_kind[0].display_name,
-                    )
-                )
-
-    @api.constrains("rental_set_component_ids")
-    def _check_rental_set_key_unique(self):
-        """Keep a combination the name of at most one rental fee product.
-
-        The lookup answers with whatever carries the key, so two products
-        sharing one would make the answer depend on search order. Archived
-        products stay out of it: `search` skips them here exactly as it does at
-        lookup time, so a retired set never blocks the one replacing it.
-        """
-        for template in self.filtered("rental_set_key"):
-            duplicate = self.search(
-                [
-                    ("rental_set_key", "=", template.rental_set_key),
-                    ("id", "!=", template.id),
-                ],
-                limit=1,
-            )
-            if duplicate:
-                raise ValidationError(
-                    self.env._(
-                        "%(product)s already bills this set of equipment. A "
-                        "combination identifies one rental fee product.",
-                        product=duplicate.display_name,
                     )
                 )
