@@ -9,18 +9,20 @@
         <field name="arch" type="xml">
             <!-- Beside the other per-customer terms (payment terms, pricelist,
                  customer kind) rather than on a tab of its own, which the
-                 sibling modules also avoid. -->
+                 sibling modules also avoid. The policy is the company's and
+                 syncs downward only, so a contact shows it read-only, as core
+                 does for company_id on this tab. -->
             <xpath expr="//group[@name='sale']" position="inside">
                 <group name="billing_policy" string="Billing Policy" colspan="2">
-                    <field name="prorated_billing" />
-                    <field name="revenue_timing" />
-                    <field name="bill_on_loss" />
+                    <field name="prorated_billing" readonly="parent_id" />
+                    <field name="revenue_timing" readonly="parent_id" />
+                    <field name="bill_on_loss" readonly="parent_id" />
                 </group>
             </xpath>
             <!-- 全請求／部分請求 is a condition of the vendor contract, so it
                  sits with the purchase terms. -->
             <xpath expr="//group[@name='purchase']" position="inside">
-                <field name="billing_scope" />
+                <field name="billing_scope" readonly="parent_id" />
             </xpath>
         </field>
     </record>
