@@ -17,4 +17,15 @@
             </field>
         </field>
     </record>
+    <record id="res_partner_view_search" model="ir.ui.view">
+        <field name="name">res.partner.select.prorated.product</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter" />
+        <field name="arch" type="xml">
+            <!-- Which customers are prorated on a given piece of equipment. -->
+            <field name="user_id" position="after">
+                <field name="prorated_product_tmpl_ids" />
+            </field>
+        </field>
+    </record>
 </odoo>
