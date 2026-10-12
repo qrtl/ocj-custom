@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Quartile (https://www.quartile.co)
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl). -->
+<odoo>
+    <record id="res_partner_view_form" model="ir.ui.view">
+        <field name="name">res.partner.form.prorated.product</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="partner_billing_policy.view_partner_form" />
+        <field name="arch" type="xml">
+            <field name="prorated_billing" position="after">
+                <field
+                    name="prorated_product_tmpl_ids"
+                    widget="many2many_tags"
+                    invisible="not prorated_billing"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
