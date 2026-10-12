@@ -1,0 +1,55 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* partner_billing_policy
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: partner_billing_policy
+#: model_terms:ir.ui.view,arch_db:partner_billing_policy.view_partner_form
+msgid "Billing Policy"
+msgstr "請求方針"
+
+#. module: partner_billing_policy
+#: model:ir.model.fields,field_description:partner_billing_policy.field_res_partner__billing_scope
+msgid "Billing Scope"
+msgstr "請求範囲"
+
+#. module: partner_billing_policy
+#: model:ir.model.fields.selection,name:partner_billing_policy.selection__res_partner__billing_scope__full
+msgid "Full Billing"
+msgstr "全請求"
+
+#. module: partner_billing_policy
+#: model:ir.model.fields.selection,name:partner_billing_policy.selection__res_partner__billing_scope__partial
+msgid "Partial Billing"
+msgstr "部分請求"
+
+#. module: partner_billing_policy
+#: model:ir.model.fields,field_description:partner_billing_policy.field_res_partner__prorated_billing
+msgid "Prorated Billing"
+msgstr "日割り請求"
+
+#. module: partner_billing_policy
+#: model:ir.model.fields,help:partner_billing_policy.field_res_partner__billing_scope
+msgid ""
+"Vendor contract condition for rented equipment: under full billing the "
+"vendor is paid for every month the device is installed, regardless of the "
+"patient's visits; under partial billing only months with a billable visit "
+"are paid."
+msgstr "レンタル機器の仕入先契約条件。全請求では患者の受診に関わらず設置中の月はすべて支払対象となり、部分請求では請求対象の受診があった月のみ支払対象となる。"
+
+#. module: partner_billing_policy
+#: model:ir.model.fields,help:partner_billing_policy.field_res_partner__prorated_billing
+msgid ""
+"Whether amounts are prorated by usage days on mid-period start/cancellation."
+msgstr "期中の開始・解約時に利用日数で日割り計算するか。"
