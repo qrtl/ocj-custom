@@ -6,7 +6,7 @@
     "category": "Accounting/Accounting",
     "website": "https://www.quartile.co",
     "author": "Quartile",
-    "maintainer": "Quartile",
+    "maintainers": ["smorita7749"],
     "license": "LGPL-3",
     "summary": "Customer-level billing-policy defaults on partners",
     "installable": True,

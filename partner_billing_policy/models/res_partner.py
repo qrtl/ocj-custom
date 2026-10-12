@@ -1,7 +1,7 @@
 # Copyright 2026 Quartile (https://www.quartile.co)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
 
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class ResPartner(models.Model):
@@ -31,3 +31,14 @@ class ResPartner(models.Model):
     bill_on_loss = fields.Boolean(
         help="Whether lost goods may be billed to the customer.",
     )
+
+    @api.model
+    def _commercial_fields(self):
+        # A billing policy is the company's, so a contact or invoice address
+        # under it carries the same values rather than blank ones of its own.
+        return super()._commercial_fields() + [
+            "billing_scope",
+            "prorated_billing",
+            "revenue_timing",
+            "bill_on_loss",
+        ]

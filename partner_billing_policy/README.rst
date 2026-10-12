@@ -56,6 +56,14 @@ Authors
 Maintainers
 -----------
 
+.. |maintainer-smorita7749| image:: https://github.com/smorita7749.png?size=40px
+    :target: https://github.com/smorita7749
+    :alt: smorita7749
+
+Current maintainer:
+
+|maintainer-smorita7749| 
+
 This module is part of the `qrtl/OCJ Custom <https://github.com/qrtl/OCJ Custom/tree/19.0/partner_billing_policy>`_ project on GitHub.
 
 You are welcome to contribute.
