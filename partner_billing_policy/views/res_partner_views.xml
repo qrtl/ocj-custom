@@ -24,4 +24,37 @@
             </xpath>
         </field>
     </record>
+    <record id="res_partner_view_list" model="ir.ui.view">
+        <field name="name">res.partner.list.billing.policy</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree" />
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field name="prorated_billing" optional="hide" />
+                <field name="billing_scope" optional="hide" />
+            </field>
+        </field>
+    </record>
+    <record id="res_partner_view_search" model="ir.ui.view">
+        <field name="name">res.partner.select.billing.policy</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter" />
+        <field name="arch" type="xml">
+            <filter name="type_company" position="after">
+                <separator />
+                <filter
+                    name="prorated_billing"
+                    string="Prorated Billing"
+                    domain="[('prorated_billing', '=', True)]"
+                />
+            </filter>
+            <filter name="salesperson" position="after">
+                <filter
+                    name="group_billing_scope"
+                    string="Billing Scope"
+                    context="{'group_by': 'billing_scope'}"
+                />
+            </filter>
+        </field>
+    </record>
 </odoo>
