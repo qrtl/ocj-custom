@@ -7,20 +7,21 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form" />
         <field name="arch" type="xml">
-            <notebook position="inside">
-                <page name="billing_policy" string="Billing Policy">
-                    <group>
-                        <group>
-                            <field name="billing_scope" />
-                            <field name="revenue_timing" />
-                        </group>
-                        <group>
-                            <field name="prorated_billing" />
-                            <field name="bill_on_loss" />
-                        </group>
-                    </group>
-                </page>
-            </notebook>
+            <!-- Beside the other per-customer terms (payment terms, pricelist,
+                 customer kind) rather than on a tab of its own, which the
+                 sibling modules also avoid. -->
+            <xpath expr="//group[@name='sale']" position="inside">
+                <group name="billing_policy" string="Billing Policy" colspan="2">
+                    <field name="prorated_billing" />
+                    <field name="revenue_timing" />
+                    <field name="bill_on_loss" />
+                </group>
+            </xpath>
+            <!-- 全請求／部分請求 is a condition of the vendor contract, so it
+                 sits with the purchase terms. -->
+            <xpath expr="//group[@name='purchase']" position="inside">
+                <field name="billing_scope" />
+            </xpath>
         </field>
     </record>
 </odoo>

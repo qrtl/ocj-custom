@@ -12,7 +12,10 @@ class ResPartner(models.Model):
             ("full", "Full Billing"),
             ("partial", "Partial Billing"),
         ],
-        help="Whether the whole engagement or only part of it is billed.",
+        help="Vendor contract condition for rented equipment: under full "
+        "billing the vendor is paid for every month the device is installed, "
+        "regardless of the patient's visits; under partial billing only "
+        "months with a billable visit are paid.",
     )
     prorated_billing = fields.Boolean(
         help="Whether amounts are prorated by usage days on mid-period "

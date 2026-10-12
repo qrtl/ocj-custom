@@ -76,8 +76,12 @@ msgstr "紛失した物品を顧客に請求してよいか。"
 
 #. module: partner_billing_policy
 #: model:ir.model.fields,help:partner_billing_policy.field_res_partner__billing_scope
-msgid "Whether the whole engagement or only part of it is billed."
-msgstr "全体を請求するか、一部のみを請求するか。"
+msgid ""
+"Vendor contract condition for rented equipment: under full billing the "
+"vendor is paid for every month the device is installed, regardless of the "
+"patient's visits; under partial billing only months with a billable visit "
+"are paid."
+msgstr "レンタル機器の仕入先契約条件。全請求では患者の受診に関わらず設置中の月はすべて支払対象となり、部分請求では請求対象の受診があった月のみ支払対象となる。"
 
 #. module: partner_billing_policy
 #: model:ir.model.fields,help:partner_billing_policy.field_res_partner__prorated_billing
