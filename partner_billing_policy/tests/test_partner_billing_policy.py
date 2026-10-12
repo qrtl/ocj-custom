@@ -35,3 +35,34 @@ class TestPartnerBillingPolicy(TransactionCase):
         with Form(contact) as form:
             self.assertTrue(form._get_modifier("prorated_billing", "readonly"))
             self.assertTrue(form._get_modifier("billing_scope", "readonly"))
+
+    def test_proration_is_on_by_default(self):
+        partner = self.env["res.partner"].create({"name": "病院C"})
+        self.assertTrue(partner.prorated_billing)
+        self.assertTrue(partner.prorate_installation_month)
+        self.assertTrue(partner.prorate_collection_month)
+
+    def test_a_contact_carries_its_company_month_settings(self):
+        company = self.env["res.partner"].create(
+            {
+                "name": "病院D",
+                "is_company": True,
+                "prorate_installation_month": False,
+            }
+        )
+        contact = self.env["res.partner"].create(
+            {"name": "請求先担当", "parent_id": company.id, "type": "invoice"}
+        )
+        self.assertFalse(contact.prorate_installation_month)
+        self.assertTrue(contact.prorate_collection_month)
+
+    def test_a_new_contact_takes_a_company_billed_in_full(self):
+        # The company's "off" must reach a contact created later, not be
+        # replaced by the field's default.
+        company = self.env["res.partner"].create(
+            {"name": "病院E", "is_company": True, "prorated_billing": False}
+        )
+        contact = self.env["res.partner"].create(
+            {"name": "請求先担当", "parent_id": company.id, "type": "invoice"}
+        )
+        self.assertFalse(contact.prorated_billing)

@@ -53,5 +53,30 @@ msgstr "レンタル機器の仕入先契約条件。全請求では患者の受
 #. module: partner_billing_policy
 #: model:ir.model.fields,help:partner_billing_policy.field_res_partner__prorated_billing
 msgid ""
-"Whether amounts are prorated by usage days on mid-period start/cancellation."
-msgstr "期中の開始・解約時に利用日数で日割り計算するか。"
+"Whether a rental is charged pro rata for a partial month. The two settings "
+"below choose which partial months."
+msgstr "月の途中の設置・回収時に日割りで請求するか。どちらの月に適用するかは下の2項目で選ぶ。"
+
+#. module: partner_billing_policy
+#: model:ir.model.fields,field_description:partner_billing_policy.field_res_partner__prorate_collection_month
+msgid "Prorate Collection Month"
+msgstr "回収月に適用"
+
+#. module: partner_billing_policy
+#: model:ir.model.fields,field_description:partner_billing_policy.field_res_partner__prorate_installation_month
+msgid "Prorate Installation Month"
+msgstr "開始月に適用"
+
+#. module: partner_billing_policy
+#: model:ir.model.fields,help:partner_billing_policy.field_res_partner__prorate_collection_month
+msgid ""
+"Charge the collection month from the first of the month to the day before "
+"collection, rather than in full."
+msgstr "回収月を満額ではなく、月初から回収日の前日までの日割りで請求する。"
+
+#. module: partner_billing_policy
+#: model:ir.model.fields,help:partner_billing_policy.field_res_partner__prorate_installation_month
+msgid ""
+"Charge the installation month from the installation day to the month end, "
+"rather than in full."
+msgstr "開始月（設置月）を満額ではなく、設置日から月末までの日割りで請求する。"
