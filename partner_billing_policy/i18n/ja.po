@@ -21,6 +21,7 @@ msgstr "請求方針"
 
 #. module: partner_billing_policy
 #: model:ir.model.fields,field_description:partner_billing_policy.field_res_partner__billing_scope
+#: model_terms:ir.ui.view,arch_db:partner_billing_policy.res_partner_view_search
 msgid "Billing Scope"
 msgstr "請求範囲"
 
@@ -36,6 +37,7 @@ msgstr "部分請求"
 
 #. module: partner_billing_policy
 #: model:ir.model.fields,field_description:partner_billing_policy.field_res_partner__prorated_billing
+#: model_terms:ir.ui.view,arch_db:partner_billing_policy.res_partner_view_search
 msgid "Prorated Billing"
 msgstr "日割り請求"
 
