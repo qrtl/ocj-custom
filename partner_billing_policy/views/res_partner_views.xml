@@ -15,8 +15,6 @@
             <xpath expr="//group[@name='sale']" position="inside">
                 <group name="billing_policy" string="Billing Policy" colspan="2">
                     <field name="prorated_billing" readonly="parent_id" />
-                    <field name="revenue_timing" readonly="parent_id" />
-                    <field name="bill_on_loss" readonly="parent_id" />
                 </group>
             </xpath>
             <!-- 全請求／部分請求 is a condition of the vendor contract, so it

@@ -12,8 +12,6 @@ class TestPartnerBillingPolicy(TransactionCase):
                 "is_company": True,
                 "billing_scope": "full",
                 "prorated_billing": True,
-                "revenue_timing": "period_end",
-                "bill_on_loss": True,
             }
         )
         contact = self.env["res.partner"].create(
@@ -21,8 +19,6 @@ class TestPartnerBillingPolicy(TransactionCase):
         )
         self.assertEqual(contact.billing_scope, "full")
         self.assertTrue(contact.prorated_billing)
-        self.assertEqual(contact.revenue_timing, "period_end")
-        self.assertTrue(contact.bill_on_loss)
         # A later change on the company reaches the contact as well.
         company.prorated_billing = False
         self.assertFalse(contact.prorated_billing)
