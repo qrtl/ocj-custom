@@ -56,3 +56,13 @@ class TestPartnerProratedProduct(TransactionCase):
         self.assertTrue(
             self.partner._is_prorated_for_equipment(self.ventilator | self.concentrator)
         )
+
+    def test_a_contact_carries_its_company_list(self):
+        self.partner.is_company = True
+        self.partner.prorated_product_tmpl_ids = self.ventilator
+        contact = self.env["res.partner"].create(
+            {"name": "請求先担当", "parent_id": self.partner.id, "type": "invoice"}
+        )
+        self.assertEqual(contact.prorated_product_tmpl_ids, self.ventilator)
+        self.assertTrue(contact._is_prorated_for_equipment(self.ventilator))
+        self.assertFalse(contact._is_prorated_for_equipment(self.concentrator))

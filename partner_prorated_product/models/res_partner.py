@@ -1,7 +1,7 @@
 # Copyright 2026 Quartile (https://www.quartile.co)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
 
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class ResPartner(models.Model):
@@ -21,6 +21,12 @@ class ResPartner(models.Model):
         help="The equipment this customer is billed pro rata for. Empty means "
         "every rental, once prorated billing is on.",
     )
+
+    @api.model
+    def _commercial_fields(self):
+        # The list qualifies the company's prorated billing, so it follows the
+        # switch down to the company's contacts.
+        return super()._commercial_fields() + ["prorated_product_tmpl_ids"]
 
     def _is_prorated_for_equipment(self, equipment):
         """Whether renting `equipment` to this customer is billed pro rata.
