@@ -12,6 +12,7 @@
                     name="prorated_product_tmpl_ids"
                     widget="many2many_tags"
                     invisible="not prorated_billing"
+                    readonly="parent_id"
                 />
             </field>
         </field>

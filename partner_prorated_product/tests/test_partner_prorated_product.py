@@ -1,7 +1,7 @@
 # Copyright 2026 Quartile (https://www.quartile.co)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
 
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import Form, TransactionCase
 
 
 class TestPartnerProratedProduct(TransactionCase):
@@ -66,3 +66,6 @@ class TestPartnerProratedProduct(TransactionCase):
         self.assertEqual(contact.prorated_product_tmpl_ids, self.ventilator)
         self.assertTrue(contact._is_prorated_for_equipment(self.ventilator))
         self.assertFalse(contact._is_prorated_for_equipment(self.concentrator))
+        # Synced downward only, so the contact cannot keep a list of its own.
+        with Form(contact) as form:
+            self.assertTrue(form._get_modifier("prorated_product_tmpl_ids", "readonly"))
