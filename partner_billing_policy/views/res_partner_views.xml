@@ -30,8 +30,19 @@
         <field name="inherit_id" ref="base.view_partner_tree" />
         <field name="arch" type="xml">
             <field name="user_id" position="after">
-                <field name="prorated_billing" optional="hide" />
-                <field name="billing_scope" optional="hide" />
+                <!-- 日割り請求 is the customer's, 全請求／部分請求 the vendor
+                     contract's (rented equipment, RR), so each shows only on
+                     its own side's list. -->
+                <field
+                    name="prorated_billing"
+                    optional="hide"
+                    column_invisible="context.get('res_partner_search_mode') == 'supplier'"
+                />
+                <field
+                    name="billing_scope"
+                    optional="hide"
+                    column_invisible="context.get('res_partner_search_mode') != 'supplier'"
+                />
             </field>
         </field>
     </record>
@@ -46,6 +57,7 @@
                     name="prorated_billing"
                     string="Prorated Billing"
                     domain="[('prorated_billing', '=', True)]"
+                    invisible="context.get('res_partner_search_mode') == 'supplier'"
                 />
             </filter>
             <filter name="salesperson" position="after">
@@ -53,6 +65,7 @@
                     name="group_billing_scope"
                     string="Billing Scope"
                     context="{'group_by': 'billing_scope'}"
+                    invisible="context.get('res_partner_search_mode') != 'supplier'"
                 />
             </filter>
         </field>
