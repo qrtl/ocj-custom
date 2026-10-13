@@ -375,9 +375,21 @@ ul.auto-toc {
 !! source digest: sha256:a50cd47aef077b347f9201bc75230af1ae5473d0389d36f88dadc6dcd4e82e38
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 <p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/lgpl-3.0-standalone.html"><img alt="License: LGPL-3" src="https://img.shields.io/badge/license-LGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/qrtl/OCJCustom/tree/19.0/partner_billing_policy"><img alt="qrtl/OCJ Custom" src="https://img.shields.io/badge/github-qrtl%2FOCJCustom-lightgray.png?logo=github" /></a></p>
-<p>This module adds customer-level billing-policy default fields to
-partners. The values are intended to be read by billing logic as
-defaults.</p>
+<p>Customer-level billing conditions on partners, read by billing logic as
+defaults:</p>
+<ul class="simple">
+<li><strong>Prorated billing</strong> (日割り請求) and, under it, whether the
+installation month and the collection month are prorated
+(開始月に適用／回収月に適用). All three are on by default: proration
+is the rule and the customers billed in full are the exceptions. The
+month settings are separate because a contract can prorate one end
+and not the other.</li>
+<li><strong>Billing scope</strong> (全請求／部分請求), on the purchase side: the
+vendor contract condition for rented equipment, on whether the vendor
+is paid regardless of the patient’s visits.</li>
+</ul>
+<p>All of them sync from the company to its contacts and are read-only
+there.</p>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
