@@ -8,9 +8,10 @@ from odoo import SUPERUSER_ID, api
 _logger = logging.getLogger(__name__)
 
 # Where earlier versions kept the relation, newest first, as a query returning
-# (fee template, component template) pairs. Only the first one present is read:
-# each replaced the one after it, so an older source left on the database
-# holds what was already carried over, or no longer meant.
+# (fee template, component template) pairs. Only the first one holding rows is
+# read: each replaced the one after it, so an older source left on the database
+# holds what was already carried over, or no longer meant. An interim version
+# had both tables with the set still empty, hence "holding rows".
 SOURCES = [
     # The set, held on variants.
     (
@@ -57,7 +58,9 @@ def _read_pairs(cr):
         ):
             continue
         cr.execute(query)
-        return cr.fetchall()
+        pairs = cr.fetchall()
+        if pairs:
+            return pairs
     return []
 
 

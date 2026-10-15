@@ -133,6 +133,13 @@ class TestProductRentalFeeSet(TransactionCase):
         self.assertFalse(self.Template._find_by_rental_set(self.demand_valve.ids))
         self.assertFalse(self.Template._find_rental_sets_within(self.demand_valve.ids))
 
+    def test_deleted_member_leaves_the_set(self):
+        self._set_components(self.rental_fee, self.concentrator | self.demand_valve)
+        self.demand_valve.unlink()
+        self.assertEqual(
+            self.Template._find_by_rental_set(self.concentrator.ids), self.rental_fee
+        )
+
     def test_set_is_checked_from_the_member_side(self):
         self._set_components(self.rental_fee, self.demand_valve)
         with self.assertRaises(ValidationError):

@@ -53,6 +53,14 @@ class ProductTemplate(models.Model):
                 template.rental_set_component_ids.ids
             )
 
+    def unlink(self):
+        # Deleting a member drops its relation rows in SQL, which recomputes
+        # nothing: the fees' keys must follow by hand.
+        fees = self.with_context(active_test=False).rental_set_fee_tmpl_ids - self
+        res = super().unlink()
+        fees.modified(["rental_set_component_ids"])
+        return res
+
     @api.model
     def _rental_set_key(self, product_tmpl_ids):
         """Return the stored key for a combination of component ids, or False.
