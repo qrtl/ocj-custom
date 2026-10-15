@@ -139,6 +139,12 @@ class TestProductRentalFeeSet(TransactionCase):
             self.demand_valve.unlink()
         self.flow_meter.unlink()
 
+    def test_copied_member_is_not_in_the_set(self):
+        components = self.concentrator | self.demand_valve
+        self._set_components(self.rental_fee, components)
+        self.concentrator.copy()
+        self.assertEqual(self.rental_fee.rental_set_component_ids, components)
+
     def test_set_is_checked_from_the_member_side(self):
         self._set_components(self.rental_fee, self.demand_valve)
         with self.assertRaises(ValidationError):

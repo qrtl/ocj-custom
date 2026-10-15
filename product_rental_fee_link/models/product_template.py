@@ -43,6 +43,8 @@ class ProductTemplate(models.Model):
         column1="component_tmpl_id",
         column2="fee_product_tmpl_id",
         string="Rental Fee Sets",
+        # A copy of a member is a different product, not a member.
+        copy=False,
         help="Rental fee products whose set contains this product.",
     )
 
