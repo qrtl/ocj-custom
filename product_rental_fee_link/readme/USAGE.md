@@ -1,6 +1,6 @@
-On a rental fee product - any service - the **Rental Set** tab holds **Set
-Components**: the equipment and accessories that this one product bills
-together. "Add a line" searches the existing equipment and accessories;
+On a rental fee product (product kind *Rental Fee*), the **Rental Set** tab
+holds **Set Components**: the equipment and accessories that this one product
+bills together. "Add a line" searches the existing equipment and accessories;
 consumables are billed on their own and are not offered.
 
 Register a fee for a single machine as a set of one. That is what makes the

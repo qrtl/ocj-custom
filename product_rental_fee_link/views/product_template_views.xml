@@ -15,11 +15,11 @@
                 <page
                     name="rental_set"
                     string="Rental Set"
-                    invisible="type != 'service' and product_kind not in ('equipment', 'accessory')"
+                    invisible="product_kind not in ('equipment', 'accessory', 'rental_fee')"
                 >
                     <field
                         name="rental_set_component_ids"
-                        invisible="type != 'service'"
+                        invisible="product_kind != 'rental_fee'"
                         options="{'no_quick_create': True}"
                     >
                         <list>
@@ -34,7 +34,7 @@
                          row per member. -->
                     <field
                         name="rental_set_fee_tmpl_ids"
-                        invisible="type == 'service'"
+                        invisible="product_kind == 'rental_fee'"
                         readonly="1"
                     >
                         <list>
@@ -46,7 +46,7 @@
                         <field
                             name="rental_set_key"
                             groups="base.group_no_one"
-                            invisible="type != 'service'"
+                            invisible="product_kind != 'rental_fee'"
                         />
                     </group>
                 </page>

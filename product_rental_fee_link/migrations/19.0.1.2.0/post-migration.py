@@ -68,7 +68,7 @@ def migrate(cr, version):
     earlier version becomes a set of the equipment it linked. The key is
     rebuilt for every product, since one stored from variant ids names other
     records. A row the constraints refuse is named in the log rather than
-    guessed at, and the fee product simply has no set until someone enters one.
+    guessed at, and the old tables are then kept so it can be entered by hand.
     """
     if not version:
         return
@@ -83,7 +83,7 @@ def migrate(cr, version):
     components_by_fee = {}
     for fee_id, component_id in pairs:
         components_by_fee.setdefault(fee_id, set()).add(component_id)
-    converted = 0
+    converted = refused = 0
     for fee_id, component_ids in components_by_fee.items():
         fee = Template.browse(fee_id).exists()
         components = Template.browse(list(component_ids)).exists()
@@ -98,7 +98,9 @@ def migrate(cr, version):
             converted += 1
         except Exception as error:  # noqa: BLE001 - a bad row must not stop the upgrade
             env.invalidate_all()
+            refused += 1
             _logger.warning("%s: not converted (%s)", fee.display_name, error)
-    cr.execute("DROP TABLE IF EXISTS product_template_rental_set_component_rel")
-    cr.execute("DROP TABLE IF EXISTS product_template_rental_fee_rel")
+    if not refused:
+        cr.execute("DROP TABLE IF EXISTS product_template_rental_set_component_rel")
+        cr.execute("DROP TABLE IF EXISTS product_template_rental_fee_rel")
     _logger.info("Converted %s rental sets to product components", converted)

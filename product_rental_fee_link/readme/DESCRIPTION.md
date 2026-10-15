@@ -1,4 +1,4 @@
-This module lets you record the products a rental fee service product bills,
+This module lets you record the products a rental fee product bills,
 as the exact set it bills them in. It builds on ``product_classification``,
 which is what tells equipment and accessories apart from the other goods.
 
@@ -16,11 +16,10 @@ one, so both directions are answered by the same relation.
 ``_find_by_rental_set()`` returns the rental fee products whose set is
 *exactly* the combination of products asked for, which is what turns a
 selection of equipment into the products that bill it. Several rental fee
-products may bill the same combination, and all of them are returned. The
-match is exact on purpose:
-whether a partly installed set is billed as the set or as its members
-individually is a billing decision, and nothing on the product records it -
-so the caller asks about each combination it wants priced.
+products may bill the same combination, and all of them are returned.
+``_find_rental_sets_within()`` returns those whose set is *part of* the
+combination, for a combination no set matches exactly; which of them to
+propose is left to the caller.
 
 Consumables are not part of a set: they are billed on their own.
 

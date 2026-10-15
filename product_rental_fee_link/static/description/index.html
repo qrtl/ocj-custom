@@ -375,10 +375,10 @@ ul.auto-toc {
 !! source digest: sha256:cd91e3917d3563e4af97a4bde7bef1cb579cce2450d30aa5d06150cd08052441
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 <p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/lgpl-3.0-standalone.html"><img alt="License: LGPL-3" src="https://img.shields.io/badge/license-LGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/qrtl/OCJCustom/tree/19.0/product_rental_fee_link"><img alt="qrtl/OCJ Custom" src="https://img.shields.io/badge/github-qrtl%2FOCJCustom-lightgray.png?logo=github" /></a></p>
-<p>This module lets you record the products a rental fee service product
-bills, as the exact set it bills them in. It builds on
-<tt class="docutils literal">product_classification</tt>, which is what tells equipment and
-accessories apart from the other goods.</p>
+<p>This module lets you record the products a rental fee product bills, as
+the exact set it bills them in. It builds on <tt class="docutils literal">product_classification</tt>,
+which is what tells equipment and accessories apart from the other
+goods.</p>
 <p>Rental fees are managed as service products, separate from the equipment
 itself, and nothing in the standard data model ties the two together. A
 fee is often charged for a combination rather than a single machine - a
@@ -392,10 +392,9 @@ a set of one, so both directions are answered by the same relation.</p>
 <em>exactly</em> the combination of products asked for, which is what turns a
 selection of equipment into the products that bill it. Several rental
 fee products may bill the same combination, and all of them are
-returned. The match is exact on purpose: whether a partly installed set
-is billed as the set or as its members individually is a billing
-decision, and nothing on the product records it - so the caller asks
-about each combination it wants priced.</p>
+returned. <tt class="docutils literal">_find_rental_sets_within()</tt> returns those whose set is
+<em>part of</em> the combination, for a combination no set matches exactly;
+which of them to propose is left to the caller.</p>
 <p>Consumables are not part of a set: they are billed on their own.</p>
 <p>Why a dedicated field rather than <em>Optional Products</em>:
 <tt class="docutils literal">optional_product_ids</tt> is a many2many meant for cross-sell suggestions
@@ -417,10 +416,11 @@ used as the source for integrations.</p>
 </div>
 <div class="section" id="usage">
 <h2><a class="toc-backref" href="#toc-entry-1">Usage</a></h2>
-<p>On a rental fee product - any service - the <strong>Rental Set</strong> tab holds
-<strong>Set Components</strong>: the equipment and accessories that this one product
-bills together. “Add a line” searches the existing equipment and
-accessories; consumables are billed on their own and are not offered.</p>
+<p>On a rental fee product (product kind <em>Rental Fee</em>), the <strong>Rental Set</strong>
+tab holds <strong>Set Components</strong>: the equipment and accessories that this
+one product bills together. “Add a line” searches the existing equipment
+and accessories; consumables are billed on their own and are not
+offered.</p>
 <p>Register a fee for a single machine as a set of one. That is what makes
 the product findable both ways: from the machine, and from a lookup that
 asks about that machine alone.</p>

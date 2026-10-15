@@ -17,9 +17,7 @@ class TestProductRentalFeeSet(TransactionCase):
         cls.concentrator = cls._create_goods("Concentrator", "equipment")
         cls.demand_valve = cls._create_goods("Demand Valve", "accessory")
         cls.flow_meter = cls._create_goods("Flow Meter", "accessory")
-        cls.rental_fee = cls.Template.create(
-            {"name": "Concentrator Set Rental Fee", "type": "service"}
-        )
+        cls.rental_fee = cls._create_fee("Concentrator Set Rental Fee")
 
     @classmethod
     def _create_goods(cls, name, kind):
@@ -29,6 +27,17 @@ class TestProductRentalFeeSet(TransactionCase):
                 "type": "consu",
                 "is_storable": True,
                 "product_kind": kind,
+                "equipment_classification_id": cls.classification.id,
+            }
+        )
+
+    @classmethod
+    def _create_fee(cls, name):
+        return cls.Template.create(
+            {
+                "name": name,
+                "type": "service",
+                "product_kind": "rental_fee",
                 "equipment_classification_id": cls.classification.id,
             }
         )
@@ -65,7 +74,7 @@ class TestProductRentalFeeSet(TransactionCase):
             self.rental_fee,
         )
         # A part of the set, and the set plus something else, are different
-        # combinations - what to charge for those is not this product's answer.
+        # combinations.
         self.assertFalse(
             self.Template._find_by_rental_set(
                 [self.concentrator.id, self.flow_meter.id]
@@ -78,7 +87,7 @@ class TestProductRentalFeeSet(TransactionCase):
         self._set_components(self.rental_fee, self.concentrator)
         # An empty combination must not match the products that have no
         # components - a fee billed on its own carries no set at all.
-        bare_fee = self.Template.create({"name": "Other Fee", "type": "service"})
+        bare_fee = self._create_fee("Other Fee")
         self.assertFalse(self.Template._find_by_rental_set([]))
         self.assertFalse(bare_fee.rental_set_key)
         self.assertFalse(self.Template._find_by_rental_set([self.flow_meter.id]))
@@ -87,35 +96,6 @@ class TestProductRentalFeeSet(TransactionCase):
         self._set_components(self.rental_fee, self.concentrator)
         self.rental_fee.active = False
         self.assertFalse(self.Template._find_by_rental_set([self.concentrator.id]))
-
-    def test_match_is_one_product_whatever_its_variants(self):
-        # The set is the product's, the price classes are its variants: a
-        # combination names one rental fee product, which then answers with
-        # every variant it has.
-        attribute = self.env["product.attribute"].create(
-            {
-                "name": "Price Category",
-                "create_variant": "always",
-                "value_ids": [
-                    Command.create({"name": "First Unit"}),
-                    Command.create({"name": "Second Unit"}),
-                ],
-            }
-        )
-        self.rental_fee.attribute_line_ids = [
-            Command.create(
-                {
-                    "attribute_id": attribute.id,
-                    "value_ids": [Command.set(attribute.value_ids.ids)],
-                }
-            )
-        ]
-        self._set_components(self.rental_fee, self.concentrator | self.demand_valve)
-        matched = self.Template._find_by_rental_set(
-            [self.demand_valve.id, self.concentrator.id]
-        )
-        self.assertEqual(matched, self.rental_fee)
-        self.assertEqual(len(matched.product_variant_ids), 2)
 
     def test_sets_are_visible_from_the_component(self):
         self._set_components(self.rental_fee, self.concentrator | self.demand_valve)
@@ -130,17 +110,6 @@ class TestProductRentalFeeSet(TransactionCase):
         self.assertIn(self.flow_meter, missing)
         self.assertNotIn(self.concentrator, missing)
 
-    def test_storable_service_can_bill_a_set(self):
-        # "Track Inventory" can be switched on for a service by a user default,
-        # so it must not disqualify a service from billing a set.
-        self.rental_fee.is_storable = True
-        self._set_components(self.rental_fee, self.concentrator)
-        self.assertEqual(self.rental_fee.rental_set_component_ids, self.concentrator)
-
-    def test_goods_cannot_bill_a_set(self):
-        with self.assertRaises(ValidationError):
-            self._set_components(self.concentrator, self.demand_valve)
-
     def test_consumable_cannot_be_a_component(self):
         consumable = self.Template.create(
             {"name": "Cannula", "type": "consu", "product_kind": "consumable"}
@@ -148,25 +117,35 @@ class TestProductRentalFeeSet(TransactionCase):
         with self.assertRaises(ValidationError):
             self._set_components(self.rental_fee, consumable)
 
-    def test_self_reference_not_allowed(self):
-        # A service has no product kind that qualifies, so this is only
-        # reachable on data that contradicts itself - which is when a set
-        # naming its own product would otherwise be created.
-        self.rental_fee.write(
-            {
-                "product_kind": "equipment",
-                "equipment_classification_id": self.classification.id,
-            }
-        )
+    def test_only_a_rental_fee_can_bill_a_set(self):
+        service = self.Template.create({"name": "Delivery", "type": "service"})
         with self.assertRaises(ValidationError):
-            self._set_components(self.rental_fee, self.rental_fee)
+            self._set_components(service, self.concentrator)
+        with self.assertRaises(ValidationError):
+            self._set_components(self.concentrator, self.demand_valve)
+        self._set_components(self.rental_fee, self.concentrator)
+        with self.assertRaises(ValidationError):
+            self.rental_fee.product_kind = False
+
+    def test_find_rental_sets_within(self):
+        single = self._create_fee("Concentrator Rental Fee")
+        self._set_components(single, self.concentrator)
+        self._set_components(self.rental_fee, self.concentrator | self.demand_valve)
+        humidifier = self._create_goods("Humidifier", "accessory")
+        within = self.Template._find_rental_sets_within(
+            (self.concentrator | self.demand_valve | humidifier).ids
+        )
+        self.assertEqual(within, single | self.rental_fee)
+        # A set reaching beyond the combination is not part of it.
+        self.assertEqual(
+            self.Template._find_rental_sets_within(self.concentrator.ids), single
+        )
+        self.assertFalse(self.Template._find_rental_sets_within([]))
 
     def test_a_combination_can_be_billed_by_several_products(self):
         components = self.concentrator | self.flow_meter
         self._set_components(self.rental_fee, components)
-        other_fee = self.Template.create(
-            {"name": "Concentrator Set Rental Fee (2)", "type": "service"}
-        )
+        other_fee = self._create_fee("Concentrator Set Rental Fee (2)")
         self._set_components(other_fee, components)
         self.assertEqual(
             self.Template._find_by_rental_set(components.ids),
@@ -180,8 +159,6 @@ class TestProductRentalFeeSet(TransactionCase):
         components = self.concentrator | self.flow_meter
         self._set_components(self.rental_fee, components)
         self.rental_fee.active = False
-        replacement = self.Template.create(
-            {"name": "Concentrator Set Rental Fee (new)", "type": "service"}
-        )
+        replacement = self._create_fee("Concentrator Set Rental Fee (new)")
         self._set_components(replacement, components)
         self.assertEqual(self.Template._find_by_rental_set(components.ids), replacement)

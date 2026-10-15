@@ -24,8 +24,7 @@ class ProductTemplate(models.Model):
         domain=[("product_kind", "in", RENTAL_SET_COMPONENT_KINDS)],
         help="Equipment and accessories this rental fee product bills as one "
         "set - e.g. a concentrator together with a demand valve and a flow "
-        "meter. The combination is exact: a lookup returns this product only "
-        "when it asks for these components and no others.",
+        "meter.",
     )
     rental_set_key = fields.Char(
         compute="_compute_rental_set_key",
@@ -67,42 +66,39 @@ class ProductTemplate(models.Model):
     def _find_by_rental_set(self, product_tmpl_ids):
         """Return the rental fee products billing exactly `product_tmpl_ids`.
 
-        Exact, not "contains": what to charge when only part of a set is
-        installed is a billing decision, and nothing on the product says it -
-        so the caller asks about each combination it wants priced. An empty
-        combination matches nothing, rather than every product that happens to
-        have no components. Several products may bill the same combination,
-        and all of them are returned.
+        An empty combination matches nothing, rather than every product that
+        happens to have no components. Several products may bill the same
+        combination (a second-unit fee, say), and all of them are returned.
         """
         key = self._rental_set_key(product_tmpl_ids)
         if not key:
             return self.browse()
         return self.search([("rental_set_key", "=", key)])
 
-    @api.constrains("rental_set_component_ids", "type")
-    def _check_rental_set_owner(self):
-        # The type is the discriminator here, as it is for the fee link above:
-        # a rental fee is a service, while 品目区分 is still being filled in on
-        # the fee products and cannot yet be relied on to select them.
+    @api.model
+    def _find_rental_sets_within(self, product_tmpl_ids):
+        """Return the rental fee products whose set is part of `product_tmpl_ids`.
+
+        This is what answers a combination no set matches exactly: the sets it
+        covers. Which of them to propose is the caller's decision.
+        """
+        components = self.browse(product_tmpl_ids)
+        return self.search(
+            [("rental_set_component_ids", "in", components.ids)]
+        ).filtered(lambda fee: fee.rental_set_component_ids <= components)
+
+    @api.constrains("rental_set_component_ids", "product_kind")
+    def _check_rental_set_component_ids(self):
         for template in self.filtered("rental_set_component_ids"):
-            if template.type != "service":
+            if template.product_kind != "rental_fee":
                 raise ValidationError(
                     self.env._(
-                        "%(product)s is not a service, so it cannot bill a set "
+                        "%(product)s is not a rental fee, so it cannot bill a set "
                         "of equipment.",
                         product=template.display_name,
                     )
                 )
-
-    @api.constrains("rental_set_component_ids")
-    def _check_rental_set_component_ids(self):
-        for template in self.filtered("rental_set_component_ids"):
-            components = template.rental_set_component_ids
-            if template in components:
-                raise ValidationError(
-                    self.env._("A product cannot be a component of its own set.")
-                )
-            wrong_kind = components.filtered(
+            wrong_kind = template.rental_set_component_ids.filtered(
                 lambda p: p.product_kind not in RENTAL_SET_COMPONENT_KINDS
             )
             if wrong_kind:

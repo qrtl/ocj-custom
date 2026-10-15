@@ -26,10 +26,10 @@ Product Rental Fee Link
 
 |badge1| |badge2| |badge3|
 
-This module lets you record the products a rental fee service product
-bills, as the exact set it bills them in. It builds on
-``product_classification``, which is what tells equipment and
-accessories apart from the other goods.
+This module lets you record the products a rental fee product bills, as
+the exact set it bills them in. It builds on ``product_classification``,
+which is what tells equipment and accessories apart from the other
+goods.
 
 Rental fees are managed as service products, separate from the equipment
 itself, and nothing in the standard data model ties the two together. A
@@ -46,10 +46,9 @@ a set of one, so both directions are answered by the same relation.
 *exactly* the combination of products asked for, which is what turns a
 selection of equipment into the products that bill it. Several rental
 fee products may bill the same combination, and all of them are
-returned. The match is exact on purpose: whether a partly installed set
-is billed as the set or as its members individually is a billing
-decision, and nothing on the product records it - so the caller asks
-about each combination it wants priced.
+returned. ``_find_rental_sets_within()`` returns those whose set is
+*part of* the combination, for a combination no set matches exactly;
+which of them to propose is left to the caller.
 
 Consumables are not part of a set: they are billed on their own.
 
@@ -68,10 +67,11 @@ used as the source for integrations.
 Usage
 =====
 
-On a rental fee product - any service - the **Rental Set** tab holds
-**Set Components**: the equipment and accessories that this one product
-bills together. "Add a line" searches the existing equipment and
-accessories; consumables are billed on their own and are not offered.
+On a rental fee product (product kind *Rental Fee*), the **Rental Set**
+tab holds **Set Components**: the equipment and accessories that this
+one product bills together. "Add a line" searches the existing equipment
+and accessories; consumables are billed on their own and are not
+offered.
 
 Register a fee for a single machine as a set of one. That is what makes
 the product findable both ways: from the machine, and from a lookup that
