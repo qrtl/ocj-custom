@@ -20,7 +20,7 @@
                     <field
                         name="rental_set_component_ids"
                         invisible="product_kind != 'rental_fee'"
-                        domain="[('product_kind', 'in', ('equipment', 'accessory'))]"
+                        domain="[('product_kind', 'in', ('equipment', 'accessory')), ('active', '=', True)]"
                         options="{'no_quick_create': True}"
                     >
                         <list>
