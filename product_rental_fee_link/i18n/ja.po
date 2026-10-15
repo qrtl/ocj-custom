@@ -19,6 +19,15 @@ msgstr ""
 #. odoo-python
 #: code:addons/product_rental_fee_link/models/product_template.py:0
 msgid ""
+"%(fee)s bills a set containing this product. Archive the product instead, "
+"or remove it from the set first."
+msgstr ""
+"%(fee)s のセットにこの製品が含まれています。削除せずにアーカイブするか、先にセットから外してください。"
+
+#. module: product_rental_fee_link
+#. odoo-python
+#: code:addons/product_rental_fee_link/models/product_template.py:0
+msgid ""
 "%(product)s is neither equipment nor an accessory, so a rental fee set "
 "cannot contain it."
 msgstr "%(product)s は機器でも付属品でもないため、レンタル料のセットに含められません。"

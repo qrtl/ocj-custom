@@ -2,7 +2,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
 
 from odoo import Command
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
 from odoo.tests.common import TransactionCase
 
 
@@ -133,12 +133,11 @@ class TestProductRentalFeeSet(TransactionCase):
         self.assertFalse(self.Template._find_by_rental_set(self.demand_valve.ids))
         self.assertFalse(self.Template._find_rental_sets_within(self.demand_valve.ids))
 
-    def test_deleted_member_leaves_the_set(self):
+    def test_set_member_cannot_be_deleted(self):
         self._set_components(self.rental_fee, self.concentrator | self.demand_valve)
-        self.demand_valve.unlink()
-        self.assertEqual(
-            self.Template._find_by_rental_set(self.concentrator.ids), self.rental_fee
-        )
+        with self.assertRaises(UserError):
+            self.demand_valve.unlink()
+        self.flow_meter.unlink()
 
     def test_set_is_checked_from_the_member_side(self):
         self._set_components(self.rental_fee, self.demand_valve)

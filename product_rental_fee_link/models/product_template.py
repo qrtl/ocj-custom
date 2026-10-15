@@ -2,7 +2,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
 
 from odoo import api, fields, models
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
 
 # What a rental fee set may contain. Consumables are billed on their own, so
 # they are not part of the combination a set is identified by.
@@ -53,13 +53,19 @@ class ProductTemplate(models.Model):
                 template.rental_set_component_ids.ids
             )
 
-    def unlink(self):
-        # Deleting a member drops its relation rows in SQL, which recomputes
-        # nothing: the fees' keys must follow by hand.
+    @api.ondelete(at_uninstall=False)
+    def _unlink_except_rental_set_member(self):
+        # Deleting a member would quietly turn its set into a smaller one, as
+        # archiving deliberately does not.
         fees = self.with_context(active_test=False).rental_set_fee_tmpl_ids - self
-        res = super().unlink()
-        fees.modified(["rental_set_component_ids"])
-        return res
+        if fees:
+            raise UserError(
+                self.env._(
+                    "%(fee)s bills a set containing this product. Archive the "
+                    "product instead, or remove it from the set first.",
+                    fee=fees[0].display_name,
+                )
+            )
 
     @api.model
     def _rental_set_key(self, product_tmpl_ids):
