@@ -127,6 +127,20 @@ class TestProductRentalFeeSet(TransactionCase):
         with self.assertRaises(ValidationError):
             self.rental_fee.product_kind = False
 
+    def test_archived_member_stays_in_the_set(self):
+        self._set_components(self.rental_fee, self.concentrator | self.demand_valve)
+        self.concentrator.active = False
+        self.assertFalse(self.Template._find_by_rental_set(self.demand_valve.ids))
+        self.assertFalse(self.Template._find_rental_sets_within(self.demand_valve.ids))
+
+    def test_set_is_checked_from_the_member_side(self):
+        self._set_components(self.rental_fee, self.demand_valve)
+        with self.assertRaises(ValidationError):
+            self.demand_valve.product_kind = "consumable"
+        service = self.Template.create({"name": "Delivery", "type": "service"})
+        with self.assertRaises(ValidationError):
+            self.concentrator.rental_set_fee_tmpl_ids = [Command.link(service.id)]
+
     def test_find_rental_sets_within(self):
         single = self._create_fee("Concentrator Rental Fee")
         self._set_components(single, self.concentrator)

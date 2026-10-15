@@ -21,7 +21,10 @@ class ProductTemplate(models.Model):
         column1="fee_product_tmpl_id",
         column2="component_tmpl_id",
         string="Set Components",
-        domain=[("product_kind", "in", RENTAL_SET_COMPONENT_KINDS)],
+        # Archiving a member does not change what the set bills. The kinds are
+        # limited in the form and the constraint, not by a field domain, which
+        # would hide a reclassified member from the set instead of refusing it.
+        context={"active_test": False},
         help="Equipment and accessories this rental fee product bills as one "
         "set - e.g. a concentrator together with a demand valve and a flow "
         "meter.",
@@ -87,9 +90,15 @@ class ProductTemplate(models.Model):
             [("rental_set_component_ids", "in", components.ids)]
         ).filtered(lambda fee: fee.rental_set_component_ids <= components)
 
-    @api.constrains("rental_set_component_ids", "product_kind")
+    @api.constrains(
+        "rental_set_component_ids", "rental_set_fee_tmpl_ids", "product_kind"
+    )
     def _check_rental_set_component_ids(self):
-        for template in self.filtered("rental_set_component_ids"):
+        # A set is checked from either side: a member's kind or membership can
+        # change without the fee being written.
+        templates = self.with_context(active_test=False)
+        fees = templates | templates.rental_set_fee_tmpl_ids
+        for template in fees.filtered("rental_set_component_ids"):
             if template.product_kind != "rental_fee":
                 raise ValidationError(
                     self.env._(
