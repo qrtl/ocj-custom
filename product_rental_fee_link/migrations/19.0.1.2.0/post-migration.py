@@ -60,22 +60,22 @@ def _read_pairs(cr):
         cr.execute(query)
         pairs = cr.fetchall()
         if pairs:
-            return pairs
-    return []
+            return pairs, table == SOURCES[0][0]
+    return [], False
 
 
 def migrate(cr, version):
     """Carry the sets over to template components, then drop the old tables.
 
     A set read from variants becomes the set of their products; a link from an
-    earlier version becomes a set of the equipment it linked. The key is
+    earlier version becomes a set of the one product it linked. The key is
     rebuilt for every product, since one stored from variant ids names other
     records. A row the constraints refuse is named in the log rather than
     guessed at, with its components, so it can be entered by hand.
     """
     if not version:
         return
-    pairs = _read_pairs(cr)
+    pairs, from_set = _read_pairs(cr)
     cr.execute(
         "UPDATE product_template SET rental_set_key = NULL "
         "WHERE rental_set_key IS NOT NULL"
@@ -91,6 +91,15 @@ def migrate(cr, version):
         fee = Template.browse(fee_id).exists()
         components = Template.browse(list(component_ids)).exists()
         if not fee or not components:
+            continue
+        if not from_set and len(components) > 1:
+            # A link said "may bill this machine": several links are several
+            # sets, which one fee cannot carry.
+            _logger.warning(
+                "%s: links %s, not converted",
+                fee.display_name,
+                ", ".join(components.mapped("display_name")),
+            )
             continue
         try:
             # A savepoint per row, flushed inside it: a row the constraints
