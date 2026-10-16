@@ -1,0 +1,65 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* partner_collection_method
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: partner_collection_method
+#: model:ir.model.fields.selection,name:partner_collection_method.selection__res_partner__collection_method__bank_transfer
+msgid "Bank Transfer"
+msgstr "振込"
+
+#. module: partner_collection_method
+#: model:ir.model.fields,field_description:partner_collection_method.field_res_partner__collection_company
+msgid "Collection Company"
+msgstr "回収会社"
+
+#. module: partner_collection_method
+#: model:ir.model.fields,field_description:partner_collection_method.field_res_partner__collection_method
+msgid "Collection Method"
+msgstr "回収方法"
+
+#. module: partner_collection_method
+#: model:ir.model.fields,help:partner_collection_method.field_res_partner__collection_company
+msgid "Company that handles direct debit collection for this customer."
+msgstr "この顧客の口座振替を取り扱う回収会社。"
+
+#. module: partner_collection_method
+#: model:ir.model.fields.selection,name:partner_collection_method.selection__res_partner__collection_method__direct_debit
+msgid "Direct Debit"
+msgstr "口座振替"
+
+#. module: partner_collection_method
+#: model:ir.model.fields.selection,name:partner_collection_method.selection__res_partner__collection_method__electronic_receivable
+msgid "Electronic Receivable"
+msgstr "電子債権"
+
+#. module: partner_collection_method
+#: model:ir.model.fields,help:partner_collection_method.field_res_partner__collection_method
+msgid "How payment is collected from this customer."
+msgstr "この顧客からの回収方法。"
+
+#. module: partner_collection_method
+#: model:ir.model.fields.selection,name:partner_collection_method.selection__res_partner__collection_company__mitsuuroko
+msgid "Mitsuuroko"
+msgstr "ミツウロコ"
+
+#. module: partner_collection_method
+#: model:ir.model.fields.selection,name:partner_collection_method.selection__res_partner__collection_company__smbc
+msgid "SMBC"
+msgstr "SMBC"
+
+#. module: partner_collection_method
+#: model:ir.model.fields.selection,name:partner_collection_method.selection__res_partner__collection_company__widenet
+msgid "Widenet"
+msgstr "ワイドネット"
