@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-30 05:51+0000\n"
-"PO-Revision-Date: 2026-07-30 05:51+0000\n"
+"POT-Creation-Date: 2026-10-15 11:42+0000\n"
+"PO-Revision-Date: 2026-10-15 11:42+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,8 +18,25 @@ msgstr ""
 #. module: product_rental_fee_link
 #. odoo-python
 #: code:addons/product_rental_fee_link/models/product_template.py:0
-msgid "A product cannot be its own rental fee product."
-msgstr "プロダクト自身をレンタル費用品目に設定することはできません。"
+msgid ""
+"%(fee)s bills a set containing this product. Archive the product instead, "
+"or remove it from the set first."
+msgstr ""
+"%(fee)s のセットにこの製品が含まれています。削除せずにアーカイブするか、先にセットから外してください。"
+
+#. module: product_rental_fee_link
+#. odoo-python
+#: code:addons/product_rental_fee_link/models/product_template.py:0
+msgid ""
+"%(product)s is neither equipment nor an accessory, so a rental fee set "
+"cannot contain it."
+msgstr "%(product)s は機器でも付属品でもないため、レンタル料のセットに含められません。"
+
+#. module: product_rental_fee_link
+#. odoo-python
+#: code:addons/product_rental_fee_link/models/product_template.py:0
+msgid "%(product)s is not a rental fee, so it cannot bill a set of equipment."
+msgstr "%(product)s はレンタル料ではないため、セットを持てません。"
 
 #. module: product_rental_fee_link
 #: model:ir.model.fields,field_description:product_rental_fee_link.field_product_template__display_name
@@ -27,9 +44,17 @@ msgid "Display Name"
 msgstr "表示名"
 
 #. module: product_rental_fee_link
+#: model:ir.model.fields,help:product_rental_fee_link.field_product_product__rental_set_component_ids
+#: model:ir.model.fields,help:product_rental_fee_link.field_product_template__rental_set_component_ids
+msgid ""
+"Equipment and accessories this rental fee product bills as one set - e.g. a "
+"concentrator together with a demand valve and a flow meter."
+msgstr "このレンタル料が1つのセットとして請求する機器と付属品（例：濃縮器と呼吸同調器と流量計）。"
+
+#. module: product_rental_fee_link
 #: model:ir.model.fields,field_description:product_rental_fee_link.field_product_template__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: product_rental_fee_link
 #: model:ir.model,name:product_rental_fee_link.model_product_template
@@ -37,30 +62,49 @@ msgid "Product"
 msgstr "プロダクト"
 
 #. module: product_rental_fee_link
-#: model:ir.model.fields,field_description:product_rental_fee_link.field_product_product__rental_fee_product_tmpl_id
-#: model:ir.model.fields,field_description:product_rental_fee_link.field_product_template__rental_fee_product_tmpl_id
-msgid "Rental Fee Product"
-msgstr "レンタル費用品目"
+#: model_terms:ir.ui.view,arch_db:product_rental_fee_link.product_template_view_search
+msgid "Rental Fee Product Missing"
+msgstr "レンタル料 未設定"
+
+#. module: product_rental_fee_link
+#: model:ir.model.fields,field_description:product_rental_fee_link.field_product_product__rental_set_fee_tmpl_ids
+#: model:ir.model.fields,field_description:product_rental_fee_link.field_product_template__rental_set_fee_tmpl_ids
+msgid "Rental Fee Sets"
+msgstr "レンタル料セット"
+
+#. module: product_rental_fee_link
+#: model_terms:ir.ui.view,arch_db:product_rental_fee_link.product_template_view_form
+msgid "Rental Fees"
+msgstr "レンタル料"
 
 #. module: product_rental_fee_link
 #: model_terms:ir.ui.view,arch_db:product_rental_fee_link.product_template_view_search
-msgid "Rental Fee Product Missing"
-msgstr "レンタル費用品目 未設定"
+msgid "Rental Set"
+msgstr "レンタルセット"
 
 #. module: product_rental_fee_link
-#: model:ir.model.fields,help:product_rental_fee_link.field_product_product__rental_fee_product_tmpl_id
-#: model:ir.model.fields,help:product_rental_fee_link.field_product_template__rental_fee_product_tmpl_id
+#: model:ir.model.fields,help:product_rental_fee_link.field_product_product__rental_set_fee_tmpl_ids
+#: model:ir.model.fields,help:product_rental_fee_link.field_product_template__rental_set_fee_tmpl_ids
+msgid "Rental fee products whose set contains this product."
+msgstr "この製品をセットに含むレンタル料。"
+
+#. module: product_rental_fee_link
+#: model:ir.model.fields,field_description:product_rental_fee_link.field_product_product__rental_set_component_ids
+#: model:ir.model.fields,field_description:product_rental_fee_link.field_product_template__rental_set_component_ids
+#: model_terms:ir.ui.view,arch_db:product_rental_fee_link.product_template_view_form
+msgid "Set Components"
+msgstr "セット構成"
+
+#. module: product_rental_fee_link
+#: model:ir.model.fields,field_description:product_rental_fee_link.field_product_product__rental_set_key
+#: model:ir.model.fields,field_description:product_rental_fee_link.field_product_template__rental_set_key
+msgid "Set Key"
+msgstr "セットキー"
+
+#. module: product_rental_fee_link
+#: model:ir.model.fields,help:product_rental_fee_link.field_product_product__rental_set_key
+#: model:ir.model.fields,help:product_rental_fee_link.field_product_template__rental_set_key
 msgid ""
-"Service product used to bill the rental of this equipment. The rental fee is"
-" managed as a product separate from the equipment itself, so this link is "
-"what ties the two together - e.g. to derive the product codes to send to an "
-"external system from the variants of the rental fee product."
-msgstr ""
-"この機種の課金に使うレンタル費用品目。レンタル費用は機器そのものとは別の品目として管理するため、両者を結びつけるのはこの項目です"
-"（例: 外部システムへ配信する商品CDを、レンタル費用品目のバリアントから導出する）。"
-
-#. module: product_rental_fee_link
-#. odoo-python
-#: code:addons/product_rental_fee_link/models/product_template.py:0
-msgid "The rental fee product must be a service, but %(product)s is not."
-msgstr "レンタル費用品目はサービス品目でなければなりません（%(product)s はサービス品目ではありません）。"
+"The components as an order-independent key. It is what turns looking up a "
+"combination into an indexed equality search."
+msgstr "構成を順序に依存しないキーにしたもの。組合せの照会をインデックス付きの一致検索にする。"
