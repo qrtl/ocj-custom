@@ -74,6 +74,10 @@ msgstr "レンタル料セット"
 
 #. module: product_rental_fee_link
 #: model_terms:ir.ui.view,arch_db:product_rental_fee_link.product_template_view_form
+msgid "Rental Fees"
+msgstr "レンタル料"
+
+#. module: product_rental_fee_link
 #: model_terms:ir.ui.view,arch_db:product_rental_fee_link.product_template_view_search
 msgid "Rental Set"
 msgstr "レンタルセット"
@@ -87,6 +91,7 @@ msgstr "この製品をセットに含むレンタル料。"
 #. module: product_rental_fee_link
 #: model:ir.model.fields,field_description:product_rental_fee_link.field_product_product__rental_set_component_ids
 #: model:ir.model.fields,field_description:product_rental_fee_link.field_product_template__rental_set_component_ids
+#: model_terms:ir.ui.view,arch_db:product_rental_fee_link.product_template_view_form
 msgid "Set Components"
 msgstr "セット構成"
 

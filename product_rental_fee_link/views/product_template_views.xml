@@ -8,18 +8,17 @@
             ref="product_classification.product_template_view_form"
         />
         <field name="arch" type="xml">
-            <!-- One page for both directions of the same relation: what a
-                 rental fee bills, and which rental fees bill a product. A
-                 page rather than a group, because each side is a list. -->
+            <!-- One page per direction of the relation, never both on one
+                 product. A list directly in a page shows no label, so the page
+                 title is the only thing that says which side the rows are. -->
             <xpath expr="//page[@name='general_information']" position="after">
                 <page
-                    name="rental_set"
-                    string="Rental Set"
-                    invisible="product_kind not in ('equipment', 'accessory', 'rental_fee')"
+                    name="rental_set_components"
+                    string="Set Components"
+                    invisible="product_kind != 'rental_fee'"
                 >
                     <field
                         name="rental_set_component_ids"
-                        invisible="product_kind != 'rental_fee'"
                         domain="[('product_kind', 'in', ('equipment', 'accessory')), ('active', '=', True)]"
                         options="{'no_quick_create': True}"
                     >
@@ -30,26 +29,24 @@
                             <field name="equipment_classification_id" />
                         </list>
                     </field>
+                    <group>
+                        <field name="rental_set_key" groups="base.group_no_one" />
+                    </group>
+                </page>
+                <page
+                    name="rental_set_fees"
+                    string="Rental Fees"
+                    invisible="product_kind not in ('equipment', 'accessory')"
+                >
                     <!-- Read-only: a set is maintained from the rental fee
                          product, which is where it is one list rather than one
                          row per member. -->
-                    <field
-                        name="rental_set_fee_tmpl_ids"
-                        invisible="product_kind == 'rental_fee'"
-                        readonly="1"
-                    >
+                    <field name="rental_set_fee_tmpl_ids" readonly="1">
                         <list>
                             <field name="default_code" />
                             <field name="name" />
                         </list>
                     </field>
-                    <group>
-                        <field
-                            name="rental_set_key"
-                            groups="base.group_no_one"
-                            invisible="product_kind != 'rental_fee'"
-                        />
-                    </group>
                 </page>
             </xpath>
         </field>
