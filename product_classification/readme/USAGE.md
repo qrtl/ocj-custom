@@ -6,6 +6,11 @@ To classify a product:
    the **Manufacturer** and the relevant classification. The equipment
    classification field appears when the kind is equipment, accessory or rental
    fee.
+3. Set the **Middle Category** and then the **Minor Category**. Only the middle
+   categories under the product category (or one of its parents) can be
+   selected, and once a middle category is set, only the minor categories under
+   it. Changing the product category or the middle category clears a lower
+   category that no longer belongs to it.
 
 *Rental Fee* is the one kind that is not goods: it is the service billed for
 renting equipment, and it carries the classification of the equipment the fee is

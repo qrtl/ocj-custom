@@ -33,12 +33,13 @@ Each product can be flagged as **equipment**, **accessory**,
 **consumable** or **rental fee** (*Product Kind*) and linked to a
 **Manufacturer** (メーカー), then given a classification:
 
--  **Equipment Classification** (機器分類) for equipment and
-   accessories, and for the rental fee charged against equipment of that
-   classification.
+- **Equipment Classification** (機器分類) for equipment and accessories,
+  and for the rental fee charged against equipment of that
+  classification.
 
 Products can also be given a **Middle Category** (中分類) and a **Minor
-Category** (小分類).
+Category** (小分類). A middle category can belong to a product category
+(the major category), and a minor category to a middle category.
 
 Each axis is backed by a dedicated, user-maintainable model holding a
 name and an optional code (a numeric code is preferred for integration
@@ -77,6 +78,11 @@ To classify a product:
    fee), the **Manufacturer** and the relevant classification. The
    equipment classification field appears when the kind is equipment,
    accessory or rental fee.
+3. Set the **Middle Category** and then the **Minor Category**. Only the
+   middle categories under the product category (or one of its parents)
+   can be selected, and once a middle category is set, only the minor
+   categories under it. Changing the product category or the middle
+   category clears a lower category that no longer belongs to it.
 
 *Rental Fee* is the one kind that is not goods: it is the service billed
 for renting equipment, and it carries the classification of the

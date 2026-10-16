@@ -8,6 +8,7 @@
                 <field name="sequence" widget="handle" />
                 <field name="name" />
                 <field name="code" />
+                <field name="categ_id" options="{'no_create': True}" />
             </list>
         </field>
     </record>
