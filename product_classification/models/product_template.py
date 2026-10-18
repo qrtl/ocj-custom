@@ -34,13 +34,36 @@ class ProductTemplate(models.Model):
     middle_category_id = fields.Many2one(
         comodel_name="product.middle.category",
         string="Middle Category",
-        help="Middle-level product category.",
+        domain="[('categ_id', 'parent_of', categ_id)]",
+        help="Middle-level product category. Only the middle categories under "
+        "the product category or one of its parents can be selected.",
     )
     minor_category_id = fields.Many2one(
         comodel_name="product.minor.category",
         string="Minor Category",
-        help="Minor-level product category.",
+        domain="[('middle_category_id', '=?', middle_category_id)]",
+        help="Minor-level product category. Once a middle category is set, only "
+        "the minor categories under it can be selected.",
     )
+
+    @api.onchange("categ_id")
+    def _onchange_categ_id(self):
+        # Mirror the 'parent_of' domain of the field: the middle category stays
+        # only while its product category is the product's or one of its parents.
+        middle_categ = self.middle_category_id.categ_id
+        if self.middle_category_id and not (
+            middle_categ
+            and (self.categ_id.parent_path or "").startswith(middle_categ.parent_path)
+        ):
+            self.middle_category_id = False
+
+    @api.onchange("middle_category_id")
+    def _onchange_middle_category_id(self):
+        if (
+            self.minor_category_id
+            and self.minor_category_id.middle_category_id != self.middle_category_id
+        ):
+            self.minor_category_id = False
 
     @api.constrains("product_kind", "equipment_classification_id")
     def _check_equipment_classification(self):

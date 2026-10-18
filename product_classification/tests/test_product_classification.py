@@ -4,6 +4,7 @@
 from psycopg2 import IntegrityError
 
 from odoo.exceptions import ValidationError
+from odoo.tests import Form
 from odoo.tests.common import TransactionCase
 from odoo.tools import mute_logger
 
@@ -114,3 +115,52 @@ class TestProductClassification(TransactionCase):
             self.env["product.manufacturer"].create(
                 {"name": "Duplicate", "code": "300"}
             )
+
+    def test_minor_category_belongs_to_middle_category(self):
+        categ = self.env["product.category"].create({"name": "Consumables"})
+        middle = self.env["product.middle.category"].create(
+            {"name": "Filters", "categ_id": categ.id}
+        )
+        minor = self.env["product.minor.category"].create(
+            {"name": "Standard Filter", "middle_category_id": middle.id}
+        )
+        self.assertEqual(minor.middle_category_id, middle)
+        self.assertEqual(minor.middle_category_id.categ_id, categ)
+
+    def test_change_middle_category_clears_minor_category(self):
+        middle_1 = self.env["product.middle.category"].create({"name": "Filters"})
+        middle_2 = self.env["product.middle.category"].create({"name": "Tubes"})
+        minor = self.env["product.minor.category"].create(
+            {"name": "Standard Filter", "middle_category_id": middle_1.id}
+        )
+        with Form(self.product) as form:
+            form.middle_category_id = middle_1
+            form.minor_category_id = minor
+            form.middle_category_id = middle_2
+            self.assertFalse(form.minor_category_id)
+            form.middle_category_id = middle_1
+            form.minor_category_id = minor
+        self.assertEqual(self.product.minor_category_id, minor)
+
+    def test_change_categ_clears_middle_and_minor_category(self):
+        categ_1 = self.env["product.category"].create({"name": "Consumables"})
+        categ_1_child = self.env["product.category"].create(
+            {"name": "Filters", "parent_id": categ_1.id}
+        )
+        categ_2 = self.env["product.category"].create({"name": "Equipment"})
+        middle = self.env["product.middle.category"].create(
+            {"name": "Filters", "categ_id": categ_1.id}
+        )
+        minor = self.env["product.minor.category"].create(
+            {"name": "Standard Filter", "middle_category_id": middle.id}
+        )
+        with Form(self.product) as form:
+            form.categ_id = categ_1
+            form.middle_category_id = middle
+            form.minor_category_id = minor
+            # A child of the middle category's product category keeps it.
+            form.categ_id = categ_1_child
+            self.assertEqual(form.middle_category_id, middle)
+            form.categ_id = categ_2
+            self.assertFalse(form.middle_category_id)
+            self.assertFalse(form.minor_category_id)
