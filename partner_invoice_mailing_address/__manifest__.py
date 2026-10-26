@@ -1,5 +1,5 @@
 # Copyright 2026 Quartile (https://www.quartile.co)
-# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     "name": "Partner Invoice Mailing Address",
     "version": "19.0.1.0.0",
@@ -7,7 +7,7 @@
     "website": "https://www.quartile.co",
     "author": "Quartile",
     "maintainers": ["smorita7749"],
-    "license": "LGPL-3",
+    "license": "AGPL-3",
     "summary": "Print a customer's invoice mailing address on invoices and summary "
     "invoices",
     "installable": True,
