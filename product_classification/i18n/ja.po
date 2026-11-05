@@ -217,11 +217,17 @@ msgid "Middle Categories"
 msgstr "中分類"
 
 #. module: product_classification
+#: model:ir.model.fields,field_description:product_classification.field_product_minor_category__middle_category_id
 #: model:ir.model.fields,field_description:product_classification.field_product_product__middle_category_id
 #: model:ir.model.fields,field_description:product_classification.field_product_template__middle_category_id
 #: model_terms:ir.ui.view,arch_db:product_classification.product_template_view_search
 msgid "Middle Category"
 msgstr "中分類"
+
+#. module: product_classification
+#: model:ir.model.fields,help:product_classification.field_product_minor_category__middle_category_id
+msgid "Middle category this minor category belongs to."
+msgstr "この小分類が属する中分類。"
 
 #. module: product_classification
 #: model:ir.model.fields,help:product_classification.field_product_product__middle_category_id
@@ -245,8 +251,10 @@ msgstr "小分類"
 #. module: product_classification
 #: model:ir.model.fields,help:product_classification.field_product_product__minor_category_id
 #: model:ir.model.fields,help:product_classification.field_product_template__minor_category_id
-msgid "Minor-level product category."
-msgstr "プロダクトの小分類。"
+msgid ""
+"Minor-level product category. Once a middle category is set, only the minor "
+"categories under it can be selected."
+msgstr "プロダクトの小分類。中分類を設定すると、その中分類に属する小分類だけを選択できます。"
 
 #. module: product_classification
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__name
