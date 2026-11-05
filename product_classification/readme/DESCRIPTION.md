@@ -9,8 +9,7 @@ given a classification:
   the rental fee charged against equipment of that classification.
 
 Products can also be given a **Middle Category** (中分類) and a **Minor
-Category** (小分類). A middle category can belong to a product category (the
-major category), and a minor category to a middle category.
+Category** (小分類). A minor category can belong to a middle category.
 
 Each axis is backed by a dedicated, user-maintainable model holding a name and
 an optional code (a numeric code is preferred for integration with external
