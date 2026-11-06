@@ -11,21 +11,22 @@
                  customer kind) rather than on a tab of its own, which the
                  sibling modules also avoid. The policy is the company's and
                  syncs downward only, so a contact shows it read-only, as core
-                 does for company_id on this tab. -->
+                 does for company_id on this tab. A separator rather than a
+                 nested group: a group holding a group is laid out as an outer
+                 group, which drops the labels of the sale fields around it. -->
             <xpath expr="//group[@name='sale']" position="inside">
-                <group name="billing_policy" string="Billing Policy" colspan="2">
-                    <field name="prorated_billing" readonly="parent_id" />
-                    <field
-                        name="prorate_installation_month"
-                        readonly="parent_id"
-                        invisible="not prorated_billing"
-                    />
-                    <field
-                        name="prorate_collection_month"
-                        readonly="parent_id"
-                        invisible="not prorated_billing"
-                    />
-                </group>
+                <separator name="billing_policy" string="Billing Policy" />
+                <field name="prorated_billing" readonly="parent_id" />
+                <field
+                    name="prorate_installation_month"
+                    readonly="parent_id"
+                    invisible="not prorated_billing"
+                />
+                <field
+                    name="prorate_collection_month"
+                    readonly="parent_id"
+                    invisible="not prorated_billing"
+                />
             </xpath>
             <!-- 全請求／部分請求 is a condition of the vendor contract, so it
                  sits with the purchase terms. -->
