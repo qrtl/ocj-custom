@@ -4,6 +4,7 @@
 from psycopg2 import IntegrityError
 
 from odoo.exceptions import ValidationError
+from odoo.tests import Form
 from odoo.tests.common import TransactionCase
 from odoo.tools import mute_logger
 
@@ -114,3 +115,18 @@ class TestProductClassification(TransactionCase):
             self.env["product.manufacturer"].create(
                 {"name": "Duplicate", "code": "300"}
             )
+
+    def test_change_middle_category_clears_minor_category(self):
+        middle_1 = self.env["product.middle.category"].create({"name": "Filters"})
+        middle_2 = self.env["product.middle.category"].create({"name": "Tubes"})
+        minor = self.env["product.minor.category"].create(
+            {"name": "Standard Filter", "middle_category_id": middle_1.id}
+        )
+        with Form(self.product) as form:
+            form.middle_category_id = middle_1
+            form.minor_category_id = minor
+            form.middle_category_id = middle_2
+            self.assertFalse(form.minor_category_id)
+            form.middle_category_id = middle_1
+            form.minor_category_id = minor
+        self.assertEqual(self.product.minor_category_id, minor)

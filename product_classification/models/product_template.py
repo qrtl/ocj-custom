@@ -39,8 +39,18 @@ class ProductTemplate(models.Model):
     minor_category_id = fields.Many2one(
         comodel_name="product.minor.category",
         string="Minor Category",
-        help="Minor-level product category.",
+        domain="[('middle_category_id', '=?', middle_category_id)]",
+        help="Minor-level product category. Once a middle category is set, only "
+        "the minor categories under it can be selected.",
     )
+
+    @api.onchange("middle_category_id")
+    def _onchange_middle_category_id(self):
+        if (
+            self.minor_category_id
+            and self.minor_category_id.middle_category_id != self.middle_category_id
+        ):
+            self.minor_category_id = False
 
     @api.constrains("product_kind", "equipment_classification_id")
     def _check_equipment_classification(self):

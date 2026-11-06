@@ -381,12 +381,12 @@ consumables can be categorized consistently.</p>
 <strong>consumable</strong> or <strong>rental fee</strong> (<em>Product Kind</em>) and linked to a
 <strong>Manufacturer</strong> (メーカー), then given a classification:</p>
 <ul class="simple">
-<li><strong>Equipment Classification</strong> (機器分類) for equipment and
-accessories, and for the rental fee charged against equipment of that
+<li><strong>Equipment Classification</strong> (機器分類) for equipment and accessories,
+and for the rental fee charged against equipment of that
 classification.</li>
 </ul>
 <p>Products can also be given a <strong>Middle Category</strong> (中分類) and a <strong>Minor
-Category</strong> (小分類).</p>
+Category</strong> (小分類). A minor category can belong to a middle category.</p>
 <p>Each axis is backed by a dedicated, user-maintainable model holding a
 name and an optional code (a numeric code is preferred for integration
 with external systems). Several fields feed the <strong>Navi in Flow</strong>
@@ -429,6 +429,10 @@ Information</em> tab, below the product category and pricing.</li>
 fee), the <strong>Manufacturer</strong> and the relevant classification. The
 equipment classification field appears when the kind is equipment,
 accessory or rental fee.</li>
+<li>Set the <strong>Middle Category</strong> and then the <strong>Minor Category</strong>. Once a
+middle category is set, only the minor categories under it can be
+selected, and changing the middle category clears a minor category
+that no longer belongs to it.</li>
 </ol>
 <p><em>Rental Fee</em> is the one kind that is not goods: it is the service billed
 for renting equipment, and it carries the classification of the
