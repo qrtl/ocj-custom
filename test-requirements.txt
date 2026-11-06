@@ -1,0 +1,3 @@
+odoo-addon-account_billing @ git+https://github.com/qrtl/ocj-oca@19.0#subdirectory=account_billing
+odoo-addon-report_alternative_layout @ git+https://github.com/qrtl/ocj-oca@19.0#subdirectory=report_alternative_layout
+odoo-addon-l10n_jp_summary_invoice @ git+https://github.com/qrtl/ocj-oca@19.0#subdirectory=l10n_jp_summary_invoice

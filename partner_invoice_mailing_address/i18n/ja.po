@@ -1,0 +1,52 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* partner_invoice_mailing_address
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-26 10:18+0000\n"
+"PO-Revision-Date: 2026-10-26 10:18+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: partner_invoice_mailing_address
+#: model:ir.model.fields,help:partner_invoice_mailing_address.field_res_partner__invoice_mailing_address
+#: model:ir.model.fields,help:partner_invoice_mailing_address.field_res_users__invoice_mailing_address
+msgid ""
+"Address printed on customer invoices and summary invoices in place of the "
+"customer's own address. The customer's name and phone are printed as usual."
+msgstr "顧客請求書と合計請求書に、取引先自身の住所に代えて印字する住所です。取引先名と電話番号は通常どおり印字されます。"
+
+#. module: partner_invoice_mailing_address
+#: model:ir.model,name:partner_invoice_mailing_address.model_res_partner
+msgid "Contact"
+msgstr "連絡先"
+
+#. module: partner_invoice_mailing_address
+#: model:ir.model.fields,field_description:partner_invoice_mailing_address.field_ir_actions_report__display_name
+#: model:ir.model.fields,field_description:partner_invoice_mailing_address.field_res_partner__display_name
+msgid "Display Name"
+msgstr "表示名"
+
+#. module: partner_invoice_mailing_address
+#: model:ir.model.fields,field_description:partner_invoice_mailing_address.field_ir_actions_report__id
+#: model:ir.model.fields,field_description:partner_invoice_mailing_address.field_res_partner__id
+msgid "ID"
+msgstr ""
+
+#. module: partner_invoice_mailing_address
+#: model:ir.model.fields,field_description:partner_invoice_mailing_address.field_res_partner__invoice_mailing_address
+#: model:ir.model.fields,field_description:partner_invoice_mailing_address.field_res_users__invoice_mailing_address
+msgid "Invoice Mailing Address"
+msgstr "請求書送付先"
+
+#. module: partner_invoice_mailing_address
+#: model:ir.model,name:partner_invoice_mailing_address.model_ir_actions_report
+msgid "Report Action"
+msgstr "レポートアクション"
