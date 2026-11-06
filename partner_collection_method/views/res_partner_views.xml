@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Quartile (https://www.quartile.co)
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl). -->
+<odoo>
+    <record
+        id="view_partner_property_form_inherit_collection_method"
+        model="ir.ui.view"
+    >
+        <field name="name">res.partner.property.form.inherit.collection.method</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="account.view_partner_property_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='property_payment_term_id']" position="after">
+                <field name="collection_method" />
+                <field
+                    name="collection_company"
+                    invisible="collection_method != 'direct_debit'"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
