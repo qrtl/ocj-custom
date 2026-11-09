@@ -27,7 +27,7 @@ Partner Collection Method
 |badge1| |badge2| |badge3|
 
 This module adds a collection method field to partners (bank transfer /
-direct debit / electronic receivable), and, when direct debit is
+direct debit / electronic receivable / cash), and, when direct debit is
 selected, which company handles the collection.
 
 **Table of contents**

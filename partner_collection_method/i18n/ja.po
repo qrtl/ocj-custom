@@ -25,6 +25,11 @@ msgid "Collection Company"
 msgstr "回収会社"
 
 #. module: partner_collection_method
+#: model:ir.model.fields.selection,name:partner_collection_method.selection__res_partner__collection_method__cash
+msgid "Cash"
+msgstr "現金"
+
+#. module: partner_collection_method
 #: model:ir.model.fields,field_description:partner_collection_method.field_res_partner__collection_method
 msgid "Collection Method"
 msgstr "回収方法"

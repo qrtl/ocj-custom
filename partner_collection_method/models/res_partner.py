@@ -12,6 +12,7 @@ class ResPartner(models.Model):
             ("bank_transfer", "Bank Transfer"),
             ("direct_debit", "Direct Debit"),
             ("electronic_receivable", "Electronic Receivable"),
+            ("cash", "Cash"),
         ],
         help="How payment is collected from this customer.",
     )
