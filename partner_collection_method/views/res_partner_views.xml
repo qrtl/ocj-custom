@@ -11,10 +11,14 @@
         <field name="inherit_id" ref="account.view_partner_property_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='property_payment_term_id']" position="after">
-                <field name="collection_method" />
+                <field
+                    name="collection_method"
+                    groups="account.group_account_invoice,account.group_account_readonly"
+                />
                 <field
                     name="collection_company"
                     invisible="collection_method != 'direct_debit'"
+                    groups="account.group_account_invoice,account.group_account_readonly"
                 />
             </xpath>
         </field>
