@@ -1,6 +1,7 @@
 # Copyright 2026 Quartile (https://www.quartile.co)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
 
+from odoo import Command
 from odoo.exceptions import UserError
 from odoo.tests.common import TransactionCase
 
@@ -147,6 +148,42 @@ class TestLocationTrackingRestriction(TransactionCase):
         )
         with self.assertRaises(UserError):
             move.move_line_ids.location_dest_id = self.tracked_location
+
+    def test_product_added_to_done_transfer(self):
+        # A move added to a done transfer is done on creation, without _action_done().
+        receipt_type = self.env.ref("stock.picking_type_in")
+        picking = self.env["stock.picking"].create(
+            {
+                "picking_type_id": receipt_type.id,
+                "location_id": self.supplier_location.id,
+                "location_dest_id": self.quantity_location.id,
+                "move_ids": [
+                    Command.create(
+                        {
+                            "product_id": self.untracked_product.id,
+                            "product_uom_qty": 1.0,
+                            "location_id": self.supplier_location.id,
+                            "location_dest_id": self.quantity_location.id,
+                        }
+                    )
+                ],
+            }
+        )
+        picking.action_assign()
+        picking.move_ids.picked = True
+        picking._action_done()
+        self.assertEqual(picking.state, "done")
+        with self.assertRaisesRegex(UserError, "is tracked by serial or lot"):
+            self.env["stock.move"].create(
+                {
+                    "picking_id": picking.id,
+                    "product_id": self.lot_product.id,
+                    "product_uom_qty": 1.0,
+                    "quantity": 1.0,
+                    "location_id": self.supplier_location.id,
+                    "location_dest_id": self.quantity_location.id,
+                }
+            )
 
     def test_error_lists_every_product(self):
         other_product = self.env["product.product"].create(

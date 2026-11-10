@@ -3,12 +3,6 @@
 
 from odoo import fields, models
 
-# The product trackings each restriction accepts.
-ACCEPTED_TRACKINGS = {
-    "tracked": {"serial", "lot"},
-    "quantity": {"none"},
-}
-
 
 class StockLocation(models.Model):
     _inherit = "stock.location"

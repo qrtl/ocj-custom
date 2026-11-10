@@ -8,7 +8,7 @@
     "author": "Quartile",
     "maintainers": ["kanda999"],
     "license": "LGPL-3",
-    "summary": "Limit the products a location accepts to serial- or lot-tracked ones",
+    "summary": "Limit the products a location accepts by how they are tracked",
     "installable": True,
     "depends": ["stock"],
     "data": [

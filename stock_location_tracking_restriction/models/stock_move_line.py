@@ -1,14 +1,22 @@
 # Copyright 2026 Quartile (https://www.quartile.co)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
 
-from odoo import models
+from odoo import api, models
 from odoo.exceptions import UserError
-
-from .stock_location import ACCEPTED_TRACKINGS
 
 
 class StockMoveLine(models.Model):
     _inherit = "stock.move.line"
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        mls = super().create(vals_list)
+        # A line added to a done transfer moves its stock in create(), without
+        # going through _action_done().
+        mls.filtered(
+            lambda ml: ml.state == "done"
+        )._check_product_tracking_restriction()
+        return mls
 
     def write(self, vals):
         res = super().write(vals)
@@ -28,10 +36,11 @@ class StockMoveLine(models.Model):
             restriction = location._get_product_tracking_restriction()
             if not restriction:
                 continue
+            accepted = {"serial", "lot"} if restriction == "tracked" else {"none"}
             products = lines.filtered(
-                lambda ml, location=location, restriction=restriction: (
+                lambda ml, location=location, accepted=accepted: (
                     ml.location_dest_id == location
-                    and ml.product_id.tracking not in ACCEPTED_TRACKINGS[restriction]
+                    and ml.product_id.tracking not in accepted
                 )
             ).product_id
             for product in products:
