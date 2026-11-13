@@ -40,3 +40,14 @@ class TestPartnerPayer(TransactionCase):
         self.member.payer_partner_id = False
         self.assertFalse(child.payer_partner_id)
         self.assertNotIn(self.member.id, self.payer._get_paid_for_partner_ids())
+
+    def test_archived_child_stale_payer_ignored(self):
+        """Core sync skips archived children, so their stale payer must not count."""
+        child = self.env["res.partner"].create(
+            {"name": "Billing", "type": "invoice", "parent_id": self.member.id}
+        )
+        child.action_archive()
+        self.member.payer_partner_id = False
+        self.assertNotIn(self.member.id, self.payer._get_paid_for_partner_ids())
+        self.payer.payer_partner_id = self.outer
+        self.assertEqual(self.payer.payer_partner_id, self.outer)

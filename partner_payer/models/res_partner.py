@@ -23,6 +23,17 @@ class ResPartner(models.Model):
     def _commercial_fields(self):
         return super()._commercial_fields() + ["payer_partner_id"]
 
+    def _search_paid_for(self, limit=None):
+        return self.with_context(active_test=False).search(
+            [
+                ("payer_partner_id", "=", self.id),
+                "|",
+                ("is_company", "=", True),
+                ("parent_id", "=", False),
+            ],
+            limit=limit,
+        )
+
     @api.constrains("payer_partner_id")
     def _check_payer_partner_id(self):
         for partner in self:
@@ -50,9 +61,7 @@ class ResPartner(models.Model):
                 )
             # Same reason seen from the other side: a contact others already
             # point at as their payer cannot start being paid for itself.
-            if self.with_context(active_test=False).search_count(
-                [("payer_partner_id", "=", partner.id)], limit=1
-            ):
+            if partner._search_paid_for(limit=1):
                 raise ValidationError(
                     self.env._(
                         "%(name)s is the payer of other customers, so it cannot "
@@ -69,8 +78,4 @@ class ResPartner(models.Model):
         contact may be looking to settle.
         """
         self.ensure_one()
-        paid_for = self.with_context(active_test=False).search(
-            [("payer_partner_id", "=", self.id)]
-        )
-        partners = self | paid_for
-        return (partners | partners.commercial_partner_id).ids
+        return (self | self.commercial_partner_id | self._search_paid_for()).ids
