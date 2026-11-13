@@ -6,7 +6,7 @@
     "category": "Accounting/Accounting",
     "website": "https://www.quartile.co",
     "author": "Quartile",
-    "maintainer": "Quartile",
+    "maintainers": ["yostashiro"],
     "license": "LGPL-3",
     "summary": "Record the contact that settles a customer's invoices",
     "installable": True,

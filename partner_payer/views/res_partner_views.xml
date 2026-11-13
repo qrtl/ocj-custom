@@ -10,7 +10,8 @@
             <xpath expr="//field[@name='property_payment_term_id']" position="after">
                 <field
                     name="payer_partner_id"
-                    domain="[('id', '!=', id)]"
+                    domain="[('id', '!=', id), '|', ('is_company', '=', True), ('parent_id', '=', False)]"
+                    readonly="parent_id and not is_company"
                     context="{'default_is_company': True}"
                 />
             </xpath>
