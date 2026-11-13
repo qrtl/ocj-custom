@@ -12,8 +12,8 @@
                  sibling modules also avoid. The policy is the company's and
                  syncs downward only, so a contact shows it read-only, as core
                  does for company_id on this tab. -->
-            <xpath expr="//group[@name='sale']" position="inside">
-                <group name="billing_policy" string="Billing Policy" colspan="2">
+            <xpath expr="//group[@name='purchase']" position="after">
+                <group name="billing_policy" string="Billing Policy">
                     <field name="prorated_billing" readonly="parent_id" />
                     <field
                         name="prorate_installation_month"
