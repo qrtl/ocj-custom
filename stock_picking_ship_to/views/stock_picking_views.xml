@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="name">stock.picking.form.ship.to</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <page name="note" position="after">
+                <page
+                    name="integration"
+                    string="Integration"
+                    invisible="picking_type_code != 'outgoing'"
+                >
+                    <group>
+                        <group name="ship_to" string="Ship To">
+                            <field
+                                name="ship_to_name"
+                                readonly="state in ('done', 'cancel')"
+                            />
+                            <field
+                                name="ship_to_address"
+                                readonly="state in ('done', 'cancel')"
+                            />
+                            <field
+                                name="ship_to_phone"
+                                readonly="state in ('done', 'cancel')"
+                            />
+                        </group>
+                    </group>
+                </page>
+            </page>
+        </field>
+    </record>
+    <record id="vpicktree" model="ir.ui.view">
+        <field name="name">stock.picking.list.ship.to</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree" />
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="ship_to_name" optional="hide" />
+            </field>
+        </field>
+    </record>
+</odoo>
