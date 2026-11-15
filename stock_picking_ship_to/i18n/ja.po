@@ -26,6 +26,16 @@ msgid "ID"
 msgstr "ID"
 
 #. module: stock_picking_ship_to
+#: model_terms:ir.ui.view,arch_db:stock_picking_ship_to.view_picking_form
+msgid "Integration"
+msgstr "システム連携"
+
+#. module: stock_picking_ship_to
+#: model_terms:ir.ui.view,arch_db:stock_picking_ship_to.view_picking_form
+msgid "Ship To"
+msgstr "配送先"
+
+#. module: stock_picking_ship_to
 #: model:ir.model.fields,field_description:stock_picking_ship_to.field_stock_picking__ship_to_address
 msgid "Ship-to Address"
 msgstr "配送先住所"

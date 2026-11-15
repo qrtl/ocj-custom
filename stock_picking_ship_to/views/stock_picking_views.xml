@@ -5,23 +5,34 @@
         <field name="model">stock.picking</field>
         <field name="inherit_id" ref="stock.view_picking_form" />
         <field name="arch" type="xml">
-            <field name="partner_id" position="after">
-                <field
-                    name="ship_to_name"
-                    invisible="picking_type_code != 'outgoing'"
-                    readonly="state in ('done', 'cancel')"
-                />
-                <field
-                    name="ship_to_address"
-                    invisible="picking_type_code != 'outgoing'"
-                    readonly="state in ('done', 'cancel')"
-                />
-                <field
-                    name="ship_to_phone"
-                    invisible="picking_type_code != 'outgoing'"
-                    readonly="state in ('done', 'cancel')"
-                />
-            </field>
+            <page name="extra" position="before">
+                <page
+                    name="integration"
+                    string="Integration"
+                    invisible="picking_type_code == 'internal'"
+                >
+                    <group>
+                        <group
+                            name="ship_to"
+                            string="Ship To"
+                            invisible="picking_type_code != 'outgoing'"
+                        >
+                            <field
+                                name="ship_to_name"
+                                readonly="state in ('done', 'cancel')"
+                            />
+                            <field
+                                name="ship_to_address"
+                                readonly="state in ('done', 'cancel')"
+                            />
+                            <field
+                                name="ship_to_phone"
+                                readonly="state in ('done', 'cancel')"
+                            />
+                        </group>
+                    </group>
+                </page>
+            </page>
         </field>
     </record>
 </odoo>
