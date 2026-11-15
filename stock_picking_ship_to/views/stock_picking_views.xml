@@ -31,4 +31,14 @@
             </page>
         </field>
     </record>
+    <record id="vpicktree" model="ir.ui.view">
+        <field name="name">stock.picking.list.ship.to</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree" />
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="ship_to_name" optional="hide" />
+            </field>
+        </field>
+    </record>
 </odoo>
