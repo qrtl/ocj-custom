@@ -34,7 +34,7 @@ class TestShipTo(TransactionCase):
     def test_defaults_from_contact(self):
         # A contact's name keeps its company in front, as a carrier needs it.
         picking = self._picking(partner_id=self.contact.id)
-        self.assertEqual(picking.ship_to_name, "Clinic　Ward 3")
+        self.assertEqual(picking.ship_to_name, "Clinic, Ward 3")
         self.assertEqual(picking.ship_to_address, "東京都港区高輪2-19-17")
         self.assertEqual(picking.ship_to_phone, "03-0000-0000")
 

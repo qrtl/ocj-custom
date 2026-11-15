@@ -33,8 +33,8 @@ systems that take the destination as text.
 
 The fields default from the transfer's partner and stay editable:
 
-- **name**: the partner's name, or for a contact, its company and its
-  name joined by a full-width space;
+- **name**: the partner's display name (for a contact, its company and
+  its name);
 - **address**: state, city, street and street 2 on one line, in Japanese
   order;
 - **phone**: the partner's phone.

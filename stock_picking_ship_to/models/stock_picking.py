@@ -3,8 +3,6 @@
 
 from odoo import api, fields, models
 
-SEPARATOR = "　"
-
 
 class StockPicking(models.Model):
     _inherit = "stock.picking"
@@ -30,13 +28,6 @@ class StockPicking(models.Model):
     )
 
     @api.model
-    def _ship_to_name(self, partner):
-        if partner.parent_id and not partner.is_company:
-            names = (partner.parent_id.name, partner.name)
-            return SEPARATOR.join(name for name in names if name) or False
-        return partner.name or False
-
-    @api.model
     def _ship_to_address(self, partner):
         parts = (partner.state_id.name, partner.city, partner.street, partner.street2)
         return "".join(part for part in parts if part) or False
@@ -45,6 +36,6 @@ class StockPicking(models.Model):
     def _compute_ship_to(self):
         for picking in self:
             partner = picking.partner_id
-            picking.ship_to_name = picking._ship_to_name(partner)
+            picking.ship_to_name = partner.display_name or False
             picking.ship_to_address = picking._ship_to_address(partner)
             picking.ship_to_phone = partner.phone or False
