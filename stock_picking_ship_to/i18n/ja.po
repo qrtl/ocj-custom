@@ -48,4 +48,4 @@ msgstr "住所全体を1行で保持します。"
 #. module: stock_picking_ship_to
 #: model:ir.model,name:stock_picking_ship_to.model_stock_picking
 msgid "Transfer"
-msgstr "転送"
+msgstr "移動"
