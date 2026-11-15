@@ -56,7 +56,8 @@ from the partner when it is set; change them when the goods go somewhere
 else.
 
 Modules that connect transfers to other systems can add their own group
-to the same tab (``page[@name='integration']``).
+to the same tab (``page[@name='integration']``), widening its
+``invisible`` condition when their group shows on other transfers.
 
 Bug Tracker
 ===========

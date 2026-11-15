@@ -3,4 +3,5 @@ fields are on the **Integration** tab. They are filled from the partner when it 
 change them when the goods go somewhere else.
 
 Modules that connect transfers to other systems can add their own group to the same
-tab (`page[@name='integration']`).
+tab (`page[@name='integration']`), widening its `invisible` condition when their
+group shows on other transfers.

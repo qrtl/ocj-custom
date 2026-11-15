@@ -9,14 +9,10 @@
                 <page
                     name="integration"
                     string="Integration"
-                    invisible="picking_type_code == 'internal'"
+                    invisible="picking_type_code != 'outgoing'"
                 >
                     <group>
-                        <group
-                            name="ship_to"
-                            string="Ship To"
-                            invisible="picking_type_code != 'outgoing'"
-                        >
+                        <group name="ship_to" string="Ship To">
                             <field
                                 name="ship_to_name"
                                 readonly="state in ('done', 'cancel')"
