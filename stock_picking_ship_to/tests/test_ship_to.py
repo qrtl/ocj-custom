@@ -38,6 +38,14 @@ class TestShipTo(TransactionCase):
         self.assertEqual(picking.ship_to_address, "東京都港区高輪2-19-17")
         self.assertEqual(picking.ship_to_phone, "03-0000-0000")
 
+    def test_nameless_address_takes_company_name(self):
+        # Not "Clinic, Delivery Address", the type label display_name falls back to.
+        address = self.env["res.partner"].create(
+            {"parent_id": self.company.id, "type": "delivery"}
+        )
+        picking = self._picking(partner_id=address.id)
+        self.assertEqual(picking.ship_to_name, "Clinic")
+
     def test_values_given_on_create_are_kept(self):
         # An integration sets the partner and the destination in one create.
         picking = self._picking(

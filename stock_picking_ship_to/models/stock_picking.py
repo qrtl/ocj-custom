@@ -36,6 +36,11 @@ class StockPicking(models.Model):
     def _compute_ship_to(self):
         for picking in self:
             partner = picking.partner_id
-            picking.ship_to_name = partner.display_name or False
+            # A nameless address would show its type label ("Company, Delivery").
+            picking.ship_to_name = (
+                partner.display_name
+                if partner.name
+                else partner.commercial_partner_id.name
+            ) or False
             picking.ship_to_address = picking._ship_to_address(partner)
             picking.ship_to_phone = partner.phone or False
