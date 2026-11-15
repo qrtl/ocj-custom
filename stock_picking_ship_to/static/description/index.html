@@ -409,8 +409,19 @@ until the partner changes.</p>
 from the partner when it is set; change them when the goods go somewhere
 else.</p>
 <p>Modules that connect transfers to other systems can add their own group
-to the same tab (<tt class="docutils literal"><span class="pre">page[&#64;name='integration']</span></tt>), widening its
-<tt class="docutils literal">invisible</tt> condition when their group shows on other transfers.</p>
+to the same tab (<tt class="docutils literal"><span class="pre">page[&#64;name='integration']</span></tt>). The tab shows on
+deliveries only. To show it on other transfers, or to hide the ship-to
+group (<tt class="docutils literal"><span class="pre">group[&#64;name='ship_to']</span></tt>) where the destination means nothing,
+extend the condition rather than replace it, so that the conditions of
+several modules combine:</p>
+<pre class="code xml literal-block">
+<span class="nt">&lt;page</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;integration&quot;</span><span class="w"> </span><span class="na">position=</span><span class="s">&quot;attributes&quot;</span><span class="nt">&gt;</span><span class="w">
+    </span><span class="nt">&lt;attribute</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;invisible&quot;</span><span class="w"> </span><span class="na">add=</span><span class="s">&quot;not my_field&quot;</span><span class="w"> </span><span class="na">separator=</span><span class="s">&quot;and&quot;</span><span class="w"> </span><span class="nt">/&gt;</span><span class="w">
+</span><span class="nt">&lt;/page&gt;</span><span class="w">
+</span><span class="nt">&lt;group</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ship_to&quot;</span><span class="w"> </span><span class="na">position=</span><span class="s">&quot;attributes&quot;</span><span class="nt">&gt;</span><span class="w">
+    </span><span class="nt">&lt;attribute</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;invisible&quot;</span><span class="w"> </span><span class="na">add=</span><span class="s">&quot;my_direction == 'in'&quot;</span><span class="w"> </span><span class="na">separator=</span><span class="s">&quot;or&quot;</span><span class="w"> </span><span class="nt">/&gt;</span><span class="w">
+</span><span class="nt">&lt;/group&gt;</span>
+</pre>
 </div>
 <div class="section" id="bug-tracker">
 <h2><a class="toc-backref" href="#toc-entry-2">Bug Tracker</a></h2>
