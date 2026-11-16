@@ -43,56 +43,57 @@ class TestLocationTrackingRestriction(TransactionCase):
             {"name": "Untracked Product", "is_storable": True, "tracking": "none"}
         )
 
-    def _move(self, product, source, dest, qty=1.0):
-        move = self.env["stock.move"].create(
-            {
-                "product_id": product.id,
-                "product_uom_qty": qty,
-                "location_id": source.id,
-                "location_dest_id": dest.id,
-            }
+    def _move(self, products, source, dest):
+        moves = self.env["stock.move"].create(
+            [
+                {
+                    "product_id": product.id,
+                    "product_uom_qty": 1.0,
+                    "location_id": source.id,
+                    "location_dest_id": dest.id,
+                }
+                for product in products
+            ]
         )
-        move._action_confirm()
-        move._action_assign()
-        if product.tracking != "none" and source == self.supplier_location:
-            move.move_line_ids.lot_id = self.env["stock.lot"].create(
-                {"name": f"{product.name} {dest.name}", "product_id": product.id}
-            )
-        move.picked = True
-        move._action_done()
-        return move
-
-    def test_tracked_location_accepts_tracked_products(self):
-        for product in (self.serial_product, self.lot_product):
-            with self.subTest(product=product.name):
-                move = self._move(
-                    product, self.supplier_location, self.tracked_location
+        moves._action_confirm()
+        moves._action_assign()
+        if source == self.supplier_location:
+            for move in moves.filtered(lambda m: m.product_id.tracking != "none"):
+                move.move_line_ids.lot_id = self.env["stock.lot"].create(
+                    {
+                        "name": f"{move.product_id.name} {dest.name}",
+                        "product_id": move.product_id.id,
+                    }
                 )
-                self.assertEqual(move.state, "done")
+        moves.picked = True
+        moves._action_done()
+        return moves
 
-    def test_tracked_location_refuses_untracked_product(self):
-        with self.assertRaisesRegex(UserError, "not tracked by serial or lot"):
-            self._move(
-                self.untracked_product, self.supplier_location, self.tracked_location
-            )
+    def test_tracked_location(self):
+        moves = self._move(
+            self.serial_product | self.lot_product,
+            self.supplier_location,
+            self.tracked_location,
+        )
+        self.assertEqual(set(moves.mapped("state")), {"done"})
+        other_product = self.env["product.product"].create(
+            {"name": "Other Product", "is_storable": True, "tracking": "none"}
+        )
+        products = self.untracked_product | other_product
+        with self.assertRaisesRegex(UserError, "not tracked by serial or lot") as error:
+            self._move(products, self.supplier_location, self.tracked_location)
+        for product in products:
+            self.assertIn(product.display_name, str(error.exception))
 
-    def test_quantity_location_accepts_untracked_product(self):
+    def test_quantity_location(self):
         move = self._move(
             self.untracked_product, self.supplier_location, self.quantity_location
         )
         self.assertEqual(move.state, "done")
-
-    def test_quantity_location_refuses_tracked_products(self):
         for product in (self.serial_product, self.lot_product):
             with self.subTest(product=product.name):
                 with self.assertRaisesRegex(UserError, "is tracked by serial or lot"):
                     self._move(product, self.supplier_location, self.quantity_location)
-
-    def test_unrestricted_location(self):
-        move = self._move(
-            self.untracked_product, self.supplier_location, self.free_location
-        )
-        self.assertEqual(move.state, "done")
 
     def test_sublocation_follows_nearest_setting(self):
         Location = self.env["stock.location"]
@@ -107,17 +108,22 @@ class TestLocationTrackingRestriction(TransactionCase):
             }
         )
         shelf = Location.create({"name": "Shelf", "location_id": personal.id})
-        # With no setting of its own, a sublocation follows its parent.
         self._move(self.untracked_product, self.supplier_location, shared)
         with self.assertRaises(UserError):
             self._move(self.serial_product, self.supplier_location, shared)
-        # A sublocation with its own setting follows that one, and so do the
-        # locations under it.
         for location in (personal, shelf):
             with self.subTest(location=location.name):
                 self._move(self.serial_product, self.supplier_location, location)
                 with self.assertRaises(UserError):
                     self._move(self.untracked_product, self.supplier_location, location)
+
+    def test_existing_stock_can_move_out(self):
+        self._move(self.untracked_product, self.supplier_location, self.free_location)
+        self.free_location.product_tracking_restriction = "tracked"
+        move = self._move(
+            self.untracked_product, self.free_location, self.supplier_location
+        )
+        self.assertEqual(move.state, "done")
 
     def test_inventory_adjustment(self):
         quant = (
@@ -134,27 +140,10 @@ class TestLocationTrackingRestriction(TransactionCase):
         with self.assertRaises(UserError):
             quant.action_apply_inventory()
 
-    def test_existing_stock_can_move_out(self):
-        self._move(self.untracked_product, self.supplier_location, self.free_location)
-        self.free_location.product_tracking_restriction = "tracked"
-        move = self._move(
-            self.untracked_product, self.free_location, self.supplier_location
-        )
-        self.assertEqual(move.state, "done")
-
-    def test_edit_done_line_destination(self):
-        move = self._move(
-            self.untracked_product, self.supplier_location, self.free_location
-        )
-        with self.assertRaises(UserError):
-            move.move_line_ids.location_dest_id = self.tracked_location
-
-    def test_product_added_to_done_transfer(self):
-        # A move added to a done transfer is done on creation, without _action_done().
-        receipt_type = self.env.ref("stock.picking_type_in")
+    def test_done_transfer_changes(self):
         picking = self.env["stock.picking"].create(
             {
-                "picking_type_id": receipt_type.id,
+                "picking_type_id": self.env.ref("stock.picking_type_in").id,
                 "location_id": self.supplier_location.id,
                 "location_dest_id": self.quantity_location.id,
                 "move_ids": [
@@ -173,6 +162,8 @@ class TestLocationTrackingRestriction(TransactionCase):
         picking.move_ids.picked = True
         picking._action_done()
         self.assertEqual(picking.state, "done")
+        with self.assertRaisesRegex(UserError, "not tracked by serial or lot"):
+            picking.move_line_ids.location_dest_id = self.tracked_location
         with self.assertRaisesRegex(UserError, "is tracked by serial or lot"):
             self.env["stock.move"].create(
                 {
@@ -184,26 +175,3 @@ class TestLocationTrackingRestriction(TransactionCase):
                     "location_dest_id": self.quantity_location.id,
                 }
             )
-
-    def test_error_lists_every_product(self):
-        other_product = self.env["product.product"].create(
-            {"name": "Other Product", "is_storable": True, "tracking": "none"}
-        )
-        moves = self.env["stock.move"].create(
-            [
-                {
-                    "product_id": product.id,
-                    "product_uom_qty": 1.0,
-                    "location_id": self.supplier_location.id,
-                    "location_dest_id": self.tracked_location.id,
-                }
-                for product in (self.untracked_product, other_product)
-            ]
-        )
-        moves._action_confirm()
-        moves._action_assign()
-        moves.picked = True
-        with self.assertRaises(UserError) as error:
-            moves._action_done()
-        for product in moves.product_id:
-            self.assertIn(product.display_name, str(error.exception))

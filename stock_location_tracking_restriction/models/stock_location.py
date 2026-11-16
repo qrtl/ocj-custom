@@ -20,10 +20,7 @@ class StockLocation(models.Model):
     )
 
     def _get_product_tracking_restriction(self):
-        """Return the restriction that applies to the location: its own, or
-        else that of its nearest parent that has one."""
         self.ensure_one()
-        # parent_path lists the ids from the root down to the location itself.
         ancestor_ids = [int(i) for i in self.parent_path.split("/")[:-1]]
         for ancestor in reversed(self.browse(ancestor_ids)):
             if ancestor.product_tracking_restriction:
