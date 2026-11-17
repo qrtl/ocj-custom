@@ -59,14 +59,14 @@ class TestPartnerPayer(TransactionCase):
         )
         self.assertIn(self.member.id, child._get_paid_for_partner_ids())
 
-    def test_paid_for_after_person_payer_joins_company(self):
-        """A person payer linked to a company later must still reach its members."""
+    def test_person_payer_cannot_join_company(self):
+        """A payer turning into a child contact would orphan its members' payer."""
         person = self.env["res.partner"].create({"name": "Owner"})
-        member = self.env["res.partner"].create(
+        self.env["res.partner"].create(
             {"name": "Shop", "is_company": True, "payer_partner_id": person.id}
         )
-        person.parent_id = self.outer
-        self.assertIn(member.id, person._get_paid_for_partner_ids())
+        with self.assertRaises(ValidationError):
+            person.parent_id = self.outer
 
     def test_child_contact_cannot_be_payer(self):
         """Import or RPC must not set a child contact as payer past the view domain."""

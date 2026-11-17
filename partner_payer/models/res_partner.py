@@ -26,13 +26,28 @@ class ResPartner(models.Model):
     def _search_paid_for(self, limit=None):
         return self.with_context(active_test=False).search(
             [
-                ("payer_partner_id", "in", self.ids),
+                ("payer_partner_id", "=", self.id),
                 "|",
                 ("is_company", "=", True),
                 ("parent_id", "=", False),
             ],
             limit=limit,
         )
+
+    @api.constrains("parent_id", "is_company")
+    def _check_payer_stays_commercial(self):
+        for partner in self:
+            if partner != partner.commercial_partner_id and partner._search_paid_for(
+                limit=1
+            ):
+                raise ValidationError(
+                    self.env._(
+                        "%(name)s is the payer of other customers, so it cannot "
+                        "become a contact of %(company)s.",
+                        name=partner.name,
+                        company=partner.commercial_partner_id.name,
+                    )
+                )
 
     @api.constrains("payer_partner_id")
     def _check_payer_partner_id(self):
@@ -88,5 +103,4 @@ class ResPartner(models.Model):
         """
         self.ensure_one()
         commercial = self.commercial_partner_id
-        partners = self | commercial
-        return (partners | partners._search_paid_for()).ids
+        return (self | commercial | commercial._search_paid_for()).ids

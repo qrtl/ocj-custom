@@ -49,6 +49,15 @@ msgstr ""
 #. module: partner_payer
 #: code:addons/partner_payer/models/res_partner.py:0
 msgid ""
+"%(name)s is the payer of other customers, so it cannot become a contact of "
+"%(company)s."
+msgstr ""
+"%(name)s は他の顧客の支払人になっているため、%(company)s の連絡先にはできませ"
+"ん。"
+
+#. module: partner_payer
+#: code:addons/partner_payer/models/res_partner.py:0
+msgid ""
 "%(payer)s is a contact of %(company)s, so it cannot be a payer. Use "
 "%(company)s instead."
 msgstr ""
