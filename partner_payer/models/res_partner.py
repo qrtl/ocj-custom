@@ -26,7 +26,7 @@ class ResPartner(models.Model):
     def _search_paid_for(self, limit=None):
         return self.with_context(active_test=False).search(
             [
-                ("payer_partner_id", "=", self.id),
+                ("payer_partner_id", "in", self.ids),
                 "|",
                 ("is_company", "=", True),
                 ("parent_id", "=", False),
@@ -88,4 +88,5 @@ class ResPartner(models.Model):
         """
         self.ensure_one()
         commercial = self.commercial_partner_id
-        return (self | commercial | commercial._search_paid_for()).ids
+        partners = self | commercial
+        return (partners | partners._search_paid_for()).ids
