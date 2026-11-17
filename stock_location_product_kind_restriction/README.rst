@@ -2,9 +2,9 @@
    :target: https://odoo-community.org/get-involved?utm_source=readme
    :alt: Odoo Community Association
 
-===================================
-Stock Location Tracking Restriction
-===================================
+=======================================
+Stock Location Product Kind Restriction
+=======================================
 
 .. 
    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -21,18 +21,21 @@ Stock Location Tracking Restriction
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-qrtl%2FOCJ Custom-lightgray.png?logo=github
-    :target: https://github.com/qrtl/OCJ Custom/tree/19.0/stock_location_tracking_restriction
+    :target: https://github.com/qrtl/OCJ Custom/tree/19.0/stock_location_product_kind_restriction
     :alt: qrtl/OCJ Custom
 
 |badge1| |badge2| |badge3|
 
-This module limits the products a stock location accepts by whether they
-are tracked by serial or lot number. A location can be set to accept:
+This module limits the products a stock location accepts by their
+product kind (set on the product by ``product_classification``). A
+location can be set to accept:
 
-- **Serial- or Lot-Tracked Only**: products tracked by serial or lot
-  number;
-- **Quantity-Tracked Only**: products tracked by quantity only, with
-  neither serial nor lot numbers.
+- **Equipment and Accessories Only**: products of kind Equipment or
+  Accessory, whether or not they are tracked by serial number;
+- **Consumables Only**: products of kind Consumable.
+
+Products with no product kind, such as gas cylinders, are not checked
+and can be put in any location. Products of any other kind are refused.
 
 Validating a transfer or applying an inventory adjustment that would put
 any other product in the location is refused, with the products and the
@@ -52,13 +55,15 @@ is made is left as it is, and can still be moved out.
 Use Cases / Context
 ===================
 
-At a site where each person keeps the equipment they are responsible for
-in a location of their own, every unit identified by its serial number,
-while consumables are shared in the other locations of the site,
-equipment and consumables must not end up in each other's locations.
+At a branch where each person keeps the equipment they are responsible
+for in a location of their own, while consumables are kept in a shared
+location of the branch, equipment and consumables must not end up in
+each other's locations. Accessories go with the equipment, including
+those without a serial number, so the check cannot rely on how a product
+is tracked.
 
-Setting the site's stock location to **Quantity-Tracked Only** and each
-person's location under it to **Serial- or Lot-Tracked Only** keeps
+Setting the branch's stock location to **Consumables Only** and each
+person's location under it to **Equipment and Accessories Only** keeps
 equipment out of the shared locations, including ones created later, and
 consumables out of the personal ones.
 
@@ -75,13 +80,16 @@ Configuration
 The **Accepted Products** column can be shown in the location list from
 the optional columns.
 
+The product kind the setting checks is set on the product form, in the
+**Product Kind** field added by ``product_classification``.
+
 Bug Tracker
 ===========
 
 Bugs are tracked on `GitHub Issues <https://github.com/qrtl/OCJ Custom/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/qrtl/OCJ Custom/issues/new?body=module:%20stock_location_tracking_restriction%0Aversion:%2019.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/qrtl/OCJ Custom/issues/new?body=module:%20stock_location_product_kind_restriction%0Aversion:%2019.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -104,6 +112,6 @@ Current maintainer:
 
 |maintainer-kanda999| 
 
-This module is part of the `qrtl/OCJ Custom <https://github.com/qrtl/OCJ Custom/tree/19.0/stock_location_tracking_restriction>`_ project on GitHub.
+This module is part of the `qrtl/OCJ Custom <https://github.com/qrtl/OCJ Custom/tree/19.0/stock_location_product_kind_restriction>`_ project on GitHub.
 
 You are welcome to contribute.

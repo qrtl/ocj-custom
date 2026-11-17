@@ -7,3 +7,6 @@
 
 The **Accepted Products** column can be shown in the location list from the
 optional columns.
+
+The product kind the setting checks is set on the product form, in the
+**Product Kind** field added by `product_classification`.

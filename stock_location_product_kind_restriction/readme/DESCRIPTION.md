@@ -1,9 +1,13 @@
-This module limits the products a stock location accepts by whether they are
-tracked by serial or lot number. A location can be set to accept:
+This module limits the products a stock location accepts by their product kind
+(set on the product by `product_classification`). A location can be set to
+accept:
 
-- **Serial- or Lot-Tracked Only**: products tracked by serial or lot number;
-- **Quantity-Tracked Only**: products tracked by quantity only, with neither
-  serial nor lot numbers.
+- **Equipment and Accessories Only**: products of kind Equipment or Accessory,
+  whether or not they are tracked by serial number;
+- **Consumables Only**: products of kind Consumable.
+
+Products with no product kind, such as gas cylinders, are not checked and can be
+put in any location. Products of any other kind are refused.
 
 Validating a transfer or applying an inventory adjustment that would put any
 other product in the location is refused, with the products and the location
