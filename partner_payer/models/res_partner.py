@@ -44,6 +44,15 @@ class ResPartner(models.Model):
                 raise ValidationError(
                     self.env._("%(name)s cannot be its own payer.", name=partner.name)
                 )
+            if payer != payer.commercial_partner_id:
+                raise ValidationError(
+                    self.env._(
+                        "%(payer)s is a contact of %(company)s, so it cannot be a "
+                        "payer. Use %(company)s instead.",
+                        payer=payer.name,
+                        company=payer.commercial_partner_id.name,
+                    )
+                )
             # A payer that is itself paid for by someone else would make the
             # group ambiguous: the money of the outer payer would have to reach
             # the invoices of a customer it never appears on. One level is what
@@ -78,4 +87,5 @@ class ResPartner(models.Model):
         contact may be looking to settle.
         """
         self.ensure_one()
-        return (self | self.commercial_partner_id | self._search_paid_for()).ids
+        commercial = self.commercial_partner_id
+        return (self | commercial | commercial._search_paid_for()).ids

@@ -51,3 +51,18 @@ class TestPartnerPayer(TransactionCase):
         self.assertNotIn(self.member.id, self.payer._get_paid_for_partner_ids())
         self.payer.payer_partner_id = self.outer
         self.assertEqual(self.payer.payer_partner_id, self.outer)
+
+    def test_paid_for_from_payer_child_contact(self):
+        """A payment from the payer's child contact must still reach the members."""
+        child = self.env["res.partner"].create(
+            {"name": "Accounting", "type": "invoice", "parent_id": self.payer.id}
+        )
+        self.assertIn(self.member.id, child._get_paid_for_partner_ids())
+
+    def test_child_contact_cannot_be_payer(self):
+        """Import or RPC must not set a child contact as payer past the view domain."""
+        child = self.env["res.partner"].create(
+            {"name": "Accounting", "type": "invoice", "parent_id": self.payer.id}
+        )
+        with self.assertRaises(ValidationError):
+            self.outer.payer_partner_id = child
