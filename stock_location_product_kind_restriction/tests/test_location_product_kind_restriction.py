@@ -104,45 +104,27 @@ class TestLocationProductKindRestriction(TransactionCase):
         moves._action_done()
         return moves
 
-    def test_equipment_location(self):
-        products = self.equipment | self.serial_accessory | self.accessory
-        moves = self._move(products, self.supplier_location, self.personal_location)
-        self.assertEqual(set(moves.mapped("state")), {"done"})
-        other_consumable = self.consumable.copy({"name": "Other Consumable"})
-        products = self.consumable | other_consumable
-        with self.assertRaisesRegex(
-            UserError, "not equipment or an accessory"
-        ) as error:
-            self._move(products, self.supplier_location, self.personal_location)
-        for product in products:
-            self.assertIn(product.display_name, str(error.exception))
-
-    def test_consumable_location(self):
-        for location in (self.branch_location, self.consumable_location):
-            with self.subTest(location=location.name):
-                move = self._move(self.consumable, self.supplier_location, location)
-                self.assertEqual(move.state, "done")
-                for product in (self.equipment, self.accessory):
-                    with self.assertRaisesRegex(UserError, "not a consumable"):
-                        self._move(product, self.supplier_location, location)
-
-    def test_product_without_kind_is_not_checked(self):
-        for location in (
-            self.personal_location,
-            self.branch_location,
-            self.consumable_location,
-        ):
-            with self.subTest(location=location.name):
-                move = self._move(self.unclassified, self.supplier_location, location)
-                self.assertEqual(move.state, "done")
-
-    def test_sublocation_follows_nearest_setting(self):
+    def test_incoming_moves(self):
         shelf = self.env["stock.location"].create(
             {"name": "Shelf", "location_id": self.personal_location.id}
         )
-        self._move(self.accessory, self.supplier_location, shelf)
-        with self.assertRaises(UserError):
-            self._move(self.consumable, self.supplier_location, shelf)
+        equipment_kinds = self.equipment | self.serial_accessory | self.accessory
+        cases = [
+            (self.personal_location, equipment_kinds, self.consumable),
+            (shelf, equipment_kinds, self.consumable),
+            (self.branch_location, self.consumable, equipment_kinds),
+            (self.consumable_location, self.consumable, equipment_kinds),
+        ]
+        for location, accepted, refused in cases:
+            with self.subTest(location=location.name):
+                moves = self._move(
+                    accepted | self.unclassified, self.supplier_location, location
+                )
+                self.assertEqual(set(moves.mapped("state")), {"done"})
+                with self.assertRaisesRegex(UserError, "cannot be put in") as error:
+                    self._move(refused, self.supplier_location, location)
+                for product in refused:
+                    self.assertIn(product.display_name, str(error.exception))
 
     def test_existing_stock_can_move_out(self):
         self._move(self.consumable, self.supplier_location, self.free_location)
@@ -162,7 +144,7 @@ class TestLocationProductKindRestriction(TransactionCase):
                 }
             )
         )
-        with self.assertRaisesRegex(UserError, "not equipment or an accessory"):
+        with self.assertRaisesRegex(UserError, "cannot be put in"):
             quant.action_apply_inventory()
 
     def test_done_transfer_changes(self):
@@ -187,9 +169,9 @@ class TestLocationProductKindRestriction(TransactionCase):
         picking.move_ids.picked = True
         picking._action_done()
         self.assertEqual(picking.state, "done")
-        with self.assertRaisesRegex(UserError, "not equipment or an accessory"):
+        with self.assertRaisesRegex(UserError, "cannot be put in"):
             picking.move_line_ids.location_dest_id = self.personal_location
-        with self.assertRaisesRegex(UserError, "not a consumable"):
+        with self.assertRaisesRegex(UserError, "cannot be put in"):
             self.env["stock.move"].create(
                 {
                     "picking_id": picking.id,

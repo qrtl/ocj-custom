@@ -18,15 +18,9 @@ msgstr ""
 #. module: stock_location_product_kind_restriction
 #. odoo-python
 #: code:addons/stock_location_product_kind_restriction/models/stock_move_line.py:0
-msgid "%(product)s is not a consumable and cannot be put in %(location)s."
-msgstr ""
-
-#. module: stock_location_product_kind_restriction
-#. odoo-python
-#: code:addons/stock_location_product_kind_restriction/models/stock_move_line.py:0
 msgid ""
-"%(product)s is not equipment or an accessory and cannot be put in "
-"%(location)s."
+"%(product)s cannot be put in %(location)s (Accepted Products: "
+"%(accepted)s)."
 msgstr ""
 
 #. module: stock_location_product_kind_restriction

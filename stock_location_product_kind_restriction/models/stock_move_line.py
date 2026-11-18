@@ -46,22 +46,21 @@ class StockMoveLine(models.Model):
                     and ml.product_id.product_kind not in accepted
                 )
             ).product_id
+            label = dict(
+                location._fields["product_kind_restriction"]._description_selection(
+                    self.env
+                )
+            )[restriction]
             for product in products:
-                if restriction == "equipment":
-                    message = self.env._(
-                        "%(product)s is not equipment or an accessory and "
-                        "cannot be put in %(location)s.",
+                errors.append(
+                    self.env._(
+                        "%(product)s cannot be put in %(location)s "
+                        "(Accepted Products: %(accepted)s).",
                         product=product.display_name,
                         location=location.display_name,
+                        accepted=label,
                     )
-                else:
-                    message = self.env._(
-                        "%(product)s is not a consumable and cannot be put in "
-                        "%(location)s.",
-                        product=product.display_name,
-                        location=location.display_name,
-                    )
-                errors.append(message)
+                )
         if errors:
             raise UserError("\n".join(errors))
 

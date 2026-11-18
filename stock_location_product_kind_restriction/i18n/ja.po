@@ -17,16 +17,10 @@ msgstr ""
 #. module: stock_location_product_kind_restriction
 #. odoo-python
 #: code:addons/stock_location_product_kind_restriction/models/stock_move_line.py:0
-msgid "%(product)s is not a consumable and cannot be put in %(location)s."
-msgstr "%(product)s は消耗品ではないため、%(location)s に入れられません。"
-
-#. module: stock_location_product_kind_restriction
-#. odoo-python
-#: code:addons/stock_location_product_kind_restriction/models/stock_move_line.py:0
 msgid ""
-"%(product)s is not equipment or an accessory and cannot be put in "
-"%(location)s."
-msgstr "%(product)s は機器でも付属品でもないため、%(location)s に入れられません。"
+"%(product)s cannot be put in %(location)s (Accepted Products: "
+"%(accepted)s)."
+msgstr "%(product)s は %(location)s に入れられません（入庫可能プロダクト: %(accepted)s）。"
 
 #. module: stock_location_product_kind_restriction
 #: model:ir.model.fields,field_description:stock_location_product_kind_restriction.field_stock_location__product_kind_restriction
