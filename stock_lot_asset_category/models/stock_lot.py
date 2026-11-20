@@ -14,6 +14,7 @@ class StockLot(models.Model):
         store=True,
         readonly=False,
         ondelete="restrict",
+        copy=False,
         tracking=True,
         help="Who owns this serial/lot number. Defaults to the product's "
         "asset category and can be changed per serial/lot number.",

@@ -9,12 +9,6 @@
                 <field
                     name="lot_asset_category_id"
                     options="{'no_quick_create': True}"
-                    groups="stock_lot_asset_category.group_assign_asset_category"
-                />
-                <field
-                    name="lot_asset_category_id"
-                    readonly="1"
-                    groups="!stock_lot_asset_category.group_assign_asset_category"
                 />
             </xpath>
         </field>

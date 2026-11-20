@@ -43,8 +43,9 @@ existing serial/lot numbers.
 
 Because the asset category says who owns a unit, only the users of the
 group *Assign Asset Categories to Products and Lots/Serials* can set it,
-on a product or on a serial/lot number. For everybody else both fields
-are read-only, in the forms and through imports alike.
+on a product or on a serial/lot number. For everybody else the default
+of the product is hidden, and the asset category of a serial/lot number
+is read-only, in the forms and through imports alike.
 
 **Table of contents**
 

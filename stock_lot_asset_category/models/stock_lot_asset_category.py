@@ -21,14 +21,13 @@ class StockLotAssetCategory(models.Model):
 
     @api.model
     def _check_assign_access(self):
-        """Raise unless the user may set the asset category of products and lots."""
+        """Raise unless the user may set the asset category of lots."""
         if self.env.su or self.env.user.has_group(
             "stock_lot_asset_category.group_assign_asset_category"
         ):
             return
         raise AccessError(
             self.env._(
-                "You are not allowed to set the asset category of a product or "
-                "of a serial/lot number."
+                "You are not allowed to set the asset category of a serial/lot number."
             )
         )

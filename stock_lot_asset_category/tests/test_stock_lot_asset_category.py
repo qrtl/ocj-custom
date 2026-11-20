@@ -81,6 +81,8 @@ class TestStockLotAssetCategory(TransactionCase):
             product.product_tmpl_id.copy({"lot_asset_category_id": self.other.id})
         created = lot.create({"name": "SN-0003", "product_id": product.id})
         self.assertEqual(created.asset_category_id, self.own)
+        self.assertEqual(lot.copy({"name": "SN-0004"}).asset_category_id, self.own)
+        product.product_tmpl_id.copy()
         user.group_ids = [
             Command.link(
                 self.env.ref("stock_lot_asset_category.group_assign_asset_category").id
