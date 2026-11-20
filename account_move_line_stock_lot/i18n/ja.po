@@ -32,11 +32,13 @@ msgstr "仕訳明細"
 
 #. module: account_move_line_stock_lot
 #: model:ir.model.fields,field_description:account_move_line_stock_lot.field_account_move_line__lot_product_id
+#: model_terms:ir.ui.view,arch_db:account_move_line_stock_lot.account_move_line_view_search
 msgid "Lot Product"
 msgstr "ロットのプロダクト"
 
 #. module: account_move_line_stock_lot
 #: model:ir.model.fields,field_description:account_move_line_stock_lot.field_account_move_line__lot_id
+#: model_terms:ir.ui.view,arch_db:account_move_line_stock_lot.account_move_line_view_search
 msgid "Lot/Serial Number"
 msgstr "ロット/シリアル番号"
 
