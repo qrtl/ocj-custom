@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="account_analytic_line_view_list" model="ir.ui.view">
+        <field name="name">account.analytic.line.view.list.lot</field>
+        <field name="model">account.analytic.line</field>
+        <field
+            name="inherit_id"
+            ref="account.view_account_analytic_line_tree_inherit_account"
+        />
+        <field name="arch" type="xml">
+            <field name="product_id" position="after">
+                <field
+                    name="lot_product_id"
+                    optional="hide"
+                    groups="stock.group_production_lot"
+                />
+                <field
+                    name="lot_id"
+                    optional="hide"
+                    groups="stock.group_production_lot"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="account_analytic_line_view_search" model="ir.ui.view">
+        <field name="name">account.analytic.line.view.search.lot</field>
+        <field name="model">account.analytic.line</field>
+        <field
+            name="inherit_id"
+            ref="account.view_account_analytic_line_filter_inherit_account"
+        />
+        <field name="arch" type="xml">
+            <field name="product_id" position="after">
+                <field name="lot_product_id" groups="stock.group_production_lot" />
+                <field name="lot_id" groups="stock.group_production_lot" />
+            </field>
+            <filter name="product" position="after">
+                <filter
+                    string="Lot Product"
+                    name="lot_product"
+                    context="{'group_by': 'lot_product_id'}"
+                    groups="stock.group_production_lot"
+                />
+                <filter
+                    string="Lot/Serial Number"
+                    name="lot"
+                    context="{'group_by': 'lot_id'}"
+                    groups="stock.group_production_lot"
+                />
+            </filter>
+        </field>
+    </record>
+</odoo>
