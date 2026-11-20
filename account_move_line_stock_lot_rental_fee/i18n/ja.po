@@ -49,3 +49,8 @@ msgid ""
 "hand."
 msgstr ""
 "この明細の対象となる在庫管理プロダクト。明細のプロダクトが在庫管理対象であればそのプロダクトです。レンタル料などサービスの明細では手入力します。"
+
+#. module: account_move_line_stock_lot_rental_fee
+#: model:ir.model.fields,field_description:account_move_line_stock_lot_rental_fee.field_account_move_line__lot_product_from_set
+msgid "Lot Product From Set"
+msgstr "ロットのプロダクトをセットから選択"
