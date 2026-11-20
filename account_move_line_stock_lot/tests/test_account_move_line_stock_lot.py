@@ -24,7 +24,7 @@ class TestAccountMoveLineStockLot(TransactionCase):
             {"name": "SN-0001", "product_id": cls.product_serial.id}
         )
 
-    def _create_invoice(self, product, lot=None):
+    def _create_invoice(self, product, lot=None, **vals):
         return self.env["account.move"].create(
             {
                 "move_type": "out_invoice",
@@ -37,6 +37,7 @@ class TestAccountMoveLineStockLot(TransactionCase):
                             "quantity": 1.0,
                             "price_unit": 100.0,
                             "lot_id": lot.id if lot else False,
+                            **vals,
                         }
                     )
                 ],
@@ -55,3 +56,15 @@ class TestAccountMoveLineStockLot(TransactionCase):
         invoice = self._create_invoice(self.product_serial, self.lot)
         with self.assertRaises(ValidationError):
             invoice.invoice_line_ids.product_id = self.product_other
+
+    def test_service_line_names_its_lot_product(self):
+        # A service has no lots: the line says which product the lot is of.
+        invoice = self._create_invoice(
+            self.product_other, self.lot, lot_product_id=self.product_serial.id
+        )
+        self.assertEqual(invoice.invoice_line_ids.lot_id, self.lot)
+
+    def test_storable_line_keeps_its_own_product(self):
+        other = self.product_serial.copy()
+        with self.assertRaises(ValidationError):
+            self._create_invoice(self.product_serial, lot_product_id=other.id)

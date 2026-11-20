@@ -35,6 +35,11 @@ created by an external system integration, or manually entered
 invoices), and it can be used to filter and group journal items by
 lot/serial number.
 
+The line also names the storable product the lot belongs to (Lot
+Product). It is the line's own product when that one is storable. On a
+line of a service, such as a rental fee, it is chosen by hand, and it
+can be recorded without a lot.
+
 **Table of contents**
 
 .. contents::

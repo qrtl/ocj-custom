@@ -10,6 +10,11 @@
                 position="after"
             >
                 <field
+                    name="lot_product_id"
+                    optional="show"
+                    groups="stock.group_production_lot"
+                />
+                <field
                     name="lot_id"
                     optional="show"
                     groups="stock.group_production_lot"
