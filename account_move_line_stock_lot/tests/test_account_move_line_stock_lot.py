@@ -44,15 +44,15 @@ class TestAccountMoveLineStockLot(TransactionCase):
             }
         )
 
-    def test_01_lot_stored_on_invoice_line(self):
+    def test_lot_stored_on_invoice_line(self):
         invoice = self._create_invoice(self.product_serial, self.lot)
         self.assertEqual(invoice.invoice_line_ids.lot_id, self.lot)
 
-    def test_02_lot_product_mismatch(self):
+    def test_lot_product_mismatch(self):
         with self.assertRaises(ValidationError):
             self._create_invoice(self.product_other, self.lot)
 
-    def test_03_product_change_on_line_with_lot(self):
+    def test_product_change_on_line_with_lot(self):
         invoice = self._create_invoice(self.product_serial, self.lot)
         with self.assertRaises(ValidationError):
             invoice.invoice_line_ids.product_id = self.product_other
