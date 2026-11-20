@@ -11,12 +11,12 @@
             >
                 <field
                     name="lot_product_id"
-                    optional="show"
+                    optional="hide"
                     groups="stock.group_production_lot"
                 />
                 <field
                     name="lot_id"
-                    optional="show"
+                    optional="hide"
                     groups="stock.group_production_lot"
                 />
             </xpath>
