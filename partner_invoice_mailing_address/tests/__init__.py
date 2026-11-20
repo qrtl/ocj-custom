@@ -1,0 +1,1 @@
+from . import test_partner_invoice_mailing_address
