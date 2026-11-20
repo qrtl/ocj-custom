@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Quartile (https://www.quartile.co)
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl). -->
+<odoo>
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="name">res.partner.form.billing.policy</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <!-- Beside the other per-customer terms (payment terms, pricelist,
+                 customer kind) rather than on a tab of its own, which the
+                 sibling modules also avoid. The policy is the company's and
+                 syncs downward only, so a contact shows it read-only, as core
+                 does for company_id on this tab. -->
+            <xpath expr="//group[@name='sale']" position="inside">
+                <group name="billing_policy" string="Billing Policy" colspan="2">
+                    <field name="prorated_billing" readonly="parent_id" />
+                    <field
+                        name="prorate_installation_month"
+                        readonly="parent_id"
+                        invisible="not prorated_billing"
+                    />
+                    <field
+                        name="prorate_collection_month"
+                        readonly="parent_id"
+                        invisible="not prorated_billing"
+                    />
+                </group>
+            </xpath>
+            <!-- 全請求／部分請求 is a condition of the vendor contract, so it
+                 sits with the purchase terms. -->
+            <xpath expr="//group[@name='purchase']" position="inside">
+                <field name="billing_scope" readonly="parent_id" />
+            </xpath>
+        </field>
+    </record>
+    <record id="res_partner_view_list" model="ir.ui.view">
+        <field name="name">res.partner.list.billing.policy</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree" />
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <!-- 日割り請求 is the customer's, 全請求／部分請求 the vendor
+                     contract's (rented equipment, RR), so each shows only on
+                     its own side's list. -->
+                <field
+                    name="prorated_billing"
+                    optional="hide"
+                    column_invisible="context.get('res_partner_search_mode') == 'supplier'"
+                />
+                <field
+                    name="billing_scope"
+                    optional="hide"
+                    column_invisible="context.get('res_partner_search_mode') != 'supplier'"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="res_partner_view_search" model="ir.ui.view">
+        <field name="name">res.partner.select.billing.policy</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter" />
+        <field name="arch" type="xml">
+            <filter name="type_company" position="after">
+                <separator />
+                <filter
+                    name="prorated_billing"
+                    string="Prorated Billing"
+                    domain="[('prorated_billing', '=', True)]"
+                    invisible="context.get('res_partner_search_mode') == 'supplier'"
+                />
+            </filter>
+            <filter name="salesperson" position="after">
+                <filter
+                    name="group_billing_scope"
+                    string="Billing Scope"
+                    context="{'group_by': 'billing_scope'}"
+                    invisible="context.get('res_partner_search_mode') != 'supplier'"
+                />
+            </filter>
+        </field>
+    </record>
+</odoo>

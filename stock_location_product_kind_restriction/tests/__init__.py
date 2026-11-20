@@ -1,0 +1,1 @@
+from . import test_location_product_kind_restriction

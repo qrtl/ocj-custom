@@ -15,6 +15,12 @@ class ProductMinorCategory(models.Model):
     )
     sequence = fields.Integer(default=10)
     active = fields.Boolean(default=True)
+    middle_category_id = fields.Many2one(
+        comodel_name="product.middle.category",
+        string="Middle Category",
+        ondelete="restrict",
+        help="Middle category this minor category belongs to.",
+    )
 
     _code_uniq = models.Constraint(
         "unique(code)",

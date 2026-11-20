@@ -6,14 +6,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-29 09:38+0000\n"
-"PO-Revision-Date: 2026-07-29 09:38+0000\n"
+"POT-Creation-Date: 2026-08-19 15:42+0000\n"
+"PO-Revision-Date: 2026-08-19 15:42+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: product_classification
+#. odoo-python
+#: code:addons/product_classification/models/product_template.py:0
+msgid ""
+"%(product)s is an equipment, an accessory or a rental fee, so it needs an "
+"equipment classification."
+msgstr "%(product)s は機器・付属品・レンタル料のいずれかのため、機器分類が必要です。"
 
 #. module: product_classification
 #: model:product.equipment.classification,name:product_classification.product_equipment_classification_asv
@@ -51,6 +59,11 @@ msgstr "CPAP"
 #: model_terms:ir.ui.view,arch_db:product_classification.product_template_view_form
 msgid "Classification"
 msgstr "分類"
+
+#. module: product_classification
+#: model_terms:ir.ui.view,arch_db:product_classification.product_template_view_search
+msgid "Classification Missing"
+msgstr "機器分類が未設定"
 
 #. module: product_classification
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__code
@@ -114,11 +127,6 @@ msgstr "機器分類"
 #: model:ir.ui.menu,name:product_classification.product_equipment_classification_menu
 msgid "Equipment Classifications"
 msgstr "機器分類"
-
-#. module: product_classification
-#: model_terms:ir.ui.view,arch_db:product_classification.product_template_view_search
-msgid "Equipment Sub-Classification"
-msgstr "機器分類サブ"
 
 #. module: product_classification
 #: model:ir.model.fields,help:product_classification.field_product_equipment_classification__code
@@ -209,11 +217,17 @@ msgid "Middle Categories"
 msgstr "中分類"
 
 #. module: product_classification
+#: model:ir.model.fields,field_description:product_classification.field_product_minor_category__middle_category_id
 #: model:ir.model.fields,field_description:product_classification.field_product_product__middle_category_id
 #: model:ir.model.fields,field_description:product_classification.field_product_template__middle_category_id
 #: model_terms:ir.ui.view,arch_db:product_classification.product_template_view_search
 msgid "Middle Category"
 msgstr "中分類"
+
+#. module: product_classification
+#: model:ir.model.fields,help:product_classification.field_product_minor_category__middle_category_id
+msgid "Middle category this minor category belongs to."
+msgstr "この小分類が属する中分類。"
 
 #. module: product_classification
 #: model:ir.model.fields,help:product_classification.field_product_product__middle_category_id
@@ -237,8 +251,10 @@ msgstr "小分類"
 #. module: product_classification
 #: model:ir.model.fields,help:product_classification.field_product_product__minor_category_id
 #: model:ir.model.fields,help:product_classification.field_product_template__minor_category_id
-msgid "Minor-level product category."
-msgstr "プロダクトの小分類。"
+msgid ""
+"Minor-level product category. Once a middle category is set, only the minor "
+"categories under it can be selected."
+msgstr "プロダクトの小分類。中分類を設定すると、その中分類に属する小分類だけを選択できます。"
 
 #. module: product_classification
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__name
@@ -272,9 +288,9 @@ msgstr "携帯酸素"
 #: model:ir.model.fields,help:product_classification.field_product_product__equipment_classification_id
 #: model:ir.model.fields,help:product_classification.field_product_template__equipment_classification_id
 msgid ""
-"Primary classification of an equipment or accessory product. Used in the "
-"Navi in Flow integration."
-msgstr "機器または付属品プロダクトの主分類。ナビフロー連携で使用されます。"
+"Primary classification of an equipment or accessory product, or of the "
+"equipment a rental fee is charged for. Used in the Navi in Flow integration."
+msgstr "機器または付属品プロダクトの主分類、またはレンタル料の課金対象となる機器の分類。ナビフロー連携で使用されます。"
 
 #. module: product_classification
 #: model:ir.model,name:product_classification.model_product_template
@@ -292,6 +308,11 @@ msgstr "機器分類"
 #: model_terms:ir.ui.view,arch_db:product_classification.product_template_view_search
 msgid "Product Kind"
 msgstr "プロダクト種別"
+
+#. module: product_classification
+#: model_terms:ir.ui.view,arch_db:product_classification.product_template_view_search
+msgid "Product Kind Not Set"
+msgstr "プロダクト種別が未設定"
 
 #. module: product_classification
 #: model:ir.model,name:product_classification.model_product_manufacturer
@@ -312,6 +333,11 @@ msgstr "小分類"
 #: model:product.equipment.classification,name:product_classification.product_equipment_classification_pulse_oximeter
 msgid "Pulse Oximeter"
 msgstr "パルスオキシメータ"
+
+#. module: product_classification
+#: model:ir.model.fields.selection,name:product_classification.selection__product_template__product_kind__rental_fee
+msgid "Rental Fee"
+msgstr "レンタル料"
 
 #. module: product_classification
 #: model:ir.model.fields,field_description:product_classification.field_product_equipment_classification__sequence
@@ -350,6 +376,7 @@ msgstr "超音波骨折治療器"
 #: model:ir.model.fields,help:product_classification.field_product_product__product_kind
 #: model:ir.model.fields,help:product_classification.field_product_template__product_kind
 msgid ""
-"Whether the product is an equipment, an accessory or a consumable. Used in "
-"the Navi in Flow integration."
-msgstr "プロダクトが機器・付属品・消耗品のいずれか。ナビフロー連携で使用されます。"
+"What the product is: one of the goods - equipment, an accessory or a "
+"consumable - or the fee charged for renting equipment, which is a service "
+"rather than goods. Used in the Navi in Flow integration."
+msgstr "プロダクトの区分。機器・付属品・消耗品はいずれもモノですが、レンタル料は機器の貸出に対して請求するサービスです。ナビフロー連携で使用されます。"
