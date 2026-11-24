@@ -121,9 +121,9 @@ class TestLocationProductKindRestriction(TransactionCase):
                     accepted | self.unclassified, self.supplier_location, location
                 )
                 self.assertEqual(set(moves.mapped("state")), {"done"})
-                with self.assertRaisesRegex(UserError, "cannot be put in") as error:
-                    self._move(refused, self.supplier_location, location)
                 for product in refused:
+                    with self.assertRaisesRegex(UserError, "cannot be put in") as error:
+                        self._move(product, self.supplier_location, location)
                     self.assertIn(product.display_name, str(error.exception))
 
     def test_existing_stock_can_move_out(self):
