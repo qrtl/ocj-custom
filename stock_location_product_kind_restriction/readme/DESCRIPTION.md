@@ -10,9 +10,9 @@ Products with no product kind, such as gas cylinders, are not checked and can be
 put in any location. Products of any other kind are refused.
 
 Validating a transfer or applying an inventory adjustment that would put any
-other product in the location is refused, with the products and the location
-named in the error. Editing the destination of a done move line to such a
-location is refused the same way.
+other product in the location is refused, with the product and the location
+named in the error. Editing the destination or the quantity of a done move line
+is checked the same way.
 
 The setting applies to the location and to its sublocations; a sublocation
 with its own setting follows that setting instead. It only checks stock coming

@@ -16,7 +16,11 @@ class StockQuant(models.Model):
     def _update_available_quantity(
         self, product_id, location_id, quantity=False, **kwargs
     ):
-        if quantity and product_id.uom_id.compare(quantity, 0) > 0:
+        if (
+            quantity
+            and product_id.uom_id.compare(quantity, 0) > 0
+            and not self.env.context.get("skip_product_kind_restriction")
+        ):
             self._check_product_kind_restriction(product_id, location_id)
         return super()._update_available_quantity(
             product_id, location_id, quantity=quantity, **kwargs
