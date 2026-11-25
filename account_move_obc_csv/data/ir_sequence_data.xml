@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="account_move_obc_export_sequence" model="ir.sequence">
+        <field name="name">OBC Export</field>
+        <field name="code">account.move.obc.export</field>
+        <field name="prefix">OBC/%(year)s/</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False" />
+    </record>
+</odoo>

@@ -1,0 +1,293 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_move_obc_csv
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-25 10:11+0000\n"
+"PO-Revision-Date: 2026-11-25 10:11+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: account_move_obc_csv
+#: model:ir.model.fields.selection,name:account_move_obc_csv.selection__account_tax__obc_tax_rate_type__0
+msgid "0: Standard"
+msgstr "0: 標準"
+
+#. module: account_move_obc_csv
+#: model:ir.model.fields.selection,name:account_move_obc_csv.selection__account_tax__obc_tax_rate_type__1
+msgid "1: Reduced"
+msgstr "1: 軽減"
+
+#. module: account_move_obc_csv
+#: model:ir.model,name:account_move_obc_csv.model_account_analytic_account
+msgid "Analytic Account"
+msgstr "分析勘定"
+
+#. module: account_move_obc_csv
+#: model:ir.model,name:account_move_obc_csv.model_res_company
+msgid "Companies"
+msgstr "会社"
+
+#. module: account_move_obc_csv
+#: model:ir.model.fields,field_description:account_move_obc_csv.field_account_move_obc_export__company_id
+msgid "Company"
+msgstr "会社"
+
+#. module: account_move_obc_csv
+#: model:ir.model,name:account_move_obc_csv.model_res_config_settings
+msgid "Config Settings"
+msgstr "設定"
+
+#. module: account_move_obc_csv
+#. odoo-python
+#: code:addons/account_move_obc_csv/report/report_account_move_obc_csv.py:0
+msgid "Cost of Sales"
+msgstr "売上原価"
+
+#. module: account_move_obc_csv
+#: model:ir.model.fields,field_description:account_move_obc_csv.field_account_move_obc_export__create_uid
+msgid "Created by"
+msgstr "作成者"
+
+#. module: account_move_obc_csv
+#: model:ir.model.fields,field_description:account_move_obc_csv.field_account_move_obc_export__create_date
+msgid "Created on"
+msgstr "作成日"
+
+#. module: account_move_obc_csv
+#: model:ir.model.fields,field_description:account_move_obc_csv.field_account_move_obc_export__date_from
+msgid "Date From"
+msgstr "開始日"
+
+#. module: account_move_obc_csv
+#: model:ir.model.fields,field_description:account_move_obc_csv.field_account_move_obc_export__date_to
+msgid "Date To"
+msgstr "終了日"
+
+#. module: account_move_obc_csv
+#: model_terms:ir.ui.view,arch_db:account_move_obc_csv.res_config_settings_view_form
+msgid "Department code exported for journal items without a department"
+msgstr "部門のない仕訳明細に出力する部門コード"
+
+#. module: account_move_obc_csv
+#: model:ir.model.fields,help:account_move_obc_csv.field_account_analytic_account__obc_department_code
+msgid ""
+"Department code in OBC. Income and expense journal items distributed to this"
+" analytic account are exported with it."
+msgstr "勘定奉行の部門コード。この分析勘定に配分された収益・費用の仕訳明細は、このコードで出力します。"
+
+#. module: account_move_obc_csv
+#: model:ir.model.fields,field_description:account_move_obc_csv.field_account_analytic_account__display_name
+#: model:ir.model.fields,field_description:account_move_obc_csv.field_account_journal__display_name
+#: model:ir.model.fields,field_description:account_move_obc_csv.field_account_move__display_name
+#: model:ir.model.fields,field_description:account_move_obc_csv.field_account_move_obc_export__display_name
+#: model:ir.model.fields,field_description:account_move_obc_csv.field_account_tax__display_name
+#: model:ir.model.fields,field_description:account_move_obc_csv.field_report_account_move_obc_csv_report_obc_csv__display_name
+#: model:ir.model.fields,field_description:account_move_obc_csv.field_res_company__display_name
+#: model:ir.model.fields,field_description:account_move_obc_csv.field_res_config_settings__display_name
+msgid "Display Name"
+msgstr "表示名"
+
+#. module: account_move_obc_csv
+#: model:ir.model.fields,field_description:account_move_obc_csv.field_account_journal__obc_export_excluded
+msgid "Exclude from OBC Export"
+msgstr "勘定奉行へ出力しない"
+
+#. module: account_move_obc_csv
+#: model_terms:ir.ui.view,arch_db:account_move_obc_csv.account_move_obc_export_view_form
+msgid "Export CSV"
+msgstr "CSV出力"
+
+#. module: account_move_obc_csv
+#: model:ir.model.fields,help:account_move_obc_csv.field_res_company__obc_default_department_code
+#: model:ir.model.fields,help:account_move_obc_csv.field_res_config_settings__obc_default_department_code
+msgid "Exported for journal items that have no department."
+msgstr "部門のない仕訳明細に出力します。"
+
+#. module: account_move_obc_csv
+#: model_terms:ir.ui.view,arch_db:account_move_obc_csv.view_account_move_filter
+msgid "Exported to OBC"
+msgstr "勘定奉行へ出力済"
+
+#. module: account_move_obc_csv
+#. odoo-python
+#: code:addons/account_move_obc_csv/models/account_move.py:0
+msgid ""
+"Following records have been exported to OBC and cannot be reset to draft. Delete the OBC export first.\n"
+"%(names)s"
+msgstr ""
+"次の仕訳は勘定奉行へ出力済みのため、ドラフトに戻せません。先に勘定奉行出力の記録を削除してください。\n"
+"%(names)s"
+
+#. module: account_move_obc_csv
+#: model:ir.model.fields,field_description:account_move_obc_csv.field_account_analytic_account__id
+#: model:ir.model.fields,field_description:account_move_obc_csv.field_account_journal__id
+#: model:ir.model.fields,field_description:account_move_obc_csv.field_account_move__id
+#: model:ir.model.fields,field_description:account_move_obc_csv.field_account_move_obc_export__id
+#: model:ir.model.fields,field_description:account_move_obc_csv.field_account_tax__id
+#: model:ir.model.fields,field_description:account_move_obc_csv.field_report_account_move_obc_csv_report_obc_csv__id
+#: model:ir.model.fields,field_description:account_move_obc_csv.field_res_company__id
+#: model:ir.model.fields,field_description:account_move_obc_csv.field_res_config_settings__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_move_obc_csv
+#: model:ir.model,name:account_move_obc_csv.model_account_journal
+msgid "Journal"
+msgstr "仕訳帳"
+
+#. module: account_move_obc_csv
+#: model:ir.model.fields,field_description:account_move_obc_csv.field_account_move_obc_export__move_ids
+#: model_terms:ir.ui.view,arch_db:account_move_obc_csv.account_move_obc_export_view_form
+#: model_terms:ir.ui.view,arch_db:account_move_obc_csv.account_move_obc_export_view_list
+msgid "Journal Entries"
+msgstr "仕訳"
+
+#. module: account_move_obc_csv
+#: model:ir.model,name:account_move_obc_csv.model_account_move
+msgid "Journal Entry"
+msgstr "仕訳"
+
+#. module: account_move_obc_csv
+#: model:ir.model.fields,help:account_move_obc_csv.field_account_journal__obc_export_excluded
+msgid "Journal entries of this journal are never exported to OBC."
+msgstr "この仕訳帳の仕訳は勘定奉行へ出力しません。"
+
+#. module: account_move_obc_csv
+#: model:ir.model.fields,help:account_move_obc_csv.field_account_journal__obc_aggregation
+msgid ""
+"Journal items are summed into one OBC entry per day, or into one entry dated"
+" the last day of the month."
+msgstr "仕訳明細を、日付ごとの伝票、または月末日付の1つの伝票に合算して出力します。"
+
+#. module: account_move_obc_csv
+#: model:ir.model.fields,field_description:account_move_obc_csv.field_account_move_obc_export__write_uid
+msgid "Last Updated by"
+msgstr "最終更新者"
+
+#. module: account_move_obc_csv
+#: model:ir.model.fields,field_description:account_move_obc_csv.field_account_move_obc_export__write_date
+msgid "Last Updated on"
+msgstr "最終更新日"
+
+#. module: account_move_obc_csv
+#: model:ir.model.fields,field_description:account_move_obc_csv.field_account_move_obc_export__move_count
+msgid "Move Count"
+msgstr "仕訳数"
+
+#. module: account_move_obc_csv
+#: model:ir.model.fields,field_description:account_move_obc_csv.field_account_move_obc_export__name
+msgid "Name"
+msgstr "名称"
+
+#. module: account_move_obc_csv
+#: model_terms:ir.ui.view,arch_db:account_move_obc_csv.view_account_move_filter
+msgid "Not Exported to OBC"
+msgstr "勘定奉行へ未出力"
+
+#. module: account_move_obc_csv
+#: model:ir.model.fields,field_description:account_move_obc_csv.field_account_journal__obc_aggregation
+msgid "OBC Aggregation"
+msgstr "勘定奉行 集約単位"
+
+#. module: account_move_obc_csv
+#: model:ir.actions.report,name:account_move_obc_csv.report_obc_csv
+msgid "OBC CSV"
+msgstr "勘定奉行CSV"
+
+#. module: account_move_obc_csv
+#: model:ir.model,name:account_move_obc_csv.model_report_account_move_obc_csv_report_obc_csv
+msgid "OBC CSV Report"
+msgstr "勘定奉行CSVレポート"
+
+#. module: account_move_obc_csv
+#: model:ir.model.fields,field_description:account_move_obc_csv.field_res_company__obc_default_department_code
+#: model:ir.model.fields,field_description:account_move_obc_csv.field_res_config_settings__obc_default_department_code
+msgid "OBC Default Department Code"
+msgstr "勘定奉行 部門コードの初期値"
+
+#. module: account_move_obc_csv
+#: model:ir.model.fields,field_description:account_move_obc_csv.field_account_analytic_account__obc_department_code
+msgid "OBC Department Code"
+msgstr "勘定奉行 部門コード"
+
+#. module: account_move_obc_csv
+#: model:ir.model,name:account_move_obc_csv.model_account_move_obc_export
+#: model:ir.model.fields,field_description:account_move_obc_csv.field_account_bank_statement_line__obc_export_id
+#: model:ir.model.fields,field_description:account_move_obc_csv.field_account_move__obc_export_id
+#: model_terms:ir.ui.view,arch_db:account_move_obc_csv.res_config_settings_view_form
+#: model_terms:ir.ui.view,arch_db:account_move_obc_csv.view_account_journal_form
+msgid "OBC Export"
+msgstr "勘定奉行出力"
+
+#. module: account_move_obc_csv
+#: model:ir.actions.act_window,name:account_move_obc_csv.account_move_obc_export_action
+#: model:ir.ui.menu,name:account_move_obc_csv.account_move_obc_export_menu
+msgid "OBC Exports"
+msgstr "勘定奉行出力"
+
+#. module: account_move_obc_csv
+#: model_terms:ir.ui.view,arch_db:account_move_obc_csv.view_tax_form
+msgid "OBC Settings"
+msgstr "勘定奉行の設定"
+
+#. module: account_move_obc_csv
+#: model:ir.model.fields,field_description:account_move_obc_csv.field_account_tax__obc_tax_category
+msgid "OBC Tax Category"
+msgstr "勘定奉行 税区分"
+
+#. module: account_move_obc_csv
+#: model:ir.model.fields,field_description:account_move_obc_csv.field_account_tax__obc_tax_rate_type
+msgid "OBC Tax Rate Type"
+msgstr "勘定奉行 税率種別"
+
+#. module: account_move_obc_csv
+#: model:ir.model.fields.selection,name:account_move_obc_csv.selection__account_journal__obc_aggregation__day
+msgid "Per Day"
+msgstr "日付ごと"
+
+#. module: account_move_obc_csv
+#: model:ir.model.fields.selection,name:account_move_obc_csv.selection__account_journal__obc_aggregation__month
+msgid "Per Month"
+msgstr "月ごと"
+
+#. module: account_move_obc_csv
+#: model:ir.model,name:account_move_obc_csv.model_account_tax
+msgid "Tax"
+msgstr "税"
+
+#. module: account_move_obc_csv
+#. odoo-python
+#: code:addons/account_move_obc_csv/report/report_account_move_obc_csv.py:0
+msgid "The journal items of %(journal)s on %(date)s do not balance."
+msgstr "%(journal)s の %(date)s の仕訳明細は、貸借が一致しません。"
+
+#. module: account_move_obc_csv
+#: model:ir.model.fields,help:account_move_obc_csv.field_account_tax__obc_tax_category
+#: model:ir.model.fields,help:account_move_obc_csv.field_account_tax__obc_tax_rate_type
+msgid "The set value will be used in OBC data export."
+msgstr "設定した値を勘定奉行への出力に使います。"
+
+#. module: account_move_obc_csv
+#: model:ir.model.constraint,message:account_move_obc_csv.constraint_account_move_obc_export_date_check
+msgid "The start date must not be later than the end date."
+msgstr "開始日は終了日以前にしてください。"
+
+#. module: account_move_obc_csv
+#. odoo-python
+#: code:addons/account_move_obc_csv/models/account_move_obc_export.py:0
+msgid "There is no journal entry to export in the period."
+msgstr "この期間に出力する仕訳がありません。"
+
+#. module: account_move_obc_csv
+#: model:ir.actions.report,print_report_name:account_move_obc_csv.report_obc_csv
+msgid "object.name.replace('/', '_')"
+msgstr ""
