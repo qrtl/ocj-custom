@@ -1,69 +1,15 @@
 # Copyright 2026 Quartile (https://www.quartile.co)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
 
-from odoo import api, models
-from odoo.exceptions import UserError
-
-ACCEPTED_PRODUCT_KINDS = {
-    "equipment": ("equipment", "accessory"),
-    "consumable": ("consumable",),
-}
+from odoo import models
 
 
 class StockMoveLine(models.Model):
     _inherit = "stock.move.line"
 
-    @api.model_create_multi
-    def create(self, vals_list):
-        mls = super().create(vals_list)
-        mls.filtered(lambda ml: ml.state == "done")._check_product_kind_restriction()
-        return mls
-
-    def write(self, vals):
-        res = super().write(vals)
-        if "location_dest_id" in vals:
-            self.filtered(
-                lambda ml: ml.state == "done"
-            )._check_product_kind_restriction()
-        return res
-
-    def _check_product_kind_restriction(self):
-        # Products with no product kind (services, gas cylinders, ...) are left
-        # out of the check on purpose: the kind is empty by design for them.
-        lines = self.filtered(
-            lambda ml: ml.product_id.product_kind
-            and ml.product_uom_id.compare(ml.quantity, 0) > 0
-        )
-        errors = []
-        for location in lines.location_dest_id:
-            restriction = location._get_product_kind_restriction()
-            if not restriction:
-                continue
-            accepted = ACCEPTED_PRODUCT_KINDS[restriction]
-            products = lines.filtered(
-                lambda ml, location=location, accepted=accepted: (
-                    ml.location_dest_id == location
-                    and ml.product_id.product_kind not in accepted
-                )
-            ).product_id
-            label = dict(
-                location._fields["product_kind_restriction"]._description_selection(
-                    self.env
-                )
-            )[restriction]
-            for product in products:
-                errors.append(
-                    self.env._(
-                        "%(product)s cannot be put in %(location)s "
-                        "(Accepted Products: %(accepted)s).",
-                        product=product.display_name,
-                        location=location.display_name,
-                        accepted=label,
-                    )
-                )
-        if errors:
-            raise UserError("\n".join(errors))
-
-    def _action_done(self):
-        self._check_product_kind_restriction()
-        return super()._action_done()
+    def _synchronize_quant(self, quantity, location, *args, **kwargs):
+        # Core puts quantity back into the source when a done line is edited,
+        # and moves untracked stock onto the lot there; neither brings stock in.
+        if location == self.location_id and location != self.location_dest_id:
+            self = self.with_context(skip_product_kind_restriction=True)
+        return super()._synchronize_quant(quantity, location, *args, **kwargs)

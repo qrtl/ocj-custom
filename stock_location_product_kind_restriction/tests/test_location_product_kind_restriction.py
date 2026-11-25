@@ -78,12 +78,12 @@ class TestLocationProductKindRestriction(TransactionCase):
             {"name": "Unclassified", "is_storable": True, "tracking": "none"}
         )
 
-    def _move(self, products, source, dest):
+    def _move(self, products, source, dest, qty=1.0):
         moves = self.env["stock.move"].create(
             [
                 {
                     "product_id": product.id,
-                    "product_uom_qty": 1.0,
+                    "product_uom_qty": qty,
                     "location_id": source.id,
                     "location_dest_id": dest.id,
                 }
@@ -121,16 +121,29 @@ class TestLocationProductKindRestriction(TransactionCase):
                     accepted | self.unclassified, self.supplier_location, location
                 )
                 self.assertEqual(set(moves.mapped("state")), {"done"})
-                with self.assertRaisesRegex(UserError, "cannot be put in") as error:
-                    self._move(refused, self.supplier_location, location)
                 for product in refused:
+                    with self.assertRaisesRegex(UserError, "cannot be put in") as error:
+                        self._move(product, self.supplier_location, location)
                     self.assertIn(product.display_name, str(error.exception))
 
-    def test_existing_stock_can_move_out(self):
-        self._move(self.consumable, self.supplier_location, self.free_location)
+    def test_existing_stock(self):
+        incoming = self._move(
+            self.consumable, self.supplier_location, self.free_location, qty=2.0
+        )
         self.free_location.product_kind_restriction = "equipment"
-        move = self._move(self.consumable, self.free_location, self.supplier_location)
-        self.assertEqual(move.state, "done")
+        outgoing = self._move(
+            self.consumable, self.free_location, self.supplier_location, qty=2.0
+        )
+        self.assertEqual(outgoing.state, "done")
+        outgoing.move_line_ids.quantity = 1.0
+        self.assertEqual(
+            self.env["stock.quant"]._get_available_quantity(
+                self.consumable, self.free_location
+            ),
+            1.0,
+        )
+        with self.assertRaisesRegex(UserError, "cannot be put in"):
+            incoming.move_line_ids.quantity = 3.0
 
     def test_inventory_adjustment(self):
         quant = (
