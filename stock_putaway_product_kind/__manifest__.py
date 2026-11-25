@@ -10,7 +10,7 @@
     "license": "LGPL-3",
     "summary": "Putaway rules that apply to one product kind",
     "installable": True,
-    "depends": ["product_classification", "stock"],
+    "depends": ["stock", "product_classification"],
     "data": [
         "views/stock_putaway_rule_views.xml",
     ],
