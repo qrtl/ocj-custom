@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+        id="report_custom_address_layout"
+        inherit_id="report_alternative_layout.report_custom_address_layout"
+    >
+        <xpath expr="//div[@name='partner_address']/div" position="attributes">
+            <attribute name="t-if">not mailing_address</attribute>
+        </xpath>
+        <xpath expr="//div[@name='partner_address']/div" position="before">
+            <t
+                t-set="mailing_address"
+                t-value="report._get_invoice_mailing_address(o)"
+            />
+        </xpath>
+        <xpath expr="//div[@name='partner_address']/div" position="after">
+            <div t-if="mailing_address" name="invoice_mailing_address">
+                <div t-out="mailing_address" style="white-space: pre-line" />
+                <div
+                    t-esc="report_partner"
+                    t-options='{"widget": "contact", "fields": ["name", "phone"], "no_marker": true}'
+                />
+            </div>
+        </xpath>
+    </template>
+</odoo>
