@@ -5,7 +5,9 @@ from odoo import api, fields, models
 
 
 class StockLot(models.Model):
-    _inherit = "stock.lot"
+    _name = "stock.lot"
+    _inherit = ["stock.lot", "stock.lot.asset.category.lock.mixin"]
+    _asset_category_field = "asset_category_id"
 
     asset_category_id = fields.Many2one(
         comodel_name="stock.lot.asset.category",
@@ -26,14 +28,3 @@ class StockLot(models.Model):
     def _compute_asset_category_id(self):
         for lot in self:
             lot.asset_category_id = lot.product_id.lot_asset_category_id
-
-    @api.model_create_multi
-    def create(self, vals_list):
-        if any("asset_category_id" in vals for vals in vals_list):
-            self.env["stock.lot.asset.category"]._check_assign_access()
-        return super().create(vals_list)
-
-    def write(self, vals):
-        if "asset_category_id" in vals:
-            self.env["stock.lot.asset.category"]._check_assign_access()
-        return super().write(vals)

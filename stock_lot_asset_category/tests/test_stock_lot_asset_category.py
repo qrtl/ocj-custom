@@ -3,6 +3,7 @@
 
 from odoo import Command
 from odoo.exceptions import AccessError
+from odoo.tests import Form
 from odoo.tests.common import TransactionCase, new_test_user
 
 
@@ -56,39 +57,61 @@ class TestStockLotAssetCategory(TransactionCase):
         lot.asset_category_id = self.other
         self.assertEqual(quant.asset_category_id, self.other)
 
-    def test_only_assigners_set_the_category(self):
-        """Without the group, neither a lot nor a product default can be set."""
-        user = new_test_user(
+    def _create_user(self):
+        return new_test_user(
             self.env,
             login="stock_manager",
-            groups="stock.group_stock_manager,product.group_product_manager",
+            groups="stock.group_stock_manager,product.group_product_manager,"
+            "stock.group_production_lot",
         )
+
+    def test_form_locks_only_the_saved_category(self):
+        """The form field stays editable until the picked value is saved."""
+        lot = self._create_lot("SN-0001", asset_category_id=False)
+        lot = lot.with_user(self._create_user())
+        with Form(lot) as form:
+            form.asset_category_id = self.own
+            form.asset_category_id = self.other
+        self.assertEqual(lot.asset_category_id, self.other)
+        with Form(lot) as form, self.assertRaises(AssertionError):
+            form.asset_category_id = self.own
+
+    def test_only_assigners_change_a_set_category(self):
+        """Without the group, an empty category can be filled but not a set one."""
+        user = self._create_user()
         lot = self._create_lot("SN-0001").with_user(user)
         product = self.product.with_user(user)
-        with self.assertRaises(AccessError):
-            lot.asset_category_id = self.other
-        with self.assertRaises(AccessError):
-            lot.create(
-                {
-                    "name": "SN-0002",
-                    "product_id": product.id,
-                    "asset_category_id": self.other.id,
-                }
-            )
-        with self.assertRaises(AccessError):
-            product.lot_asset_category_id = self.other
-        with self.assertRaises(AccessError):
-            product.product_tmpl_id.copy({"lot_asset_category_id": self.other.id})
-        created = lot.create({"name": "SN-0003", "product_id": product.id})
-        self.assertEqual(created.asset_category_id, self.own)
-        self.assertEqual(lot.copy({"name": "SN-0004"}).asset_category_id, self.own)
-        product.product_tmpl_id.copy()
+        for record, fname in [
+            (lot, "asset_category_id"),
+            (product, "lot_asset_category_id"),
+        ]:
+            with self.assertRaises(AccessError):
+                record[fname] = self.other
+            with self.assertRaises(AccessError):
+                record[fname] = False
+            record[fname] = self.own
+        template = (
+            self.env["product.template"]
+            .with_user(user)
+            .create({"name": "New Product", "lot_asset_category_id": self.other.id})
+        )
+        self.assertEqual(template.lot_asset_category_id, self.other)
+        template = template.copy()
+        template.lot_asset_category_id = self.own
+        lot = lot.create(
+            {
+                "name": "SN-0002",
+                "product_id": product.id,
+                "asset_category_id": self.other.id,
+            }
+        )
+        self.assertEqual(lot.asset_category_id, self.other)
         user.group_ids = [
             Command.link(
                 self.env.ref("stock_lot_asset_category.group_assign_asset_category").id
             )
         ]
-        lot.asset_category_id = self.other
+        lot.asset_category_id = self.own
         product.lot_asset_category_id = self.other
-        self.assertEqual(lot.asset_category_id, self.other)
+        self.assertEqual(lot.asset_category_id, self.own)
         self.assertEqual(product.lot_asset_category_id, self.other)

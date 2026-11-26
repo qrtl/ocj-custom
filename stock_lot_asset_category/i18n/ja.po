@@ -158,8 +158,8 @@ msgstr "このシリアル/ロット番号の所有者です。プロダクト�
 
 #. module: stock_lot_asset_category
 #. odoo-python
-#: code:addons/stock_lot_asset_category/models/stock_lot_asset_category.py:0
+#: code:addons/stock_lot_asset_category/models/stock_lot_asset_category_lock_mixin.py:0
 msgid ""
-"You are not allowed to set the asset category of a product or of a serial/"
-"lot number."
-msgstr "プロダクトやシリアル/ロット番号の資産区分を設定する権限がありません。"
+"You are not allowed to change the asset category of a product or of a "
+"serial/lot number once it is set."
+msgstr "設定済みのプロダクトやシリアル/ロット番号の資産区分を変更する権限がありません。"

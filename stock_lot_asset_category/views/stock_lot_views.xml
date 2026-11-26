@@ -6,15 +6,11 @@
         <field name="inherit_id" ref="stock.view_production_lot_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='ref']" position="after">
+                <field name="asset_category_locked" invisible="1" />
                 <field
                     name="asset_category_id"
                     options="{'no_quick_create': True}"
-                    groups="stock_lot_asset_category.group_assign_asset_category"
-                />
-                <field
-                    name="asset_category_id"
-                    readonly="1"
-                    groups="!stock_lot_asset_category.group_assign_asset_category"
+                    readonly="asset_category_locked"
                 />
             </xpath>
         </field>
@@ -26,16 +22,11 @@
         <field name="inherit_id" ref="stock.view_production_lot_tree" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='product_id']" position="after">
+                <field name="asset_category_locked" column_invisible="1" />
                 <field
                     name="asset_category_id"
                     optional="show"
-                    groups="stock_lot_asset_category.group_assign_asset_category"
-                />
-                <field
-                    name="asset_category_id"
-                    optional="show"
-                    readonly="1"
-                    groups="!stock_lot_asset_category.group_assign_asset_category"
+                    readonly="asset_category_locked"
                 />
             </xpath>
         </field>

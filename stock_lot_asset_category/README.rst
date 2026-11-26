@@ -41,10 +41,11 @@ serial/lot number alone, for units that are an exception to their
 product's default. Changing the default of a product does not change its
 existing serial/lot numbers.
 
-Because the asset category says who owns a unit, only the users of the
-group *Assign Asset Categories to Products and Lots/Serials* can set it,
-on a product or on a serial/lot number. For everybody else both fields
-are read-only, in the forms and through imports alike.
+Because the asset category says who owns a unit, once it is set on a
+product or on a serial/lot number, only the users of the group *Assign
+Asset Categories to Products and Lots/Serials* can change or clear it,
+in the forms and through imports alike. Other users can still fill an
+empty one.
 
 **Table of contents**
 
@@ -64,7 +65,8 @@ Usage
 To configure the asset categories, go to *Inventory > Configuration >
 Asset Categories* and create the categories you need.
 
-The two steps below need the group described in the configuration.
+Once set, the values in the two steps below can be changed only by the
+group described in the configuration.
 
 To set the default of a product, open a product tracked by serial/lot
 number and set **Default Asset Category** in the *Inventory* tab.

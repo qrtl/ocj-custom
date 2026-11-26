@@ -2,7 +2,6 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
 
 from odoo import api, fields, models
-from odoo.exceptions import AccessError
 
 
 class StockLotAssetCategory(models.Model):
@@ -20,15 +19,7 @@ class StockLotAssetCategory(models.Model):
     )
 
     @api.model
-    def _check_assign_access(self):
-        """Raise unless the user may set the asset category of products and lots."""
-        if self.env.su or self.env.user.has_group(
+    def _can_assign(self):
+        return self.env.su or self.env.user.has_group(
             "stock_lot_asset_category.group_assign_asset_category"
-        ):
-            return
-        raise AccessError(
-            self.env._(
-                "You are not allowed to set the asset category of a product or "
-                "of a serial/lot number."
-            )
         )

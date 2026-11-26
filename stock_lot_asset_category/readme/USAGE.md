@@ -1,7 +1,8 @@
 To configure the asset categories, go to *Inventory > Configuration > Asset
 Categories* and create the categories you need.
 
-The two steps below need the group described in the configuration.
+Once set, the values in the two steps below can be changed only by the group
+described in the configuration.
 
 To set the default of a product, open a product tracked by serial/lot number
 and set **Default Asset Category** in the *Inventory* tab.

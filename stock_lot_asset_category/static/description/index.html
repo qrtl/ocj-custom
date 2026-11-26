@@ -387,10 +387,11 @@ number takes it from its product, and it can then be changed on that
 serial/lot number alone, for units that are an exception to their
 product’s default. Changing the default of a product does not change its
 existing serial/lot numbers.</p>
-<p>Because the asset category says who owns a unit, only the users of the
-group <em>Assign Asset Categories to Products and Lots/Serials</em> can set it,
-on a product or on a serial/lot number. For everybody else both fields
-are read-only, in the forms and through imports alike.</p>
+<p>Because the asset category says who owns a unit, once it is set on a
+product or on a serial/lot number, only the users of the group <em>Assign
+Asset Categories to Products and Lots/Serials</em> can change or clear it,
+in the forms and through imports alike. Other users can still fill an
+empty one.</p>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
@@ -414,7 +415,8 @@ Categories to Products and Lots/Serials</em> (<em>Settings &gt; Users &amp; Comp
 <h2><a class="toc-backref" href="#toc-entry-2">Usage</a></h2>
 <p>To configure the asset categories, go to <em>Inventory &gt; Configuration &gt;
 Asset Categories</em> and create the categories you need.</p>
-<p>The two steps below need the group described in the configuration.</p>
+<p>Once set, the values in the two steps below can be changed only by the
+group described in the configuration.</p>
 <p>To set the default of a product, open a product tracked by serial/lot
 number and set <strong>Default Asset Category</strong> in the <em>Inventory</em> tab.</p>
 <p>A serial/lot number created from then on (on a receipt, by import or by
