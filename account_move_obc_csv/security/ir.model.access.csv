@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_move_obc_export_user,account.move.obc.export user,model_account_move_obc_export,account.group_account_user,1,1,1,0
+access_account_move_obc_export_manager,account.move.obc.export manager,model_account_move_obc_export,account.group_account_manager,1,1,1,1
+access_account_move_obc_export_invoice,account.move.obc.export invoice,model_account_move_obc_export,account.group_account_invoice,1,0,0,0
+access_account_move_obc_export_readonly,account.move.obc.export readonly,model_account_move_obc_export,account.group_account_readonly,1,0,0,0

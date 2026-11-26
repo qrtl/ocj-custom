@@ -1,0 +1,1 @@
+odoo-addon-report_csv @ git+https://github.com/qrtl/ocj-oca@19.0#subdirectory=report_csv

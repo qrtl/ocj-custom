@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//block[@id='account_vendor_bills']" position="after">
+                <block title="OBC Export" id="obc_export">
+                    <setting
+                        id="obc_default_department_code"
+                        company_dependent="1"
+                        help="Department code exported for journal items without a department"
+                    >
+                        <field name="obc_default_department_code" />
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+</odoo>

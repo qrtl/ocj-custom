@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_account_journal_form" model="ir.ui.view">
+        <field name="name">account.journal.form</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='group_edi_config']" position="before">
+                <group string="OBC Export" name="group_obc_export">
+                    <field name="obc_export_excluded" />
+                    <field name="obc_aggregation" invisible="obc_export_excluded" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
