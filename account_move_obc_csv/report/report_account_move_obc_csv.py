@@ -61,17 +61,38 @@ class AccountMoveObcCsv(models.AbstractModel):
         return line.date, line.journal_id, is_cogs
 
     @api.model
-    def _get_row_key(self, line):
+    def _get_department_amounts(self, line, amount):
+        """Return [(department, amount)] split by the analytic distribution."""
+        department = self.env["account.analytic.account"]
+        account = line.account_id.with_company(line.company_id)
+        if account.internal_group not in ("income", "expense"):
+            return [(department, amount)]
+        shares = defaultdict(float)
+        for key, percent in (line.analytic_distribution or {}).items():
+            analytics = department.browse(int(i) for i in key.split(",")).exists()
+            dept = analytics.filtered("obc_department_code")[:1]
+            if dept:
+                shares[dept] += percent
+        shares[department] += max(100 - sum(shares.values()), 0)
+        currency = line.company_id.currency_id
+        res, rest = [], amount
+        for dept, percent in shares.items():
+            part = currency.round(amount * percent / 100)
+            if not currency.is_zero(part):
+                res.append([dept, part])
+                rest -= part
+        if not res:
+            return [(department, amount)]
+        res[-1][1] += rest
+        return res
+
+    @api.model
+    def _get_row_key(self, line, department):
         """Return the values journal items must share to be summed into one row."""
         company = line.company_id
         account = line.account_id.with_company(company)
         # "111.2" is account 111, sub-account 2 in OBC.
         account_code, _sep, subaccount_code = (account.code or "").partition(".")
-        department = self.env["account.analytic.account"]
-        if account.internal_group in ("income", "expense"):
-            department = line.distribution_analytic_account_ids.filtered(
-                "obc_department_code"
-            )[:1]
         tax = line.tax_ids[:1]
         return (
             bool(line.tax_line_id),  # sorts the tax rows last
@@ -108,7 +129,8 @@ class AccountMoveObcCsv(models.AbstractModel):
             if amount:
                 drcr = "dr" if line.debit else "cr"
                 entry = entries[self._get_entry_key(line)]
-                entry[drcr][self._get_row_key(line)] += amount
+                for department, part in self._get_department_amounts(line, amount):
+                    entry[drcr][self._get_row_key(line, department)] += part
         return entries
 
     def _get_rows(self, export, entry_key, sides):

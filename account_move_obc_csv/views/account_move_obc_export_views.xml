@@ -36,8 +36,14 @@
                     </div>
                     <group>
                         <group>
-                            <field name="date_from" readonly="move_count" />
-                            <field name="date_to" readonly="move_count" />
+                            <field
+                                name="date_from"
+                                string="Period"
+                                widget="daterange"
+                                options="{'end_date_field': 'date_to'}"
+                                readonly="move_count"
+                            />
+                            <field name="date_to" invisible="1" />
                         </group>
                         <group>
                             <field

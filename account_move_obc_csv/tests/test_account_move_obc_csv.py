@@ -169,3 +169,42 @@ class TestAccountMoveObcCsv(AccountTestInvoicingCommon):
             entries.button_draft()
         self.export.unlink()
         entries.button_draft()
+
+    def test_export_department_split(self):
+        journal = self.company_data["default_journal_misc"]
+        project = self.env["account.analytic.account"].create(
+            {
+                "name": "P",
+                "plan_id": self.env["account.analytic.plan"].create({"name": "X"}).id,
+            }
+        )
+        entry = self.env["account.move"].create(
+            {
+                "journal_id": journal.id,
+                "date": "2026-10-10",
+                "line_ids": [
+                    Command.create(
+                        {
+                            "account_id": self.account_expense.id,
+                            "debit": 100.0,
+                            "analytic_distribution": {
+                                str(self.department_a.id): 60,
+                                str(self.department_b.id): 40,
+                                str(project.id): 100,
+                            },
+                        }
+                    ),
+                    Command.create(
+                        {"account_id": self.account_stock.id, "credit": 100.0}
+                    ),
+                ],
+            }
+        )
+        entry.action_post()
+        self.invoices.journal_id.obc_export_excluded = True
+        rows = self._export(self.export)
+        self.assertEqual(
+            [(row["CSJS200"], float(row["CSJS213"])) for row in rows],
+            [("101", 60.0), ("102", 40.0)],
+        )
+        self.assertEqual(float(rows[0]["CSJS313"]), 100.0)

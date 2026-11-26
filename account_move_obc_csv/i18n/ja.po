@@ -250,6 +250,11 @@ msgid "OBC Tax Rate Type"
 msgstr "勘定奉行 税率種別"
 
 #. module: account_move_obc_csv
+#: model_terms:ir.ui.view,arch_db:account_move_obc_csv.account_move_obc_export_view_form
+msgid "Period"
+msgstr "期間"
+
+#. module: account_move_obc_csv
 #: model:ir.model.fields.selection,name:account_move_obc_csv.selection__account_journal__obc_aggregation__day
 msgid "Per Day"
 msgstr "日付ごと"
