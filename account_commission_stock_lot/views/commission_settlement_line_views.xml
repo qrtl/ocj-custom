@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="commission_settlement_line_view_list" model="ir.ui.view">
+        <field name="name">commission.settlement.line.view.list.lot</field>
+        <field name="model">commission.settlement.line</field>
+        <field name="inherit_id" ref="commission_oca.view_settlement_line_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='invoice_line_id']" position="after">
+                <field name="product_id" optional="show" />
+                <field name="lot_id" optional="show" />
+            </xpath>
+        </field>
+    </record>
+    <record id="commission_settlement_line_view_search" model="ir.ui.view">
+        <field name="name">commission.settlement.line.view.search.lot</field>
+        <field name="model">commission.settlement.line</field>
+        <field name="inherit_id" ref="commission_oca.view_settlement_line_search" />
+        <field name="arch" type="xml">
+            <field name="agent_id" position="after">
+                <field name="product_id" />
+                <field name="lot_id" />
+            </field>
+            <filter name="group_agent" position="after">
+                <filter
+                    string="Product"
+                    name="group_product"
+                    context="{'group_by': 'product_id'}"
+                />
+                <filter
+                    string="Lot/Serial Number"
+                    name="group_lot"
+                    context="{'group_by': 'lot_id'}"
+                />
+            </filter>
+        </field>
+    </record>
+    <record id="commission_settlement_line_view_form" model="ir.ui.view">
+        <field name="name">commission.settlement.line.view.form</field>
+        <field name="model">commission.settlement.line</field>
+        <field name="arch" type="xml">
+            <form string="Commission Line" create="false" edit="false">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="settlement_id" />
+                            <field name="agent_id" />
+                            <field name="date" />
+                            <field name="commission_id" />
+                        </group>
+                        <group>
+                            <field name="invoice_line_id" />
+                            <field name="product_id" />
+                            <field name="lot_id" />
+                            <field name="currency_id" invisible="1" />
+                            <field name="settled_amount" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="commission_settlement_line_action" model="ir.actions.act_window">
+        <field name="name">Commission Lines</field>
+        <field name="res_model">commission.settlement.line</field>
+        <field name="view_mode">list,form,graph</field>
+        <field name="search_view_id" ref="commission_oca.view_settlement_line_search" />
+    </record>
+    <menuitem
+        id="commission_settlement_line_menu"
+        parent="commission_oca.menu_settlement_parent"
+        action="commission_settlement_line_action"
+        sequence="20"
+    />
+</odoo>
