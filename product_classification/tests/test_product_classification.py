@@ -43,6 +43,21 @@ class TestProductClassification(TransactionCase):
         self.assertEqual(self.product.product_kind, "accessory")
         self.assertEqual(self.product.equipment_classification_id, self.classification)
 
+    def test_assign_classification_on_variant(self):
+        variant = self.product.product_variant_id
+        variant.write(
+            {
+                "product_kind": "equipment",
+                "equipment_classification_id": self.classification.id,
+            }
+        )
+        self.assertEqual(self.product.product_kind, "equipment")
+        self.assertEqual(self.product.equipment_classification_id, self.classification)
+        with self.assertRaises(ValidationError):
+            variant.write(
+                {"product_kind": "accessory", "equipment_classification_id": False}
+            )
+
     def test_equipment_requires_classification(self):
         with self.assertRaises(ValidationError):
             self.product.write({"product_kind": "equipment"})
